@@ -9,3 +9,6 @@ Database user: cursief_db
 Database password: worship-mung-cosmogon-volley-pulsate-soggy
 
 SSH passphrase: panel-demur-fervour-virus-sell-protegee
+
+Wordpress user: admin
+Wordpress password: bray-abidjan-chela-choral-dry-adios
