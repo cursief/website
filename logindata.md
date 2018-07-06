@@ -7,3 +7,5 @@ Server pass: dominion-boxer-monte-loth-elves-joyful
 Database name: cursief_wp
 Database user: cursief_db
 Database password: worship-mung-cosmogon-volley-pulsate-soggy
+
+SSH passphrase: panel-demur-fervour-virus-sell-protegee
