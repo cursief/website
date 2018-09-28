@@ -16,7 +16,7 @@
     },
     mounted: function() {
       if(!this.$store.state.posts.length) {
-        this.$http.get('https://cursief.co/wp-json/wp/v2/members').then(response => {
+        this.$http.get('https://cursief.co/wordpress/wp-json/wp/v2/members').then(response => {
           this.$store.commit('addMember', response.body)
           this.members = response.body
         });

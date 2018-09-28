@@ -1,29 +1,74 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <header-primary/>
     <router-view/>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+  import HeaderPrimary from '@/components/header-primary.vue'
+
+  export default {
+    name: 'app',
+    components: {
+      HeaderPrimary
     }
   }
-}
+</script>
+
+<style lang="scss">
+  @import url('https://fonts.googleapis.com/css?family=Roboto:500');
+  @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,500,700');
+
+  @import 'src/assets/scss/variables.scss';
+  @import 'src/assets/scss/layout/grid.scss';
+  @import 'src/assets/scss/button.scss';
+
+  html,
+  body,
+  #app {
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+    color: $cl-white;
+    background-color: #7A69ED;
+  }
+
+  body {
+    font-family: $font-primary;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  #app {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: $font-secondary;
+  }
+
+  .section-heading {
+    position: relative;
+    padding-bottom: 20px;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: calc(50% - 20px);
+      display: block;
+      width: 40px;
+      height: 3px;
+      background-color: $cl-primary;
+    }
+  }
+
 </style>
