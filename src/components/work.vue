@@ -1,104 +1,51 @@
 <template>
-  <div class="work">
-    <ul class="work__list">
-      <li class="work__item">
-        <a href="#">
-          <h3>NS International</h3>
-          <div class="work__labels">
-            <span>Label</span>
-            <span>Label</span>
-            <span>Label</span>
-            <span>Label</span>
-          </div>
-          <div class="work__media">
-            <img src="images/ns.jpg" alt="">
-          </div>
-        </a>
-      </li>
-      <li class="work__item">
-        <a href="#">
-          <h3>Rijksmuseum</h3>
-          <div class="work__labels">
-            <span>Label</span>
-            <span>Label</span>
-            <span>Label</span>
-            <span>Label</span>
-          </div>
-          <div class="work__media">
-            <img src="images/rijksmuseum.jpg" alt="">
-          </div>
-        </a>
-      </li>
-      <li class="work__item">
-        <a href="#">
-          <h3>HEMA</h3>
-          <div class="work__labels">
-            <span>Label</span>
-            <span>Label</span>
-            <span>Label</span>
-            <span>Label</span>
-          </div>
-          <div class="work__media">
-            <img src="images/hema.jpg" alt="">
-          </div>
-        </a>
-      </li>
-      <li class="work__item">
-        <a href="#">
-          <h3>ING Bank</h3>
-          <div class="work__labels">
-            <span>Label</span>
-            <span>Label</span>
-            <span>Label</span>
-            <span>Label</span>
-          </div>
-          <div class="work__media">
-            <img src="images/ing.jpg" alt="">
-          </div>
-        </a>
-      </li>
-    </ul>
-  </div>
+  <li class="work__item" :key="work.id">
+    <a href="#">
+      <h3>{{work.title.rendered}}</h3>
+      <div class="work__labels" v-if="work.tags.length">
+        <workTag v-for="tag in work.tags" :key="tag" :tagId="tag"/>
+      </div>
+      <div class="work__media">
+        <workMedia :media="mediaObject" />
+      </div>
+    </a>
+  </li>
 </template>
 
 <script>
+  import workMedia from '@/components/work-media.vue'
+  import workTag from '@/components/work-tag.vue'
+
   export default {
-    name: 'work'
+    name: 'work',
+    components: {
+      workMedia,
+      workTag
+    },
+    props: {
+      work: {},
+      media: {}
+    },
+    data() {
+
+      return {
+        mediaObject: []
+      }
+    },
+    mounted() {
+      this.mediaObject = this.media.find(media => media.id === this.work.featured_media);
+    }
   }
 
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
   @import 'src/assets/scss/variables.scss';
 
-  .work {
-    position: relative;
-  }
-
-  .work__list {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    list-style: none;
-  }
-
   .work__item {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 50%;
     height: 520px;
-
-    &:nth-child(1),
-    &:nth-child(2) {
-      padding-top: 100px;
-      margin-top: -140px;
-    }
 
     &:hover,
     &:focus {
@@ -116,6 +63,12 @@
     }
 
     a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
       color: $cl-white;
       text-decoration: none;
     }
@@ -124,14 +77,6 @@
   .work__labels {
     z-index: 200;
     position: relative;
-
-    span {
-      margin: 0 2px;
-      padding: 5px 10px;
-      font-size: 12px;
-      background-color: blue;
-      border-radius: 10px;
-    }
   }
 
   .work__media {

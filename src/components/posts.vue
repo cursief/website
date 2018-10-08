@@ -9,6 +9,8 @@
 </template>
 
 <script>
+  import axios from 'axios';
+
   export default {
     name: 'posts',
     data: function() {
@@ -17,21 +19,15 @@
       }
     },
     mounted: function() {
-      // debugger
-      // if(!this.$store.state.posts.length) {
-        this.$http.get('https://cursief.co/wordpress/wp-json/wp/v2/posts').then(response => {
-          this.$store.commit('addPosts', response.body)
-          this.posts = response.body
-        });
-      // } else {
-      //   this.posts = this.$store.state.posts
-      // }
+      axios.get('https://cursief.co/wordpress/wp-json/wp/v2/posts').then(response => {
+        this.$store.commit('addPosts', response.data)
+        this.posts = response.data
+      });
     }
   }
 
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
 </style>

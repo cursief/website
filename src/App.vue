@@ -10,8 +10,15 @@
 
   export default {
     name: 'app',
+
     components: {
       HeaderPrimary
+    },
+
+    data: function() {
+      return {
+        media: null
+      }
     }
   }
 </script>
