@@ -2,8 +2,8 @@
   <li class="work__item" :key="work.id">
     <a href="#">
       <h3>{{work.title.rendered}}</h3>
-      <div class="work__labels" v-if="work.tags.length">
-        <workTag v-for="tag in work.tags" :key="tag" :tagId="tag"/>
+      <div class="work__labels" v-if="work.tags">
+        <workTag v-for="tag in work.tags" :key="tag.id" :tagName="tag.name" :tagSlug="tag.slug" />
       </div>
       <div class="work__media">
         <workMedia :media="mediaObject" />
@@ -24,7 +24,8 @@
     },
     props: {
       work: {},
-      media: {}
+      media: {},
+      tags: {}
     },
     data() {
 
@@ -53,6 +54,15 @@
       .work__media img {
         transform: translate3d(-50%, 0, 0) scale(1.1);
       }
+    }
+
+    &:nth-child(1),
+    &:nth-child(2) {
+      padding-top: 6rem;
+    }
+
+    &:nth-last-of-type(-n+2) {
+      padding-bottom: 13rem;
     }
 
     h3 {

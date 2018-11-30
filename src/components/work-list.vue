@@ -3,7 +3,7 @@
     <div class="work">
       <h2 class="section-heading">What we do, who we are</h2>
       <ul class="work__list">
-        <work v-if="media" v-for="workCase in workCases" :work="workCase" :media="media" :key="workCase.id"/>
+        <work v-if="media" v-for="workCase in workCases" :work="workCase" :media="media" :tags="tags" :key="workCase.id"/>
       </ul>
     </div>
   </transition>
@@ -24,7 +24,8 @@
 
       return {
         workCases: null,
-        media: null
+        media: null,
+        tags: null
       }
     },
 
@@ -42,6 +43,7 @@
 
       axios.get('https://cursief.co/wordpress/wp-json/wp/v2/tags').then(response => {
         this.$store.commit('addTags', response.data);
+        this.tags = response.data;
       });
     }
   }
@@ -50,6 +52,7 @@
 
 <style scoped lang="scss">
   @import 'src/assets/scss/variables.scss';
+  @import 'src/assets/scss/layout/grid.scss';
 
   .fade-enter-active,
   .fade-leave-active {

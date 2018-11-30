@@ -65,6 +65,8 @@
   .section-heading {
     position: relative;
     padding-bottom: 20px;
+    font-size: 28px;
+    text-align: center;
 
     &:after {
       content: '';
