@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios';
 // https://forum.vuejs.org/t/vuex-not-working-for-me-solved/13588/6
 
 Vue.use(Vuex)
@@ -13,25 +14,59 @@ export default new Vuex.Store({
 		tags: []
 	},
 
+	actions: {
+
+		loadPosts ({ commit }) {
+			axios.get('https://cursief.co/wordpress/wp-json/wp/v2/posts').then(r => r.data).then(posts => {
+				commit('setPosts', posts)
+			})
+		},
+
+		loadMembers ({ commit }) {
+			axios.get('https://cursief.co/wordpress/wp-json/wp/v2/members').then(r => r.data).then(members => {
+				commit('setMembers', members)
+			})
+		},
+
+		loadCases ({ commit }) {
+			axios.get('https://cursief.co/wordpress/wp-json/wp/v2/cases').then(r => r.data).then(cases => {
+				commit('setCases', cases)
+			})
+		},
+
+		loadTags ({ commit }) {
+			axios.get('https://cursief.co/wordpress/wp-json/wp/v2/tags').then(r => r.data).then(tags => {
+				commit('setTags', tags)
+			})
+		},
+
+		loadMedia ({ commit }) {
+			axios.get('https://cursief.co/wordpress/wp-json/wp/v2/media').then(r => r.data).then(media => {
+				commit('setMedia', media)
+			})
+		}
+
+	},
+
 	mutations: {
 
-		addPosts (state, posts) {
+		setPosts (state, posts) {
 			this.state.posts = posts
 		},
 
-		addMedia (state, media) {
+		setMedia (state, media) {
 			this.state.media = media
 		},
 
-		addMember (state, member) {
-			this.state.member = member
+		setMembers (state, members) {
+			this.state.members = members
 		},
 
-		addCases (state, cases) {
+		setCases (state, cases) {
 			this.state.cases = cases
 		},
 
-		addTags (state, tags) {
+		setTags (state, tags) {
 			this.state.tags = tags;
 		}
 	},

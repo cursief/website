@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  import { mapState } from 'vuex';
   import workTag from '@/components/work-tag.vue'
 
   export default {
@@ -27,19 +27,13 @@
       workTag
     },
 
-    data: function() {
-
-      return {
-        members: null
-      }
+    mounted () {
+      this.$store.dispatch('loadMembers')
     },
 
-    mounted: function() {
-      axios.get('https://cursief.co/wordpress/wp-json/wp/v2/members').then(response => {
-        this.$store.commit('addMember', response.data)
-        this.members = response.data
-      });
-    }
+    computed: mapState([
+      'members'
+    ])
   }
 
 </script>

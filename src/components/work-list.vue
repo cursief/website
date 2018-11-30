@@ -1,16 +1,16 @@
 <template>
-  <transition name="fade" v-if="workCases">
+  <transition name="fade" v-if="cases">
     <div class="work">
       <h2 class="section-heading">What we do, who we are</h2>
       <ul class="work__list">
-        <work v-if="media" v-for="workCase in workCases" :work="workCase" :media="media" :tags="tags" :key="workCase.id"/>
+        <work v-if="$store.state.media.length" v-for="workCase in cases" :workCase="workCase" :key="workCase.id"/>
       </ul>
     </div>
   </transition>
 </template>
 
 <script>
-  import axios from 'axios';
+  import { mapState } from 'vuex';
   import work from '@/components/work.vue'
 
   export default {
@@ -20,32 +20,17 @@
       work
     },
 
-    data: function(){
-
-      return {
-        workCases: null,
-        media: null,
-        tags: null
-      }
+    mounted () {
+      this.$store.dispatch('loadCases')
+      this.$store.dispatch('loadTags')
+      this.$store.dispatch('loadMedia')
     },
 
-    mounted: function() {
-
-      axios.get('https://cursief.co/wordpress/wp-json/wp/v2/cases').then(response => {
-        this.$store.commit('addCases', response.data);
-        this.workCases = response.data;
-      });
-
-      axios.get('https://cursief.co/wordpress/wp-json/wp/v2/media').then(response => {
-        this.$store.commit('addMedia', response.data);
-        this.media = response.data;
-      });
-
-      axios.get('https://cursief.co/wordpress/wp-json/wp/v2/tags').then(response => {
-        this.$store.commit('addTags', response.data);
-        this.tags = response.data;
-      });
-    }
+    computed: mapState([
+      'cases',
+      'tags',
+      'media'
+    ]),
   }
 
 </script>

@@ -3,7 +3,7 @@
     <banner/>
     <cta/>
     <workList/>
-    <!-- <posts/> -->
+    <posts/>
     <members/>
   </div>
 </template>

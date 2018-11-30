@@ -1,9 +1,9 @@
 <template>
-  <li class="work__item" :key="work.id">
+  <li class="work__item" :key="workCase.id">
     <a href="#">
-      <h3>{{work.title.rendered}}</h3>
-      <div class="work__labels" v-if="work.tags">
-        <workTag v-for="tag in work.tags" :key="tag.id" :tagName="tag.name" :tagSlug="tag.slug" />
+      <h3>{{workCase.title.rendered}}</h3>
+      <div class="work__labels" v-if="workCase.tags">
+        <workTag v-for="tag in workCase.tags" :key="tag.id" :tagName="tag.name" :tagSlug="tag.slug" />
       </div>
       <div class="work__media" v-if="mediaObject">
         <workMedia :media="mediaObject" />
@@ -18,23 +18,25 @@
 
   export default {
     name: 'work',
+
     components: {
       workMedia,
       workTag
     },
+
     props: {
-      work: {},
-      media: {},
-      tags: {}
+      workCase: {}
     },
-    data() {
+
+    data () {
 
       return {
         mediaObject: []
       }
     },
-    mounted() {
-      this.mediaObject = this.media.find(media => media.id === this.work.featured_media);
+
+    mounted () {
+      this.mediaObject = this.$store.getters.getMediaById(this.workCase.featured_media);
     }
   }
 
