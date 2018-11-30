@@ -5,7 +5,7 @@
       <div class="work__labels" v-if="work.tags">
         <workTag v-for="tag in work.tags" :key="tag.id" :tagName="tag.name" :tagSlug="tag.slug" />
       </div>
-      <div class="work__media">
+      <div class="work__media" v-if="mediaObject">
         <workMedia :media="mediaObject" />
       </div>
     </a>
