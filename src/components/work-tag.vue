@@ -1,5 +1,5 @@
 <template>
-  <span :class="tag.slug">{{tag.name}}</span>
+  <span v-if="tag" :class="tag.slug">{{tag.name}}</span>
 </template>
 
 <script>
@@ -22,7 +22,7 @@
     data: function() {
 
       return {
-        tag: ''
+        tag: {}
       }
     },
 
