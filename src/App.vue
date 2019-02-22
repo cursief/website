@@ -38,7 +38,7 @@
     margin: 0;
     min-height: 100%;
     color: $cl-white;
-    background-color: #7A69ED;
+    background-color: $cl-secondary;
   }
 
   body {
