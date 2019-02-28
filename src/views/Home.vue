@@ -3,7 +3,7 @@
     <banner/>
     <cta/>
     <workList/>
-    <posts/>
+    <!-- <posts/> -->
     <members/>
   </div>
 </template>
@@ -13,7 +13,7 @@ import Posts from '@/components/posts.vue'
 import Members from '@/components/members.vue'
 import Cta from '@/components/cta.vue'
 import Banner from '@/components/banner.vue'
-import WorkList from '@/components/work-list.vue'
+import WorkList from '@/sections/work/work-list.vue'
 
 export default {
   name: 'home',

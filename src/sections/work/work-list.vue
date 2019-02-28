@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade" v-if="cases">
+  <transition name="fade" v-if="cases.length" mode="out-in" appear>
     <div class="work">
       <h2 class="section-heading">What we do, who we are</h2>
       <ul class="work__list">
@@ -11,7 +11,7 @@
 
 <script>
   import { mapState } from 'vuex';
-  import work from '@/components/work.vue'
+  import work from '@/sections/work/work.vue'
 
   export default {
     name: 'work-list',
@@ -23,30 +23,20 @@
     mounted () {
       this.$store.dispatch('loadCases')
       this.$store.dispatch('loadTags')
-      this.$store.dispatch('loadMedia')
     },
 
     computed: mapState([
       'cases',
-      'tags',
-      'media'
+      'tags'
     ]),
   }
 
 </script>
 
 <style scoped lang="scss">
-  @import 'src/assets/scss/variables.scss';
-  @import 'src/assets/scss/layout/grid.scss';
-
-  .fade-enter-active,
-  .fade-leave-active {
-    opacity: 0;
-  }
-
-  .fade-leave-to {
-    opacity: 1;
-  }
+  @import './src/assets/scss/animations.scss';
+  @import './src/assets/scss/variables.scss';
+  @import './src/assets/scss/layout/grid.scss';
 
   .section-heading {
     z-index: 1000;
@@ -55,15 +45,15 @@
   }
 
   .work {
-    margin-top: -170px;
+    margin-top: -17rem;
     transition: opacity 500ms;
   }
 
   .work__list {
     display: flex;
     flex-wrap: wrap;
-    padding: 100px 0 0 0;
-    margin-top: -170px;
+    padding: 10rem 0 0 0;
+    margin: -17rem 0 0;
     text-align: center;
     list-style: none;
   }

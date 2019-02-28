@@ -33,32 +33,32 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - 60px);
-    min-height: 800px;
-    padding-bottom: 200px;
+    height: calc(100vh - 6rem);
+    min-height: 100rem;
+    padding-bottom: 20rem;
     background-image: linear-gradient(-168deg, #7B50FF 40%, #7D6FF5 100%);
   }
 
   h1 {
-    margin: 0 0 10px;
-    font-size: 64px;
+    margin: 0 0 1rem;
+    font-size: 6.4rem;
     color: $cl-white;
     letter-spacing: 0;
     text-align: center;
-    text-shadow: 0 0 15px rgba(0,0,0,0.20);
+    text-shadow: 0 0 1.5rem rgba(0,0,0,0.20);
   }
 
   .intro {
-    font-size: 18px;
+    font-size: 1.8rem;
     text-align: center;
 
     p {
-      line-height: 28px;
-      text-shadow: 0 0 15px rgba(0,0,0,0.50);
+      line-height: 2.8rem;
+      text-shadow: 0 0 1.5rem rgba(0,0,0,0.50);
     }
 
     .button {
-      margin-top: 20px;
+      margin: 3rem auto 0;
     }
   }
 
@@ -70,7 +70,7 @@
   .fade-up-enter,
   .fade-up-leave-to {
     opacity: 0;
-    transform: translate3d(0, 20px, 0);
+    transform: translate3d(0, 2rem, 0);
   }
 
   .fade-enter-active,

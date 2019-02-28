@@ -1,20 +1,22 @@
 <template>
-  <li class="work__item" :key="workCase.id">
-    <a href="#">
-      <h3>{{workCase.title.rendered}}</h3>
-      <div class="work__labels" v-if="workCase.tags">
-        <workTag v-for="tag in workCase.tags" :key="tag.id" :tagName="tag.name" :tagSlug="tag.slug" />
-      </div>
-      <div class="work__media" v-if="mediaObject">
-        <workMedia :media="mediaObject" />
-      </div>
-    </a>
-  </li>
+  <transition name="fade" mode="out-in" v-if="mediaObject" appear>
+    <li class="work__item" :key="workCase.id">
+      <a href="#">
+        <h3>{{workCase.title.rendered}}</h3>
+        <div class="work__labels" v-if="workCase.tags">
+          <workTag v-for="tag in workCase.tags" :key="tag.id" :tagName="tag.name" :tagSlug="tag.slug" />
+        </div>
+        <div class="work__media" v-if="mediaObject">
+          <workMedia :media="mediaObject" />
+        </div>
+      </a>
+    </li>
+  </transition>
 </template>
 
 <script>
-  import workMedia from '@/components/work-media.vue'
-  import workTag from '@/components/work-tag.vue'
+  import workMedia from '@/sections/work/work-media.vue'
+  import workTag from '@/sections/work/work-tag.vue'
 
   export default {
     name: 'work',
@@ -43,7 +45,8 @@
 </script>
 
 <style scoped lang="scss">
-  @import 'src/assets/scss/variables.scss';
+  @import './src/assets/scss/variables.scss';
+  @import './src/assets/scss/animations.scss';
 
   .work__item {
     position: relative;

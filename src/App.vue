@@ -15,7 +15,7 @@
       HeaderPrimary
     },
 
-    data: function() {
+    data() {
       return {
         media: null
       }
@@ -24,10 +24,11 @@
 </script>
 
 <style lang="scss">
-  @import url('https://fonts.googleapis.com/css?family=Roboto:500');
-  @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,500,700');
+  @import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
+  @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700');
 
   @import 'src/assets/scss/variables.scss';
+  @import 'src/assets/scss/typography.scss';
   @import 'src/assets/scss/layout/grid.scss';
   @import 'src/assets/scss/button.scss';
 

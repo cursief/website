@@ -1,25 +1,38 @@
 .button {
+	display: flex;
+	align-items: center;
 	border: 0;
-	padding: 15px 25px;
+	padding: 1rem 2.5rem;
 	font-family: $font-secondary;
-	font-size: 16px;
+	font-size: 1.6rem;
 	font-weight: 500;
+	text-decoration: none;
+	border-radius: 2.5rem;
+	
+	svg {
+		margin-right: 1rem;
+	}
 }
 
 .button--primary {
 	color: $cl-tertiary;
 	background-image: linear-gradient(9deg, #65FF9B 1%, #AEFFCA 100%);
-	box-shadow: 0 16px 16px 0 rgba(51,248,120,0.20), 0 8px 8px 0 rgba(51,248,120,0.20), 0 4px 4px 0 rgba(51,248,120,0.20), 0 2px 2px 0 rgba(51,248,120,0.20), 0 1px 1px 0 rgba(51,248,120,0.20);
-	border-radius: 25px;
+	box-shadow: 0 1.6rem 1.6rem 0 rgba(51,248,120,0.20), 0 .8rem .8rem 0 rgba(51,248,120,0.20), 0 .4rem .4rem 0 rgba(51,248,120,0.20), 0 .2rem .2rem 0 rgba(51,248,120,0.20), 0 .1rem .1rem 0 rgba(51,248,120,0.20);
 }
 
 .button--secondary {
+	color: $cl-white;
 	background: #0076FF;
-	box-shadow: 0 16px 16px 0 rgba(0,118,255,0.20), 0 8px 8px 0 rgba(0,118,255,0.20), 0 4px 4px 0 rgba(0,118,255,0.20), 0 2px 2px 0 rgba(0,118,255,0.20), 0 1px 1px 0 rgba(0,118,255,0.20);
-	border-radius: 25px;
+	box-shadow: 0 1.6rem 1.6rem 0 rgba(0,118,255,0.20), 0 .8rem .8rem 0 rgba(0,118,255,0.20), 0 .4rem .4rem 0 rgba(0,118,255,0.20), 0 .2rem .2rem 0 rgba(0,118,255,0.20), 0 .1rem .1rem 0 rgba(0,118,255,0.20);
+}
+
+.button--tertiary {
+	color: $cl-tertiary;
+	background-image: linear-gradient(9deg, #65FF9B 1%, #AEFFCA 100%);
+	box-shadow: 0 16px 16px 0 rgba(51,248,120,0.20), 0 8px 8px 0 rgba(51,248,120,0.20), 0 4px 4px 0 rgba(51,248,120,0.20), 0 2px 2px 0 rgba(51,248,120,0.20), 0 1px 1px 0 rgba(51,248,120,0.20);
 }
 
 .button--big {
-	padding: 15px 40px;
+	padding: 1.5rem 4rem;
 	text-transform: uppercase;
 }
