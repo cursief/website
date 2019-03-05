@@ -1,5 +1,6 @@
 <template>
-  <div class="banner">
+  <div class="banner" ref="blobsParent">
+    <blobs />
     <div class="intro">
       <transition name="fade-up" appear>
         <h1>We make digital products.</h1>
@@ -20,8 +21,18 @@
 </template>
 
 <script>
+import Blobs from '@/components/blobs.vue'
+
   export default {
-    name: 'banner'
+    name: 'banner',
+    data() {
+      return {
+        rootElement: this.$el
+      }
+    },
+    components: {
+      Blobs
+    }
   }
 
 </script>
@@ -51,6 +62,8 @@
   }
 
   .intro {
+    position: relative;
+    z-index: 2;
     font-size: 1.8rem;
     text-align: center;
 
