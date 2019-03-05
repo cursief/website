@@ -74,10 +74,10 @@
     display: inline-block;
     margin-top: 10px;
     padding-bottom: 5px;
-    color: $cl-primary;
+    color: $cl-white;
     font-weight: 500;
     text-decoration: none;
-    border-bottom: 2px dashed $cl-primary;
+    border-bottom: 2px dashed $cl-white;
     transition: {
       property: opacity;
       duration: 300ms;

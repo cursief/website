@@ -4,7 +4,7 @@
 			<div class="member__box">
 				<div class="member__title">{{member.title.rendered}}</div>
 				<div class="member__labels" v-if="member.tags">
-					<work-tag v-for="tag in member.tags" :key="tag.id" :tagName="tag.name" :tagSlug="tag.slug" />
+					<member-tag v-for="tag in member.tags" :key="tag.id" :tagName="tag.name" :tagSlug="tag.slug" />
 				</div>
 				<div class="member__description" v-html="member.biography"></div>
 				<div class="member__meta">
@@ -24,26 +24,34 @@
 </template>
 
 <script>
-	import WorkTag from '@/sections/work/work-tag.vue';
+	import MemberTag from '@/sections/members/member-tag.vue';
 	import MembersMedia from '@/sections/members/members-media.vue';
 
 	export default {
 		name: 'member',
 
 		components: {
-			WorkTag,
+			MemberTag,
 			MembersMedia
 		},
 
 		props: {
-			member: Object
+			member: Object,
+			index: Number
+		},
+		
+		mounted() {
+			var delay = this.index ? this.index * 1200 : 600;
+			
+			setTimeout(function () {
+				this.$el.classList.add('is-visible');
+			}.bind(this), delay)
 		}
 	}
 	
 </script>
 
 <style lang="scss" scoped>
-	@import './src/assets/scss/animations.scss';
 	@import './src/assets/scss/variables.scss';
 	
 	.member {
@@ -104,7 +112,13 @@
 	}
 
 	.member__box {
+		opacity: 0;
 		max-width: 60%;
+		transition: opacity 1000ms;
+		
+		.member.is-visible & {
+			opacity: 1;
+		}
 
 		.member:nth-child(even) & {
 			margin-left: auto;

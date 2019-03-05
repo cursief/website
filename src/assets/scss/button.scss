@@ -18,6 +18,11 @@
 	color: $cl-tertiary;
 	background-image: linear-gradient(9deg, #65FF9B 1%, #AEFFCA 100%);
 	box-shadow: 0 1.6rem 1.6rem 0 rgba(51,248,120,0.20), 0 .8rem .8rem 0 rgba(51,248,120,0.20), 0 .4rem .4rem 0 rgba(51,248,120,0.20), 0 .2rem .2rem 0 rgba(51,248,120,0.20), 0 .1rem .1rem 0 rgba(51,248,120,0.20);
+	
+	&:hover,
+	&:focus {
+		
+	}
 }
 
 .button--secondary {

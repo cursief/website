@@ -5,7 +5,7 @@
         <h2 class="section-heading">The Talent</h2>
       </div>
     </transition>
-    <Member v-for="member in members" :member="member" :key="member.id"/>
+    <Member v-for="(member, index) in members" :member="member" :index="index" :key="member.id"/>
   </div>
 </template>
 

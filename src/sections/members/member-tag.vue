@@ -1,23 +1,14 @@
 <template>
-  <span :class="tag.slug">{{tag.name}}</span>
+  <span :class="tagSlug">{{tagName}}</span>
 </template>
 
 <script>
   export default {
-    name: 'work-tag',
+    name: 'member-tag',
 
     props: {
-      tagId: Number,
-    },
-
-    data() {
-      return {
-        tag: Object
-      }
-    },
-
-    mounted() {
-      this.tag = this.$store.getters.getTagById(this.tagId);
+      tagName: '',
+      tagSlug: ''
     }
   }
 

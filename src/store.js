@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios';
+import VueResource from 'vue-resource'
 // https://forum.vuejs.org/t/vuex-not-working-for-me-solved/13588/6
 
 Vue.use(Vuex)
@@ -17,35 +17,34 @@ export default new Vuex.Store({
 	actions: {
 
 		loadPosts ({ commit }) {
-			axios.get('https://cursief.co/wordpress/wp-json/wp/v2/posts').then(r => r.data).then(posts => {
+			Vue.http.get('https://cursief.co/wordpress/wp-json/wp/v2/posts').then(r => r.data).then(posts => {
 				commit('setPosts', posts)
 			})
 		},
 
 		loadMembers ({ commit }) {
-			axios.get('https://cursief.co/wordpress/wp-json/wp/v2/members').then(r => r.data).then(members => {
+			Vue.http.get('https://cursief.co/wordpress/wp-json/wp/v2/members').then(r => r.data).then(members => {
 				commit('setMembers', members)
 			})
 		},
 
 		loadCases ({ commit }) {
-			axios.get('https://cursief.co/wordpress/wp-json/wp/v2/cases').then(r => r.data).then(cases => {
+			Vue.http.get('https://cursief.co/wordpress/wp-json/wp/v2/cases').then(r => r.data).then(cases => {
 				commit('setCases', cases)
 			})
 		},
 
 		loadTags ({ commit }) {
-			axios.get('https://cursief.co/wordpress/wp-json/wp/v2/tags').then(r => r.data).then(tags => {
+			Vue.http.get('https://cursief.co/wordpress/wp-json/wp/v2/tags').then(r => r.data).then(tags => {
 				commit('setTags', tags)
 			})
 		},
 
 		loadMedia ({ commit }) {
-			axios.get('https://cursief.co/wordpress/wp-json/wp/v2/media').then(r => r.data).then(media => {
+			Vue.http.get('https://cursief.co/wordpress/wp-json/wp/v2/media').then(r => r.data).then(media => {
 				commit('setMedia', media)
 			})
 		}
-
 	},
 
 	mutations: {

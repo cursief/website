@@ -3,8 +3,6 @@
 </template>
 
 <script>
-	import axios from 'axios';
-
 	export default {
 		name: 'members-media',
 
@@ -35,7 +33,6 @@
 					this.media = this.$store.state.media.find(media => media.id == this.mediaId)
 				});
 			} else {
-				debugger
 				this.media = this.$store.state.media.find(media => media.id == this.mediaId)
 			}
 		}
