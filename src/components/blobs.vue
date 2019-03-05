@@ -140,7 +140,7 @@
         xmlns: viewModel.svgNamespace,
         width: viewModel.$parent.$refs.blobsParent.clientWidth,
         height: viewModel.$parent.$refs.blobsParent.clientHeight,
-        style: 'filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.2))'
+        style: 'transform: translate3d(0, 0, 0)'
       });
 
       viewModel.$el.appendChild(this.canvas);
