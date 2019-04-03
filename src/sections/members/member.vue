@@ -39,26 +39,26 @@
 			member: Object,
 			index: Number
 		},
-		
+
 		mounted() {
 			var delay = this.index ? this.index * 1200 : 600;
-			
+
 			setTimeout(function () {
 				this.$el.classList.add('is-visible');
 			}.bind(this), delay)
 		}
 	}
-	
+
 </script>
 
 <style lang="scss" scoped>
 	@import './src/assets/scss/variables.scss';
-	
+
 	.member {
 		position: relative;
 		width: 100%;
 		color: $cl-primary;
-		
+
 		&:before {
 			content: '';
 			position: absolute;
@@ -79,7 +79,7 @@
 			z-index: 100;
 			padding: 10rem 0;
 			background-color: #F0EDFF;
-			
+
 			&:before {
 				top: -13rem;
 				height: 13rem;
@@ -94,7 +94,7 @@
 			z-index: 200;
 			padding: 15rem 0;
 			background-color: #DEDAFF;
-			
+
 			&:before {
 				top: 0;
 				height: 10rem;
@@ -115,7 +115,7 @@
 		opacity: 0;
 		max-width: 60%;
 		transition: opacity 1000ms;
-		
+
 		.member.is-visible & {
 			opacity: 1;
 		}
@@ -145,7 +145,7 @@
 	}
 
 	.member__description {
-		
+
 	}
 
 	.member__media {
@@ -163,16 +163,16 @@
 	.member__meta {
 		display: flex;
 		margin-top: 3rem;
-		
+
 		.member:nth-child(odd) & {
 			justify-content: flex-end;
 		}
-		
+
 		.button {
 			margin: 0 1rem 0 0;
-			
+
 			.member:nth-child(odd) & {
-				
+
 				margin: 0 0 0 1rem;
 			}
 		}

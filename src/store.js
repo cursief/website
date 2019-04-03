@@ -10,8 +10,7 @@ export default new Vuex.Store({
 		posts: {},
 		media: {},
 		members: {},
-		cases: {},
-		tags: []
+		cases: {}
 	},
 
 	actions: {
@@ -31,12 +30,6 @@ export default new Vuex.Store({
 		loadCases ({ commit }) {
 			Vue.http.get('https://cursief.co/wordpress/wp-json/wp/v2/cases').then(r => r.data).then(cases => {
 				commit('setCases', cases)
-			})
-		},
-
-		loadTags ({ commit }) {
-			Vue.http.get('https://cursief.co/wordpress/wp-json/wp/v2/tags').then(r => r.data).then(tags => {
-				commit('setTags', tags)
 			})
 		},
 
@@ -63,11 +56,8 @@ export default new Vuex.Store({
 
 		setCases (state, cases) {
 			this.state.cases = cases
-		},
-
-		setTags (state, tags) {
-			this.state.tags = tags;
 		}
+
 	},
 
 	getters: {
@@ -76,10 +66,7 @@ export default new Vuex.Store({
 
 		getMediaById: (state) => (id) => {
 			return state.media.find(media => media.id === id)
-		},
-
-		getTagById: (state) => (id) => {
-			return state.tags.find(tag => tag.id === id)
 		}
+
 	}
 })

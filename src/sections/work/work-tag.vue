@@ -17,7 +17,6 @@
     },
 
     mounted() {
-      this.tag = this.$store.getters.getTagById(this.tagId);
     }
   }
 
