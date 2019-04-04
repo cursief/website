@@ -1,8 +1,8 @@
 <template>
-  <div class="members">
+  <div class="members" id="members">
     <transition name="fade" v-if="members.length" mode="out-in" appear>
       <div class="container">
-        <h2 class="section-heading">The Talent</h2>
+        <!-- <h2 class="section-heading">The Talent</h2> -->
       </div>
     </transition>
     <Member v-for="(member, index) in members" :member="member" :index="index" :key="member.id"/>
@@ -38,7 +38,6 @@
   .members {
     z-index: 1000;
     position: relative;
-    margin-top: -20rem;
     
     .section-heading {
       z-index: 200;

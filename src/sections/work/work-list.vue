@@ -1,7 +1,7 @@
 <template>
   <transition name="fade" v-if="cases.length" mode="out-in" appear>
-    <div class="work">
-      <h2 class="section-heading">What we do, who we are</h2>
+    <div class="work" id="cases">
+<!--       <h2 class="section-heading">Our work</h2> -->
       <ul class="work__list" v-if="$store.state.media.length">
         <work v-for="workCase in cases" :workCase="workCase" :key="workCase.id"/>
       </ul>
@@ -44,7 +44,7 @@
   }
 
   .work {
-    margin-top: -17rem;
+    margin-top: -23rem;
     transition: opacity 500ms;
   }
 

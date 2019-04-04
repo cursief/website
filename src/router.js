@@ -14,9 +14,30 @@ export default new Router({
       component: Home
     },
     {
+      path: '/usps',
+      name: 'usps',
+      component: Home
+    },
+    {
+      path: '/cases',
+      name: 'cases',
+      component: Home
+    },
+    {
+      path: '/members',
+      name: 'members',
+      component: Home
+    },
+    {
       path: '/about',
       name: 'about',
       component: About
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    return window.scrollTo({ 
+      top: document.querySelector('#' + to.name).offsetTop, 
+      behavior: 'smooth' 
+    })
+  }
 })

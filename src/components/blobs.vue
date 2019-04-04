@@ -48,8 +48,8 @@
       }
 
       this.blobPath = document.createElementNS(viewModel.svgNamespace, 'path');
-      this.blobPath.setAttribute('fill', 'rgb(198, 191, 255)');
-      this.blobPath.setAttribute('opacity', '.2');
+      // this.blobPath.setAttribute('fill', '#4735E2');
+      this.blobPath.setAttribute('opacity', '.3');
       viewModel.canvas.appendChild(this.blobPath);
     }
 
@@ -290,15 +290,24 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .canvas-holder {
     position: absolute;
     top: 0;
+    filter: drop-shadow(1rem 1rem 1rem rgba(0,0,0, .1));
     animation: {
       name: fadeIn;
       duration: 2s;
       delay: 2s;
       fill-mode: both;
+    }
+
+    path {
+      fill: #4735E2;
+    }
+
+    path:first-child {
+      fill: #F0834A;
     }
   }
 

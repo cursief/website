@@ -13,7 +13,7 @@
 						<span>Visit portfolio</span>
 					</a>
 					<a href="#" class="button button--primary">
-						<svg width="10" height="10" xmlns="http://www.w3.org/2000/svg"><path d="M10 5.714H5.714V10H4.286V5.714H0V4.286h4.286V0h1.428v4.286H10z" fill="#256F3F" fill-rule="nonzero"/></svg>
+						<svg width="10" height="10" xmlns="http://www.w3.org/2000/svg"><path d="M10 5.714H5.714V10H4.286V5.714H0V4.286h4.286V0h1.428v4.286H10z" fill="#FFF" fill-rule="nonzero"/></svg>
 						<span>Add to stack</span>
 					</a>
 				</div>
@@ -77,7 +77,7 @@
 
 		&:nth-child(2) {
 			z-index: 100;
-			padding: 10rem 0;
+			padding: 6rem 0 14rem 0;
 			background-color: #F0EDFF;
 
 			&:before {
@@ -145,7 +145,7 @@
 	}
 
 	.member__description {
-
+		line-height: 1.6;
 	}
 
 	.member__media {

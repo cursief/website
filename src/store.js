@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import VueResource from 'vue-resource'
 // https://forum.vuejs.org/t/vuex-not-working-for-me-solved/13588/6
 
 Vue.use(Vuex)
