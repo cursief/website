@@ -4,9 +4,10 @@
       <div class="container">
         <img class="logo" src="images/logo.svg" alt="">
         <nav class="navigation">
-          <router-link to="/">About us</router-link>
-          <router-link to="/about">Our work</router-link>
-          <router-link to="/contact">Contact</router-link>
+          <router-link to="/">Introduction</router-link>
+          <router-link to="/cases">Cases</router-link>
+          <router-link to="/talent">About us</router-link>
+          <router-link class="button button--header" to="/contact">Contact</router-link>
         </nav>
       </div>
     </transition>
@@ -24,6 +25,7 @@ export default {
 
 <style scoped lang="scss">
   @import 'src/assets/scss/variables.scss';
+  @import 'src/assets/scss/button.scss';
 
   .fade-enter-active,
   .fade-leave-active {
@@ -45,9 +47,9 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 40px 0;
+    padding: 7rem 0;
 
-    a {
+    a:not(.button) {
       font-weight: bold;
       color: $cl-white;
 
@@ -55,19 +57,30 @@ export default {
         opacity: .6;
       }
     }
+
+    .container {
+      display: flex;
+      width: 100%;
+    }
   }
 
   .navigation {
-    float: right;
-
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    
     a {
-      margin-left: 70px;
+      margin-left: 7rem;
+    }
+
+    a:not(.button) {
       font-family: $font-secondary;
-      font-size: 14px;
+      font-size: 1.6rem;
       font-weight: 500;
+      letter-spacing: .1rem;
       text-decoration: none;
       text-transform: uppercase;
-      text-shadow: 0 2px 4px rgba(62,54,132,0.50);
+      text-shadow: 0 .2rem .4rem rgba(62,54,132,0.50);
       transition: opacity 300ms;
 
       &:hover,

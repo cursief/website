@@ -145,7 +145,7 @@
 	}
 
 	.member__description {
-
+		line-height: 1.6;
 	}
 
 	.member__media {

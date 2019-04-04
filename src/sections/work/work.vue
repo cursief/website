@@ -114,7 +114,7 @@
 			display: block;
 			width: 100%;
 			height: 100%;
-			background-color: rgba(#4735E2, .5);
+			background-color: rgba(#183992, .8);
 		}
 
 		img {
