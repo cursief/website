@@ -1,18 +1,21 @@
 <template>
-  <div id="app">
+  <div id="home">
     <header-primary/>
     <router-view/>
+    <footer-primary/>
   </div>
 </template>
 
 <script>
   import HeaderPrimary from '@/components/header-primary.vue'
+  import FooterPrimary from '@/components/footer-primary.vue'
 
   export default {
     name: 'app',
 
     components: {
-      HeaderPrimary
+      HeaderPrimary,
+      FooterPrimary
     },
 
     data() {
@@ -34,7 +37,7 @@
 
   html,
   body,
-  #app {
+  #home {
     padding: 0;
     margin: 0;
     min-height: 100%;
@@ -52,7 +55,7 @@
     box-sizing: border-box;
   }
 
-  #app {
+  #home {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

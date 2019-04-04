@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <banner/>
-    <cta/>
+    <usps/>
     <workList/>
     <!-- <posts/> -->
     <members/>
@@ -11,7 +11,7 @@
 <script>
   import Posts from '@/components/posts.vue'
   import Members from '@/components/members.vue'
-  import Cta from '@/components/cta.vue'
+  import Usps from '@/components/usps.vue'
   import Banner from '@/components/banner.vue'
   import WorkList from '@/sections/work/work-list.vue'
 
@@ -20,7 +20,7 @@
     components: {
       Posts,
       Members,
-      Cta,
+      Usps,
       Banner,
       WorkList
     }

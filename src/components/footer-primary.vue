@@ -1,54 +1,32 @@
 <template>
-  <header class="header header--primary">
+  <footer class="footer footer--primary">
     <transition name="fade" appear>
       <div class="container">
         <img class="logo" src="images/logo.svg" alt="">
         <nav class="navigation">
-          <router-link to="/usps">Introduction</router-link>
-          <router-link to="/cases">Cases</router-link>
-          <router-link to="/members">Members</router-link>
-          <router-link to="/contact">Contact</router-link>
-          <router-link class="button button--primary button--header" to="/contact">Build your team</router-link>
+          <router-link to="/disclaimer">Disclaimer</router-link>
+          <router-link to="/disclaimer">Privacy policy</router-link>
+          <router-link to="/disclaimer">Contact</router-link>
         </nav>
+        <p>© 2018 Cursief. All rights reserved.</p>
       </div>
     </transition>
-  </header>
+  </footer>
 </template>
 
 <script>
-  export default {
-    name: 'HeaderPrimary',
-    props: {
-      msg: String
-    }
-  }
+export default {
+  name: 'FooterPrimary'
+}
 </script>
 
 <style scoped lang="scss">
   @import 'src/assets/scss/variables.scss';
-  @import 'src/assets/scss/button.scss';
 
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: all 800ms ease 400ms;
-  }
-
-  .fade-enter,
-  .fade-leave-to {
-    opacity: 0;
-  }
-
-  .logo {
-    float: left;
-  }
-
-  .header {
-    z-index: 2;
-    position: absolute;
-    top: 0;
-    left: 0;
+  .footer {
     width: 100%;
-    padding: 7rem 0;
+    padding: 3rem 0;
+    background-color: #504A86;
 
     a:not(.button) {
       font-weight: bold;
@@ -69,14 +47,12 @@
     display: flex;
     align-items: center;
     margin-left: auto;
-    
-    a {
-      margin-left: 5rem;
-    }
+    margin-right: 3rem;
 
-    a:not(.button) {
+    a {
+      margin-left: 3rem;
       font-family: $font-secondary;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       font-weight: 500;
       letter-spacing: .1rem;
       text-decoration: none;
