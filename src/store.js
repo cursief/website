@@ -6,67 +6,67 @@ import VueResource from 'vue-resource'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-	state: {
-		posts: {},
-		media: {},
-		members: {},
-		cases: {}
-	},
+  state: {
+    posts: {},
+    media: {},
+    members: {},
+    cases: {}
+  },
 
-	actions: {
+  actions: {
 
-		loadPosts ({ commit }) {
-			Vue.http.get('https://cursief.co/wordpress/wp-json/wp/v2/posts').then(r => r.data).then(posts => {
-				commit('setPosts', posts)
-			})
-		},
+    loadPosts ({ commit }) {
+      Vue.http.get('http://127.0.0.1:3000/wp-json/wp/v2/posts').then(r => r.data).then(posts => {
+        commit('setPosts', posts)
+      })
+    },
 
-		loadMembers ({ commit }) {
-			Vue.http.get('https://cursief.co/wordpress/wp-json/wp/v2/members').then(r => r.data).then(members => {
-				commit('setMembers', members)
-			})
-		},
+    loadMembers ({ commit }) {
+      Vue.http.get('http://127.0.0.1:3000/wp-json/wp/v2/members').then(r => r.data).then(members => {
+        commit('setMembers', members)
+      })
+    },
 
-		loadCases ({ commit }) {
-			Vue.http.get('https://cursief.co/wordpress/wp-json/wp/v2/cases').then(r => r.data).then(cases => {
-				commit('setCases', cases)
-			})
-		},
+    loadCases ({ commit }) {
+      Vue.http.get('http://127.0.0.1:3000/wp-json/wp/v2/cases').then(r => r.data).then(cases => {
+        commit('setCases', cases)
+      })
+    },
 
-		loadMedia ({ commit }) {
-			Vue.http.get('https://cursief.co/wordpress/wp-json/wp/v2/media').then(r => r.data).then(media => {
-				commit('setMedia', media)
-			})
-		}
-	},
+    loadMedia ({ commit }) {
+      Vue.http.get('http://127.0.0.1:3000/wp-json/wp/v2/media').then(r => r.data).then(media => {
+        commit('setMedia', media)
+      })
+    }
+  },
 
-	mutations: {
+  mutations: {
 
-		setPosts (state, posts) {
-			this.state.posts = posts
-		},
+    setPosts (state, posts) {
+      this.state.posts = posts
+    },
 
-		setMedia (state, media) {
-			this.state.media = media
-		},
+    setMedia (state, media) {
+      this.state.media = media
+    },
 
-		setMembers (state, members) {
-			this.state.members = members
-		},
+    setMembers (state, members) {
+      this.state.members = members
+    },
 
-		setCases (state, cases) {
-			this.state.cases = cases
-		}
+    setCases (state, cases) {
+      this.state.cases = cases
+    }
 
-	},
+  },
 
-	getters: {
+  getters: {
 
-		getMediaList: state => state.media,
+    getMediaList: state => state.media,
 
-		getMediaById: (state) => (id) => {
-			return state.media.find(media => media.id === id)
-		}
+    getMediaById: (state) => (id) => {
+      return state.media.find(media => media.id === id)
+    }
 
-	}
+  }
 })

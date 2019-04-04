@@ -8,7 +8,7 @@
 				</div>
 				<div class="member__description" v-html="member.biography"></div>
 				<div class="member__meta">
-					<a href="#" class="button button--secondary">
+					<a v-bind:href="member.portfolio_url" class="button button--secondary">
 						<svg width="10" height="10" xmlns="http://www.w3.org/2000/svg"><path d="M3.939 6.994l.783.784L7.5 5 4.722 2.222l-.783.784 1.433 1.438H0v1.112h5.372L3.94 6.994zM8.889 0H1.11C.494 0 0 .5 0 1.111v2.222h1.111V1.111H8.89V8.89H1.11V6.667H0v2.222A1.11 1.11 0 0 0 1.111 10H8.89C9.5 10 10 9.5 10 8.889V1.11C10 .5 9.5 0 8.889 0z" fill="#FFF" fill-rule="nonzero"/></svg>
 						<span>Visit portfolio</span>
 					</a>
