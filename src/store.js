@@ -15,25 +15,25 @@ export default new Vuex.Store({
   actions: {
 
     loadPosts ({ commit }) {
-      Vue.http.get('http://127.0.0.1:3000/wp-json/wp/v2/posts').then(r => r.data).then(posts => {
+      Vue.http.get('http://wordpress.test/wp-json/wp/v2/posts').then(r => r.data).then(posts => {
         commit('setPosts', posts)
       })
     },
 
     loadMembers ({ commit }) {
-      Vue.http.get('http://127.0.0.1:3000/wp-json/wp/v2/members').then(r => r.data).then(members => {
+      Vue.http.get('http://wordpress.test/wp-json/wp/v2/members').then(r => r.data).then(members => {
         commit('setMembers', members)
       })
     },
 
     loadCases ({ commit }) {
-      Vue.http.get('http://127.0.0.1:3000/wp-json/wp/v2/cases').then(r => r.data).then(cases => {
+      Vue.http.get('http://wordpress.test/wp-json/wp/v2/cases').then(r => r.data).then(cases => {
         commit('setCases', cases)
       })
     },
 
     loadMedia ({ commit }) {
-      Vue.http.get('http://127.0.0.1:3000/wp-json/wp/v2/media').then(r => r.data).then(media => {
+      Vue.http.get('http://wordpress.test/wp-json/wp/v2/media').then(r => r.data).then(media => {
         commit('setMedia', media)
       })
     }

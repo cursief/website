@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade" v-if="cases.length" mode="out-in" appear>
+  <transition name="fade" mode="out-in" appear>
     <div class="work" id="cases">
 <!--       <h2 class="section-heading">Our work</h2> -->
       <ul class="work__list" v-if="$store.state.media.length">

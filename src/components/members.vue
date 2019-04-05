@@ -5,7 +5,9 @@
         <!-- <h2 class="section-heading">The Talent</h2> -->
       </div>
     </transition>
-    <Member v-for="(member, index) in members" :member="member" :index="index" :key="member.id"/>
+    <transition-group class="group" name="fade" tag="div" appear>
+      <Member v-for="(member, index) in members" :member="member" :index="index" :key="member.id"/>
+    </transition-group>
   </div>
 </template>
 
