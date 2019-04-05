@@ -6,22 +6,22 @@
         <h1>We help you make the best digital products.</h1>
       </transition>
 
-      <transition name="fade" appear>
+      <transition name="fade-up-1" appear>
         <div class="container container--small">
           <p>We design, build and launch products for startups, established companies and ourselves. We help businesses grow through effective design and strategy.<br>
           Let’s make great things together!</p>
         </div>
       </transition>
 
-      <transition name="fade" appear>
-        <div class="banner__scroll">
+      <transition name="fade-up-1" appear>
+        <router-link to="/usps" class="banner__scroll">
           <span>Scroll down</span>
           <svg width="30" height="16" xmlns="http://www.w3.org/2000/svg"><g fill="#FFF" fill-rule="evenodd"><path d="M2.912.36L15.64 13.088a1.333 1.333 0 0 1-1.886 1.886L1.027 2.245A1.333 1.333 0 0 1 2.913.36z"/><path d="M26.809.36L14.08 13.088a1.333 1.333 0 0 0 1.886 1.886L28.693 2.245A1.333 1.333 0 1 0 26.808.36z"/></g></svg>
-        </div>
+        </router-link>
       </transition>
     </div>
 
-    <transition name="fade-up" appear>
+    <transition name="fade-up-1" appear>
       <div class="banner__bottom-blob"></div>
     </transition>
   </div>
@@ -45,6 +45,7 @@
 
 <style scoped lang="scss">
   @import 'src/assets/scss/variables.scss';
+  @import 'src/assets/scss/animations.scss';
 
   @keyframes arrowDown {
     from {
@@ -81,6 +82,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: $cl-white;
+    text-decoration: none;
     transform: translate3d(0, 8rem, 0);
 
     span {
@@ -118,37 +121,4 @@
       margin: 3rem auto 0;
     }
   }
-
-  .fade-up-enter-active,
-  .fade-up-leave-active {
-    transition: all 800ms ease 400ms;
-  }
-
-  .fade-up-enter,
-  .fade-up-leave-to {
-    opacity: 0;
-    transform: translate3d(0, 2rem, 0);
-  }
-
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: all 800ms ease 1000ms;
-  }
-
-  .fade-enter,
-  .fade-leave-to {
-    opacity: 0;
-  }
-
-  .glow-enter-active,
-  .glow-leave-active {
-    transition: all 800ms ease 1000ms;
-  }
-
-  .glow-enter,
-  .glow-leave-to {
-    opacity: 0;
-    box-shadow: 0 0px 100px 0 rgba(51, 248, 120, 1), 0 0 100px 0 rgba(51, 248, 120, 1), 0 4px 4px 0 rgba(51, 248, 120, 0.2), 0 2px 2px 0 rgba(51, 248, 120, 0.2), 0 1px 1px 0 rgba(51, 248, 120, 0.2)
-  }
-
 </style>

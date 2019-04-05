@@ -32,12 +32,32 @@ export default new Router({
       path: '/about',
       name: 'about',
       component: About
+    },
+    {
+      path: '*',
+      name: '404',
+      component: Home
     }
   ],
   scrollBehavior (to, from, savedPosition) {
-    return window.scrollTo({ 
-      top: document.querySelector('#' + to.name).offsetTop, 
-      behavior: 'smooth' 
-    })
+
+  	if(savedPosition) {
+  		// debugger
+	    return window.scrollTo({ 
+	      top: savedPosition.y,
+	      behavior: 'smooth' 
+	    })
+  	} else {
+	
+	  	if(to.name) {
+	  		// debugger
+		    return window.scrollTo({ 
+		      top: document.querySelector('#' + to.name).offsetTop, 
+		      behavior: 'smooth' 
+		    })
+	  	} else {
+	  		return { x: 0, y: 0 }
+	  	}
+  	}
   }
 })

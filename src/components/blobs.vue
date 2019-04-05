@@ -370,6 +370,7 @@
 </script>
 
 <style lang="scss">
+
   .canvas-holder {
     position: absolute;
     top: 0;
