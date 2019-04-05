@@ -43,8 +43,8 @@
 <style lang="scss" scoped>
 
 	.member__media {
-		width: 42.4rem;
-		height: 55rem;
+		width: 46rem;
+		height: 46rem;
 	}
 
 </style>

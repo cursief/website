@@ -14,10 +14,10 @@
       </transition>
 
       <transition name="fade-up-1" appear>
-        <div class="banner__scroll">
+        <router-link to="/usps" class="banner__scroll">
           <span>Scroll down</span>
           <svg width="30" height="16" xmlns="http://www.w3.org/2000/svg"><g fill="#FFF" fill-rule="evenodd"><path d="M2.912.36L15.64 13.088a1.333 1.333 0 0 1-1.886 1.886L1.027 2.245A1.333 1.333 0 0 1 2.913.36z"/><path d="M26.809.36L14.08 13.088a1.333 1.333 0 0 0 1.886 1.886L28.693 2.245A1.333 1.333 0 1 0 26.808.36z"/></g></svg>
-        </div>
+        </router-link>
       </transition>
     </div>
 
@@ -85,6 +85,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: $cl-white;
+    text-decoration: none;
     transform: translate3d(0, 8rem, 0);
 
     span {
