@@ -4,7 +4,7 @@
 			<a href="#">
 				<h3>{{workCase.title.rendered}}</h3>
 				<div class="work__labels" v-if="workCase.tags">
-					<workTag v-for="tag in workCase.tags" :key="tag.id" :tagId="tag"/>
+					<workTag v-for="tag in workCase.tags" :key="tag.id" :tag="tag"/>
 				</div>
 				<div class="work__media" v-if="mediaObject">
 					<workMedia :media="mediaObject" />

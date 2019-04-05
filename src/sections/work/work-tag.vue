@@ -7,13 +7,7 @@
     name: 'work-tag',
 
     props: {
-      tagId: Number,
-    },
-
-    data() {
-      return {
-        tag: Object
-      }
+      tag: Object,
     },
 
     mounted() {

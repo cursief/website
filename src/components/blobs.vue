@@ -13,7 +13,7 @@
       };
     },
     mounted() {
-      new BlobCanvas(this, this.totalBlobs, 12, 150, 300);
+      new BlobCanvas(this, this.totalBlobs, 12, 30, 400);
     }
   }
 
@@ -35,7 +35,7 @@
         hidden: true
       });
 
-      this.radius = blobSize + (Math.random() * blobSize);
+      this.radius = blobSize * .5 + (Math.random() * blobSize * 2);
       this.slice = 2 * Math.PI / this.blobComplexity;
 
       // const radius = blobSize;
@@ -49,7 +49,6 @@
 
       this.blobPath = document.createElementNS(viewModel.svgNamespace, 'path');
       // this.blobPath.setAttribute('fill', '#4735E2');
-      this.blobPath.setAttribute('opacity', '.3');
       viewModel.canvas.appendChild(this.blobPath);
     }
 
@@ -119,7 +118,10 @@
     {
       this.time = 0;
       this.blobs = [];
+      this.blobCount = blobCount;
+      this.blobSize = blobSize;
       this.viewModel = viewModel;
+      this.blobComplexity = blobComplexity;
       this.mouseRadiusHalf = mouseRadius * .5;
       this.mouseVelocity = {
         x: null,
@@ -136,27 +138,36 @@
       this.canvas = document.createElementNS(viewModel.svgNamespace, 'svg');
       this.animationFrameBound = this.animationFrame.bind(this);
 
-      viewModel.utils.setProperties(this.canvas, {
-        xmlns: viewModel.svgNamespace,
-        width: viewModel.$parent.$refs.blobsParent.clientWidth,
-        height: viewModel.$parent.$refs.blobsParent.clientHeight,
-        style: 'transform: translate3d(0, 0, 0)'
-      });
-
       viewModel.$el.appendChild(this.canvas);
       viewModel.canvas = this.canvas;
 
-      while (blobCount > 0) {
-        const blob = new Blob(this.viewModel, Math.max(3, Math.round(blobComplexity * .5 + blobComplexity * .5 * Math.random())), blobSize, this.blobs.length);
-        this.blobs.push(blob);
-        blobCount--;
-      }
+      this.createBlobs();
 
       // Start animation
       this.animationFrameBound();
 
       // Start mousemove listener
       window.addEventListener('mousemove', this.mouseHandler.bind(this));
+      window.addEventListener('resize', this.resizeHandler.bind(this));
+    }
+
+    createBlobs()
+    {
+      this.viewModel.utils.setProperties(this.canvas, {
+        xmlns: this.viewModel.svgNamespace,
+        width: this.viewModel.$parent.$refs.blobsParent.clientWidth,
+        height: this.viewModel.$parent.$refs.blobsParent.clientHeight,
+        style: 'transform: translate3d(0, 0, 0)'
+      });
+
+      let blobCount = this.blobCount;
+      const blobSize = this.blobSize + window.innerWidth * .02;
+
+      while (blobCount > 0) {
+        const blob = new Blob(this.viewModel, Math.max(3, Math.round(this.blobComplexity * .5 + this.blobComplexity * .5 * Math.random())), blobSize, this.blobs.length);
+        this.blobs.push(blob);
+        blobCount--;
+      }
     }
 
     mouseHandler(event)
@@ -168,6 +179,26 @@
 
       this.mousePosition.x = event.clientX + window.scrollX;
       this.mousePosition.y = event.clientY + window.scrollY;
+    }
+
+    resizeHandler(event)
+    {
+      this.resizing = true;
+
+      this.canvas.classList.add('is-hidden');
+
+      this.resizeTimeout && clearTimeout(this.resizeTimeout);
+
+      this.resizeTimeout = window.setTimeout(this.timeOutHandler.bind(this), 1000);
+    }
+
+    timeOutHandler()
+    {
+      this.resizeTimeout = window.setTimeout(() => {
+        this.destroy();
+        this.createBlobs();
+        this.canvas.classList.remove('is-hidden');
+      }, 500);
     }
 
     animationFrame(newTime)
@@ -277,6 +308,15 @@
 
       this.time++;
     }
+
+    destroy()
+    {
+      this.canvas.querySelectorAll('path').forEach(path => {
+        this.canvas.removeChild(path);
+      });
+
+      this.blobs = [];
+    }
   }
 
   class BlobUtils
@@ -294,12 +334,19 @@
   .canvas-holder {
     position: absolute;
     top: 0;
-    filter: drop-shadow(1rem 1rem 1rem rgba(0,0,0, .1));
     animation: {
       name: fadeIn;
       duration: 2s;
       delay: 2s;
       fill-mode: both;
+    };
+
+    svg {
+      transition: opacity 1s;
+
+      &.is-hidden {
+        opacity: 0;
+      }
     }
 
     path {
@@ -317,7 +364,7 @@
     }
 
     100% {
-      opacity: 1;
+      opacity: .5;
     }
   }
 </style>
