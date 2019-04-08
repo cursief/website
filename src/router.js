@@ -41,21 +41,21 @@ export default new Router({
   ],
   scrollBehavior (to, from, savedPosition) {
 
-  	if(savedPosition) {
-	    return window.scrollTo({ 
-	      top: savedPosition.y,
-	      behavior: 'smooth' 
-	    })
-  	} else {
-	
-	  	if(to.name) {
-		    return window.scrollTo({ 
-		      top: document.querySelector('#' + to.name).offsetTop, 
-		      behavior: 'smooth' 
-		    })
-	  	} else {
-	  		return { x: 0, y: 0 }
-	  	}
-  	}
+    if(savedPosition) {
+      return window.scrollTo({ 
+        top: savedPosition.y,
+        behavior: 'smooth' 
+      })
+    } else {
+  
+      if(to.name) {
+        return window.scrollTo({ 
+          top: document.querySelector('#' + to.name).offsetTop, 
+          behavior: 'smooth' 
+        })
+      } else {
+        return { x: 0, y: 0 }
+      }
+    }
   }
 })
