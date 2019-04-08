@@ -38,7 +38,7 @@
   @import './src/assets/scss/variables.scss';
 
   .members {
-    z-index: 1000;
+  	// overflow: hidden;
     position: relative;
     
     .section-heading {

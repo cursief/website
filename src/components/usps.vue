@@ -44,6 +44,7 @@
 
 <style scoped lang="scss">
   @import 'src/assets/scss/variables.scss';
+  @import 'src/assets/scss/layout/grid.scss';
   @import 'src/assets/scss/animations.scss';
 
   .usps {
@@ -51,22 +52,32 @@
     position: relative;
     margin-top: -50rem;
     width: 100%;
-    height: 102rem;
-    padding-top: 35rem;
-    padding-bottom: 15rem;
-    background-size: 100% 100%;
+    padding: 35rem 1.5rem 15rem;
+    background-size: auto 100%;
     background-image: url("data:image/svg+xml,%3Csvg width='1440' height='1119' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient x1='24.958%25' y1='24.16%25' x2='51.909%25' y2='78.361%25' id='a'%3E%3Cstop stop-color='%235948FF' offset='0%25'/%3E%3Cstop stop-color='%234C2FCC' offset='100%25'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M1440 549c.667 302 .667 631 0 987-60.635-7.857-184.302.476-371 25-236 31-331 98-624 106-134.838 3.682-283.504-25.985-446-89V781c183 20 342 20 599 0s609-103 842-232z' transform='translate(0 -549)' fill='url(%23a)' fill-rule='evenodd'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
+    
+    @include md('+') {
+    	height: 102rem;
+    	padding: 35rem 3rem 15rem;
+    	background-size: 100% 100%;
+    }
   }
 
   .group {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   .usps__column {
-    width: 25%;
+  	margin-bottom: 3rem;
+
+  	@include md('+') {
+    	width: 25%;
+    	margin-bottom: 0;
+  	}
   }
 
   .usps__heading {
@@ -75,6 +86,7 @@
   }
 
   .usps__icon {
+  	flex-shrink: 0;
     margin-right: 2rem;
   }
 

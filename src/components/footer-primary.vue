@@ -45,6 +45,7 @@ export default {
 
   .navigation {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     margin-left: auto;
     margin-right: 3rem;
