@@ -9,25 +9,66 @@
       return {
         utils: new BlobUtils(),
         svgNamespace: 'http://www.w3.org/2000/svg',
-        totalBlobs: 5
+        blobs: [
+          {
+            data: [
+              {
+                x: 0,
+                y: 0
+              },
+              {
+                x: 200,
+                y: 180
+              },
+              {
+                x: 250,
+                y: 300
+              },
+              {
+                x: 250,
+                y: 400
+              },
+              {
+                x: 200,
+                y: 500
+              },
+              {
+                x: 250,
+                y: 530
+              },
+              {
+                x: 180,
+                y: 600
+              },
+              {
+                x: 200,
+                y: 650
+              },
+              {
+                x: 0,
+                y: 650
+              },
+            ]
+          },
+        ]
       };
     },
     mounted() {
-      new BlobCanvas(this, this.totalBlobs, 12, 30, 400);
+      new BlobCanvas(this, 12, 30, 400);
     }
   }
 
   class Blob {
-    constructor(viewModel, blobComplexity, blobSize, index)
+    constructor(viewModel, blobInfo, blobSize, index)
     {
       this.points = [];
-      this.blobComplexity = blobComplexity;
+      this.blobInfo = blobInfo;
       this.blobSize = blobSize;
       this.viewModel = viewModel;
 
       const position = {
-        x: ((index + .5) / viewModel.totalBlobs) * viewModel.canvas.getAttribute('width'),
-        y: Math.random() * viewModel.canvas.getAttribute('height')
+        x: Math.random() * viewModel.canvas.getAttribute('width'),
+        y: Math.random() * viewModel.canvas.getAttribute('height') * .1
       };
 
       this.centerPoint = new Point(viewModel, {
@@ -35,15 +76,12 @@
         hidden: true
       });
 
-      this.radius = blobSize * .5 + (Math.random() * blobSize * 2);
-      this.slice = 2 * Math.PI / this.blobComplexity;
-
       // const radius = blobSize;
-      let pointIndex = this.blobComplexity;
+      let pointIndex = this.blobInfo.data.length - 1;
 
-      while (pointIndex > 0) {
+      while (pointIndex > -1) {
         // const pointRadius = radius;
-        this.points.push(this.createBlobPoint(pointIndex));
+        this.points.push(this.createBlobPoint(this.blobInfo.data[pointIndex]));
         pointIndex--;
       }
 
@@ -52,14 +90,11 @@
       viewModel.canvas.appendChild(this.blobPath);
     }
 
-    createBlobPoint(pointIndex)
+    createBlobPoint(pointCoordinate)
     {
-      const angle = pointIndex * this.slice;
-      const pointRadius = this.radius + (Math.random() - Math.random()) * this.blobSize;
-
       const position = {
-        x: this.centerPoint.x + pointRadius * Math.cos(angle),
-        y: this.centerPoint.y + pointRadius * Math.sin(angle)
+        x: this.centerPoint.x + pointCoordinate.x,
+        y: this.centerPoint.y + pointCoordinate.y
       };
 
       return {
@@ -114,11 +149,10 @@
 
   class BlobCanvas
   {
-    constructor(viewModel, blobCount = 10, blobComplexity = 5, blobSize = 20, mouseRadius = 200)
+    constructor(viewModel, blobCount, blobComplexity = 5, blobSize = 20, mouseRadius = 200)
     {
       this.time = 0;
       this.blobs = [];
-      this.blobCount = blobCount;
       this.blobSize = blobSize;
       this.viewModel = viewModel;
       this.blobComplexity = blobComplexity;
@@ -136,6 +170,10 @@
       this.previousTime = window.performance.now();
 
       this.canvas = document.createElementNS(viewModel.svgNamespace, 'svg');
+      this.canvas.innerHTML = `<linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+    </linearGradient>`;
       this.animationFrameBound = this.animationFrame.bind(this);
 
       viewModel.$el.appendChild(this.canvas);
@@ -160,11 +198,13 @@
         style: 'transform: translate3d(0, 0, 0)'
       });
 
-      let blobCount = this.blobCount;
+      this.blobCount = this.viewModel.blobs.length;
+
+      let blobCount = this.blobCount - 1;
       const blobSize = this.blobSize + window.innerWidth * .02;
 
-      while (blobCount > 0) {
-        const blob = new Blob(this.viewModel, Math.max(3, Math.round(this.blobComplexity * .5 + this.blobComplexity * .5 * Math.random())), blobSize, this.blobs.length);
+      while (blobCount > -1) {
+        const blob = new Blob(this.viewModel, this.viewModel.blobs[blobCount], blobSize, this.blobs.length);
         this.blobs.push(blob);
         blobCount--;
       }
@@ -181,7 +221,7 @@
       this.mousePosition.y = event.clientY + window.scrollY;
     }
 
-    resizeHandler(event)
+    resizeHandler()
     {
       this.resizing = true;
 
@@ -221,15 +261,14 @@
       ];
 
       this.blobs.forEach(blob => {
-        let pointIndex = blob.blobComplexity - 1;
+        let pointIndex = (blob.blobInfo.data.length - 1);
 
         while (pointIndex > -1) {
-          const angle = pointIndex * blob.slice;
           const point = blob.points[pointIndex];
           const currentFrame = point.randomSeed + this.time;
 
-          point.velocity.x += Math.cos(angle) * point.randomSeed4 * Math.cos(currentFrame / point.randomSeed2) * .4;
-          point.velocity.y -= Math.sin(angle) * point.randomSeed5 * Math.sin(currentFrame / point.randomSeed3) * .4;
+          point.velocity.x += point.randomSeed4 * Math.cos(currentFrame / point.randomSeed2) * .4;
+          point.velocity.y -= point.randomSeed5 * Math.sin(currentFrame / point.randomSeed3) * .4;
 
           // Check bluntly if the point is in distance to be affected by the mouse radius
           if (point.position.x > mouseRect[3] && point.position.x < mouseRect[1] && point.position.y > mouseRect[0] && point.position.y < mouseRect[2]) {
@@ -264,7 +303,7 @@
         pointIndex = 0;
 
         // Move to first point
-        const lastPoint = blob.points[blob.blobComplexity - 1].position;
+        const lastPoint = blob.points[blob.blobInfo.data.length - 1].position;
         const firstPoint = blob.points[0].position;
 
         const startPoint = {
@@ -274,10 +313,10 @@
 
         pathParts = pathParts.concat(`M${startPoint.x}, ${startPoint.y}`);
 
-        const blobComplexityMinusOne = blob.blobComplexity - 1;
+        const pointsAmountMinOne = blob.blobInfo.data.length - 1;
 
         // Create continuous bezier curve parts
-        while (pointIndex < blobComplexityMinusOne) {
+        while (pointIndex < pointsAmountMinOne) {
           const currentPoint = blob.points[pointIndex].position;
           const nextPoint = blob.points[pointIndex + 1].position;
 
@@ -293,7 +332,7 @@
         }
 
         // Add last curve
-        const currentPoint = blob.points[blobComplexityMinusOne].position;
+        const currentPoint = blob.points[pointsAmountMinOne].position;
 
         const endPoint = {
           x: (currentPoint.x + firstPoint.x) / 2,
@@ -351,7 +390,7 @@
     }
 
     path {
-      fill: #4735E2;
+      fill: url(#grad1);
     }
 
     path:first-child {
