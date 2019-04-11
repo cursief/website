@@ -18,11 +18,15 @@
   @import 'src/assets/scss/variables.scss';
 
   span {
-    margin: 0 2px;
-    padding: 5px 10px;
-    font-size: 12px;
+    margin: 0 .5rem;
+    padding: .5rem 1rem;
+    font-size: 1.2rem;
     color: $cl-white;
-    border-radius: 10px;
+    border-radius: .4rem;
+    
+    &:first-child {
+    	margin-left: 0;
+    }
   }
 
   .webdesign {

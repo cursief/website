@@ -112,6 +112,7 @@
 		}
 
 		&:nth-last-of-type(-n+2) {
+			height: 70rem;
 
 			@include md('+') {
 				padding-bottom: 18rem;
