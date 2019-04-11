@@ -1,3 +1,37 @@
+$grid-variant:            'class' !default; // Options: 'class' (default) or 'placehold'
+$whitespace-count:        2 !default; // How many margin/padding classes will be generated (eg: p1, m1, etc.)
+
+$base-min-width:          0 !default;
+$xxs-min-width:           375px !default; // Mobile M
+$xs-min-width:            425px !default; // Mobile L
+$sm-min-width:            768px !default; // Tablet
+$md-min-width:            1024px !default; // Laptop
+$lg-min-width:            1440px !default; // Laptop L
+$xl-min-width:            2560px !default; // 4K
+
+$base-max-width:          $xxs-min-width - 1 !default;
+$xxs-max-width:           $xs-min-width - 1 !default;
+$xs-max-width:            $sm-min-width - 1 !default;
+$sm-max-width:            $md-min-width - 1 !default;
+$md-max-width:            $lg-min-width - 1 !default;
+$lg-max-width:            $xl-min-width - 1 !default;
+$xl-max-width:            100% !default;
+
+$column-count:            24 !default;
+$gutter:                  2rem !default;
+$max-container-width:     1140px !default;
+$column-px-width:         $max-container-width / $column-count;
+$column-percentage-width: ($column-px-width / $max-container-width) * 100%;
+$devices:                 ('base', 'base: 0 -> #{$base-max-width}', $base-min-width, $base-max-width),
+                          ('xxs', 'xxs: mobile M (min-width: #{$xxs-min-width})', $xxs-min-width, $xxs-max-width),
+                          ('xs', 'xs: mobile L (min-width: #{$xs-min-width})', $xs-min-width, $xs-max-width),
+                          ('sm', 'sm: tablet (min-width: #{$sm-min-width})', $sm-min-width, $sm-max-width),
+                          ('md', 'md: laptop (min-width: #{$md-min-width})', $md-min-width, $md-max-width),
+                          ('lg', 'lg: laptop L (min-width: #{$lg-min-width})', $lg-min-width, $lg-max-width),
+                          ('xl', 'xl: 4K (min-width: #{$xl-min-width})', $xl-min-width, $xl-max-width);
+$spacing:                 ($gutter / 2) !default;
+
+
 .container {
   max-width: 1440px;
   margin: 0 auto;
@@ -5,4 +39,151 @@
 
 .container--small {
   max-width: 700px;
+}
+
+@each $device, $description, $min-width, $max-width in $devices {
+
+  @media screen and (min-width: $min-width) {
+
+    @for $column from 1 through $column-count {
+
+      @if $grid-variant == 'placehold' {
+        %#{$device}#{$column} {
+          float: left;
+          min-height: 1px;
+          padding-left: $gutter / 2;
+          padding-right: $gutter / 2;
+          position: relative;
+          width: ($column * $column-percentage-width);
+        }
+      } @else {
+        .#{$device}#{$column} {
+          float: left;
+          min-height: 1px;
+          padding-left: $gutter / 2;
+          padding-right: $gutter / 2;
+          position: relative;
+          width: ($column * $column-percentage-width);
+        }
+      }
+    }
+  }
+}
+
+@mixin font-size($xxs, $sm: null, $md: null, $lg: null) {
+  font-size: #{$xxs};
+
+  @if $sm {
+    @include sm('+') {
+      font-size: #{$sm};
+    }
+  }
+
+  @if $md {
+    @include md('+') {
+      font-size: #{$md};
+    }
+  }
+
+  @if $lg {
+    @include lg('+') {
+      font-size: #{$lg};
+    }
+  }
+}
+
+@mixin xxs($direction: null) {
+  @if $direction == '+' {
+    @media screen and (min-width: $xxs-min-width) {
+      @content;
+    }
+  } @else if $direction == '-' {
+    @media screen and (max-width: $xxs-max-width) {
+      @content;
+    }
+  } @else {
+    @media screen and (min-width: $xxs-min-width) and (max-width: $xxs-max-width) {
+      @content;
+    }
+  }
+}
+
+@mixin xs($direction: null) {
+  @if $direction == '+' {
+    @media screen and (min-width: $xs-min-width) {
+      @content;
+    }
+  } @else if $direction == '-' {
+    @media screen and (max-width: $xs-max-width) {
+      @content;
+    }
+  } @else {
+    @media screen and (min-width: $xs-min-width) and (max-width: $xs-max-width) {
+      @content;
+    }
+  }
+}
+
+@mixin sm($direction: null) {
+  @if $direction == '+' {
+    @media screen and (min-width: $sm-min-width) {
+      @content;
+    }
+  } @else if $direction == '-' {
+    @media screen and (max-width: $sm-max-width) {
+      @content;
+    }
+  } @else {
+    @media screen and (min-width: $sm-min-width) and (max-width: $sm-max-width) {
+      @content;
+    }
+  }
+}
+
+@mixin md($direction: null) {
+  @if $direction == '+' {
+    @media screen and (min-width: $md-min-width) {
+      @content;
+    }
+  } @else if $direction == '-' {
+    @media screen and (max-width: $md-max-width) {
+      @content;
+    }
+  } @else {
+    @media screen and (min-width: $md-min-width) and (max-width: $md-max-width) {
+      @content;
+    }
+  }
+}
+
+@mixin lg($direction: null) {
+  @if $direction == '+' {
+    @media screen and (min-width: $lg-min-width) {
+      @content;
+    }
+  } @else if $direction == '-' {
+    @media screen and (max-width: $lg-max-width) {
+      @content;
+    }
+  } @else {
+    @media screen and (min-width: $lg-min-width) and (max-width: $lg-max-width) {
+      @content;
+    }
+  }
+}
+
+@mixin xl($direction: null) {
+  @if $direction == '+' {
+    @media screen and (min-width: $xl-min-width) {
+      @content;
+    }
+  } @else if $direction == '-' {
+    @media screen and (max-width: $xl-max-width) {
+      @content;
+    }
+  } @else {
+    @media screen and (min-width: $xl-min-width) and (max-width: $xl-max-width) {
+      @content;
+    }
+  }
 }
