@@ -84,7 +84,7 @@
     
     &.is-scrolled {
       padding: 2rem 0;
-      background-color: $cl-primary;
+      background-color: rgba(87, 67, 244, .95);
     }
 
     a:not(.button) {
@@ -120,7 +120,7 @@
       letter-spacing: .1rem;
       text-decoration: none;
       text-transform: uppercase;
-      text-shadow: 0 .2rem .4rem rgba(62,54,132,0.50);
+      text-shadow: 0 .2rem .4rem rgba($cl-primary, .5);
       transition: opacity 300ms;
 
       &:hover,

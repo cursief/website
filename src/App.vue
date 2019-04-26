@@ -1,12 +1,13 @@
 <template>
   <div id="home">
     <header-primary/>
-    <router-view/>
+    <router-view :teamSelection="teamSelection"/>
     <footer-primary/>
   </div>
 </template>
 
 <script>
+	import { EventBus } from '@/event-bus.js';
   import HeaderPrimary from '@/components/header-primary.vue'
   import FooterPrimary from '@/components/footer-primary.vue'
 
@@ -20,8 +21,14 @@
 
     data() {
       return {
-        media: null
+        teamSelection: null
       }
+    },
+
+    mounted() {
+    	EventBus.$on('addToStack', (memberId) => {
+				this.teamSelection = memberId
+			});
     }
   }
 </script>

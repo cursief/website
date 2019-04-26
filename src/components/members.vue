@@ -6,7 +6,7 @@
       </div>
     </transition>
     <transition-group class="group" name="fade" tag="div" appear>
-      <Member v-for="(member, index) in members" :member="member" :index="index" :key="member.id"/>
+      <Member v-for="(member, index) in members" :member="member" :index="index" :teamSelection="teamSelection" :key="member.id"/>
     </transition-group>
   </div>
 </template>
@@ -17,6 +17,10 @@
 
   export default {
     name: 'members',
+
+    props: {
+    	teamSelection: null
+    },
 
     components: {
       Member
@@ -38,7 +42,6 @@
   @import './src/assets/scss/variables.scss';
 
   .members {
-  	// overflow: hidden;
     position: relative;
     
     .section-heading {
