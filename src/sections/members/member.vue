@@ -12,10 +12,12 @@
             <svg width="10" height="10" xmlns="http://www.w3.org/2000/svg"><path d="M3.939 6.994l.783.784L7.5 5 4.722 2.222l-.783.784 1.433 1.438H0v1.112h5.372L3.94 6.994zM8.889 0H1.11C.494 0 0 .5 0 1.111v2.222h1.111V1.111H8.89V8.89H1.11V6.667H0v2.222A1.11 1.11 0 0 0 1.111 10H8.89C9.5 10 10 9.5 10 8.889V1.11C10 .5 9.5 0 8.889 0z" fill="#FFF" fill-rule="nonzero"/></svg>
             <span>Visit portfolio</span>
           </a>
-          <a href="#" class="button button--primary">
-            <svg width="10" height="10" xmlns="http://www.w3.org/2000/svg"><path d="M10 5.714H5.714V10H4.286V5.714H0V4.286h4.286V0h1.428v4.286H10z" fill="#FFF" fill-rule="nonzero"/></svg>
-            <span>Add to stack</span>
-          </a>
+          <transition name="fade">
+	          <a href="#" class="button button--primary" v-if="teamSelection != member.id" @click.prevent="addToStack(member.id)">
+	            <svg width="10" height="10" xmlns="http://www.w3.org/2000/svg"><path d="M10 5.714H5.714V10H4.286V5.714H0V4.286h4.286V0h1.428v4.286H10z" fill="#FFF" fill-rule="nonzero"/></svg>
+	            <span>Add to stack</span>
+	          </a>
+	        </transition>
         </div>
       </div>
       <members-media :mediaId="member.featured_media" v-if="member.featured_media"/>
@@ -24,6 +26,7 @@
 </template>
 
 <script>
+	import { EventBus } from '@/event-bus.js';
   import MemberTag from '@/sections/members/member-tag.vue';
   import MembersMedia from '@/sections/members/members-media.vue';
 
@@ -37,7 +40,8 @@
 
     props: {
       member: Object,
-      index: Number
+      index: Number,
+      teamSelection: null
     },
 
     mounted() {
@@ -46,6 +50,13 @@
       setTimeout(function () {
         this.$el.classList.add('is-visible');
       }.bind(this), delay)
+    },
+
+    methods: {
+
+    	addToStack(memberId) {
+    		EventBus.$emit('addToStack', memberId);
+    	}
     }
   }
 
@@ -53,6 +64,7 @@
 
 <style lang="scss" scoped>
   @import './src/assets/scss/variables.scss';
+  @import './src/assets/scss/animations.scss';
   @import './src/assets/scss/layout/grid.scss';
 
   .member {

@@ -16,13 +16,13 @@
       <transition name="fade-up-1" appear>
         <router-link to="/usps" class="banner__scroll">
           <span>Scroll down</span>
-          <svg width="30" height="16" xmlns="http://www.w3.org/2000/svg"><g fill="#FFF" fill-rule="evenodd"><path d="M2.912.36L15.64 13.088a1.333 1.333 0 0 1-1.886 1.886L1.027 2.245A1.333 1.333 0 0 1 2.913.36z"/><path d="M26.809.36L14.08 13.088a1.333 1.333 0 0 0 1.886 1.886L28.693 2.245A1.333 1.333 0 1 0 26.808.36z"/></g></svg>
+          <img svg-inline src="../assets/scroll-down.svg" alt="">
         </router-link>
       </transition>
     </div>
 
     <transition name="fade-up-1" appear>
-      <div class="banner__bottom-blob"></div>
+      <img svg-inline class="banner__bottom-blob" src="../assets/blob-1.svg" alt="">
     </transition>
   </div>
 </template>
@@ -71,11 +71,6 @@
     position: absolute;
     left: 55%;
     bottom: 22rem;
-    width: 29.5rem;
-    height: 24rem;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-image: url("data:image/svg+xml,%3Csvg width='354' height='291' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cdefs%3E%3ClinearGradient x1='50%25' y1='0%25' x2='50%25' y2='100%25' id='c'%3E%3Cstop stop-color='%2300AEFF' offset='0%25'/%3E%3Cstop stop-color='%230076FF' offset='100%25'/%3E%3C/linearGradient%3E%3Cpath d='M2012.563 1173.24c-3.251-8.089-8.58-14.704-15.99-19.844-4.611-3.251-9.638-5.292-15.081-6.124-8.24-1.134-16.065.151-23.474 3.856-4.385 2.04-8.013 4.725-10.886 8.051-5.745 6.955-8.694 14.968-8.845 24.04a117.04 117.04 0 0 0 .567 13.608 43.26 43.26 0 0 0 2.268 10.66 204.268 204.268 0 0 0 6.35 15.875c3.553 7.787 5.632 15.99 6.237 24.608.605 8.24-.718 16.178-3.969 23.813a186.465 186.465 0 0 1-1.587 3.742c-3.63 7.863-8.09 15.12-13.381 21.773a152.181 152.181 0 0 1-8.392 10.092 818.687 818.687 0 0 1-15.762 16.896 1001.847 1001.847 0 0 0-17.463 18.37 264.064 264.064 0 0 0-14.742 17.01c-5.292 6.502-8.883 13.797-10.773 21.886-1.814 8.165-1.739 16.254.227 24.268 1.89 7.862 5.594 14.59 11.113 20.184 6.577 6.577 14.364 11.076 23.36 13.495 8.92 2.494 17.841 3.024 26.762 1.587 8.24-1.36 15.573-4.725 21.999-10.092a75.875 75.875 0 0 0 15.535-17.804c4.31-6.955 7.56-14.326 9.753-22.112a110.56 110.56 0 0 0 2.721-11.794 131.63 131.63 0 0 0 2.155-17.916 263.43 263.43 0 0 0 .113-25.628 665.552 665.552 0 0 0-1.587-24.494c-.605-8.014-.19-16.065 1.247-24.154a120.754 120.754 0 0 1 7.257-24.948c3.024-7.56 6.2-15.082 9.526-22.566 2.57-5.745 5.14-11.453 7.711-17.123a278.003 278.003 0 0 0 5.33-12.02c3.326-7.711 4.8-15.838 4.422-24.38a37.018 37.018 0 0 0-2.721-12.815z' id='b'/%3E%3Cfilter x='-45%25' y='-18.6%25' width='203.3%25' height='152.2%25' filterUnits='objectBoundingBox' id='a'%3E%3CfeOffset dx='10' dy='22' in='SourceAlpha' result='shadowOffsetOuter1'/%3E%3CfeGaussianBlur stdDeviation='22' in='shadowOffsetOuter1' result='shadowBlurOuter1'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0' in='shadowBlurOuter1'/%3E%3C/filter%3E%3C/defs%3E%3Cg transform='rotate(107 1498.925 75.217)' fill-rule='nonzero' fill='none'%3E%3Cuse fill='%23000' filter='url(%23a)' xlink:href='%23b'/%3E%3Cuse fill='url(%23c)' xlink:href='%23b'/%3E%3C/g%3E%3C/svg%3E");
   }
 
   .banner__scroll {
@@ -102,7 +97,7 @@
     color: $cl-white;
     letter-spacing: 0;
     text-align: center;
-    text-shadow: 0 0 1.5rem rgba(0,0,0,0.20);
+    text-shadow: 0 0 1.5rem rgba($cl-black, .2);
   }
 
   .intro {
@@ -114,7 +109,7 @@
 
     p {
       line-height: 2.8rem;
-      text-shadow: 0 0 1.5rem rgba(0,0,0,0.50);
+      text-shadow: 0 0 1.5rem rgba($cl-black, .5);
     }
 
     .button {

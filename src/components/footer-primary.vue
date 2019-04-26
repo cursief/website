@@ -26,7 +26,7 @@ export default {
   .footer {
     width: 100%;
     padding: 3rem 0;
-    background-color: #504A86;
+    background-color: rgb(87, 67, 244);
 
     a:not(.button) {
       font-weight: bold;
