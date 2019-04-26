@@ -9,147 +9,174 @@
       return {
         utils: new BlobUtils(),
         svgNamespace: 'http://www.w3.org/2000/svg',
-        blobs: [
-          {
-            data: [
-              {
-                x: 0,
-                y: 0
-              },
-              {
-                x: 200,
-                y: 180
-              },
-              {
-                x: 250,
-                y: 300
-              },
-              {
-                x: 250,
-                y: 400
-              },
-              {
-                x: 200,
-                y: 500
-              },
-              {
-                x: 250,
-                y: 530
-              },
-              {
-                x: 180,
-                y: 600
-              },
-              {
-                x: 200,
-                y: 650
-              },
-              {
-                x: 0,
-                y: 650
-              },
-            ]
-          },
-        ]
+        data: [{"points":[{"anchored":true,"anchor":{"x":-55,"y":-8}},{"anchored":true,"anchor":{"x":-52,"y":680}},{"anchor":{"x":47,"y":598}},{"anchor":{"x":194,"y":550}},{"anchor":{"x":141,"y":406}},{"anchor":{"x":81,"y":242}},{"anchor":{"x":119,"y":79}}],"anchor":{"x":"1.35%","y":"2.55%"}},{"points":[{"anchored":true,"anchor":{"x":145,"y":-45}},{"anchor":{"x":-258,"y":102}},{"anchor":{"x":1,"y":224}},{"anchor":{"x":-354,"y":385}},{"anchored":true,"anchor":{"x":107,"y":455}}],"anchor":{"x":"96.04%","y":"3.73%"}}]
       };
     },
     mounted() {
-      new BlobCanvas(this, 12, 30, 400);
+      new BlobCanvas(this, 12, 30, 500);
     }
   }
 
   class Blob {
-    constructor(viewModel, blobInfo, blobSize, index)
+    constructor(viewModel, anchor)
     {
-      this.points = [];
-      this.blobInfo = blobInfo;
-      this.blobSize = blobSize;
       this.viewModel = viewModel;
+      this.utils = this.viewModel.utils;
+      this.points = [];
 
-      const position = {
-        x: Math.random() * viewModel.canvas.getAttribute('width'),
-        y: Math.random() * viewModel.canvas.getAttribute('height') * .1
+      this.shapeGroup = document.createElementNS(this.viewModel.svgNamespace, 'svg');
+      this.shapePath = document.createElementNS(this.viewModel.svgNamespace, 'path');
+      this.position = {
+        x: 0,
+        y: 0
       };
-
-      this.centerPoint = new Point(viewModel, {
-        position,
-        hidden: true
-      });
-
-      // const radius = blobSize;
-      let pointIndex = this.blobInfo.data.length - 1;
-
-      while (pointIndex > -1) {
-        // const pointRadius = radius;
-        this.points.push(this.createBlobPoint(this.blobInfo.data[pointIndex]));
-        pointIndex--;
-      }
-
-      this.blobPath = document.createElementNS(viewModel.svgNamespace, 'path');
-      // this.blobPath.setAttribute('fill', '#4735E2');
-      viewModel.canvas.appendChild(this.blobPath);
+      this.anchor = anchor || {
+        x: 0,
+        y: 0
+      };
     }
 
-    createBlobPoint(pointCoordinate)
+    drawPath()
     {
-      const position = {
-        x: this.centerPoint.x + pointCoordinate.x,
-        y: this.centerPoint.y + pointCoordinate.y
-      };
+      if (this.points.length < 1) {
+        return;
+      }
 
-      return {
-        position: position,
-        anchor: {
-          x: position.x,
-          y: position.y
-        },
-        velocity: {
-          x: 0,
-          y: 0
-        },
-        randomSeed: Math.random() * 1000,
-        randomSeed2: 15 + Math.random() * 5,
-        randomSeed3: 15 + Math.random() * 5,
-        randomSeed4: Math.random() * .5 + .5,
-        randomSeed5: Math.random() * .5 + .5,
-        object: new Point(this.viewModel, {
-          position,
-          hidden: true
-        })
-      };
+      const pathParts = [];
+      let pointIndex = 0;
+
+      // Move to first point
+      let startPoint;
+
+      let lastPoint = this.points[this.points.length - 1].position;
+      let firstPoint = this.points[0].position;
+
+      if (this.points[this.points.length - 1].anchored) {
+        startPoint = lastPoint;
+      } else {
+        startPoint = {
+          x: (lastPoint.x + firstPoint.x) / 2,
+          y: (lastPoint.y + firstPoint.y) / 2
+        };
+      }
+
+      pathParts.push(`M${startPoint.x}, ${startPoint.y}`);
+
+      // Create continuous bezier curve parts
+      while (pointIndex < this.points.length - 1) {
+        const currentPoint = this.points[pointIndex].position;
+        const nextPoint = this.points[pointIndex + 1].position;
+
+        if (this.points[pointIndex].anchored) {
+          pathParts.push(`L${currentPoint.x}, ${currentPoint.y}`);
+        } else {
+          const controlPoint = {
+            x: (currentPoint.x + nextPoint.x) / 2,
+            y: (currentPoint.y + nextPoint.y) / 2
+          };
+
+          pathParts.push(`Q${currentPoint.x}, ${currentPoint.y}`);
+          pathParts.push(`${controlPoint.x}, ${controlPoint.y}`);
+        }
+
+        pointIndex++;
+      }
+
+      // Add last curve
+      const currentPoint = this.points[this.points.length - 1].position;
+      if (this.points[pointIndex].anchored) {
+        pathParts.push(`L${currentPoint.x}, ${currentPoint.y}`);
+      } else {
+        const endPoint = {
+          x: (currentPoint.x + firstPoint.x) / 2,
+          y: (currentPoint.y + firstPoint.y) / 2
+        };
+
+        pathParts.push(`Q${currentPoint.x}, ${currentPoint.y}`);
+        pathParts.push(`${endPoint.x}, ${endPoint.y}`);
+      }
+
+      this.utils.setProperties(this.shapePath, {
+        d: pathParts.join(' ')
+      });
+    }
+
+    appendPath()
+    {
+      this.shapeGroup.appendChild(this.shapePath);
+
+      this.utils.setProperties(this.shapeGroup, {
+        x: this.anchor.x,
+        y: this.anchor.y
+      });
+
+      this.viewModel.canvas.appendChild(this.shapeGroup);
+    }
+
+    remove()
+    {
+      utils.setProperties(this.shapePath, {
+        d: ''
+      });
+    }
+
+    createPoint(position, index = null, anchored = false, shape)
+    {
+      const point = new Point(this.viewModel, {
+        position,
+        anchored,
+        shape
+      });
+
+      this.points.push(point);
+
+      return point;
     }
   }
 
   class Point {
     constructor(viewModel, props)
     {
-      this.utils = viewModel.utils;
+      this.viewModel = viewModel;
+      this.position = props.position;
+      this.anchored = props.anchored;
+      this.anchor = {
+        x: this.position.x,
+        y: this.position.y
+      };
+      this.velocity = {
+        x: 0,
+        y: 0
+      };
+      this.randomSeeds = [
+        Math.random() * 1000,
+        15 + Math.random() * 5,
+        15 + Math.random() * 5,
+        Math.random() * .5 + .5,
+        Math.random() * .5 + .5
+      ];
+
       this.x = props.position.x;
       this.y = props.position.y;
-      this.hidden = props.hidden || false;
-      this.body = document.createElementNS(viewModel.svgNamespace, 'circle');
 
-      if (!this.hidden) {
-        viewModel.canvas.appendChild(this.body);
-      }
-    }
+      this.body = document.createElementNS(this.viewModel.svgNamespace, 'circle');
 
-    draw()
-    {
-      if (!this.hidden) {
-        this.utils.setProperties(this.body, {
-          cx: this.x,
-          cy: this.y,
-          r: 2,
-          fill: '#202020'
-        });
-      }
+      props.shape.shapeGroup.appendChild(this.body);
+
+      this.viewModel.utils.setProperties(this.body, {
+        r: 1
+      });
+
+      this.viewModel.utils.setProperties(this.body, {
+        cx: this.x,
+        cy: this.y
+      });
     }
   }
 
   class BlobCanvas
   {
-    constructor(viewModel, blobCount, blobComplexity = 5, blobSize = 20, mouseRadius = 200)
+    constructor(viewModel, blobCount, blobComplexity = 5, blobSize = 20, mouseRadius = 200, data)
     {
       this.time = 0;
       this.blobs = [];
@@ -166,9 +193,6 @@
         y: null
       };
 
-      this.fpsInterval = 33.333;
-      this.previousTime = window.performance.now();
-
       this.canvas = document.createElementNS(viewModel.svgNamespace, 'svg');
       this.canvas.innerHTML = `<linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
@@ -176,21 +200,6 @@
     </linearGradient>`;
       this.animationFrameBound = this.animationFrame.bind(this);
 
-      viewModel.$el.appendChild(this.canvas);
-      viewModel.canvas = this.canvas;
-
-      this.createBlobs();
-
-      // Start animation
-      this.animationFrameBound();
-
-      // Start mousemove listener
-      window.addEventListener('mousemove', this.mouseHandler.bind(this));
-      window.addEventListener('resize', this.resizeHandler.bind(this));
-    }
-
-    createBlobs()
-    {
       this.viewModel.utils.setProperties(this.canvas, {
         xmlns: this.viewModel.svgNamespace,
         width: this.viewModel.$parent.$refs.blobsParent.clientWidth,
@@ -198,16 +207,56 @@
         style: 'transform: translate3d(0, 0, 0)'
       });
 
-      this.blobCount = this.viewModel.blobs.length;
+      viewModel.$el.appendChild(this.canvas);
+      viewModel.canvas = this.canvas;
 
-      let blobCount = this.blobCount - 1;
-      const blobSize = this.blobSize + window.innerWidth * .02;
+      this.importBlobs(viewModel);
 
-      while (blobCount > -1) {
-        const blob = new Blob(this.viewModel, this.viewModel.blobs[blobCount], blobSize, this.blobs.length);
-        this.blobs.push(blob);
-        blobCount--;
-      }
+      this.resizeHandler();
+
+      window.addEventListener('resize', this.resizeHandler.bind(this));
+
+      // Start animation
+      this.animationFrameBound();
+
+      // Start mousemove listener
+      window.addEventListener('mousemove', this.mouseHandler.bind(this));
+    }
+
+    resizeHandler()
+    {
+      this.viewModel.utils.setProperties(this.canvas, {
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+
+      this.blobs.forEach(shape => {
+        if (shape.points[0]) {
+          const shapeRect = shape.points[0].body.getBoundingClientRect();
+          shape.position.x = shapeRect.x;
+          shape.position.y = shapeRect.y;
+        }
+      });
+    }
+
+    importBlobs(viewModel)
+    {
+      this.viewModel = viewModel;
+      const importData = this.viewModel.data;
+
+      importData.forEach(shape => {
+        this.currentShape = new Blob(this.viewModel, shape.anchor);
+
+        this.blobs.push(this.currentShape);
+
+        this.currentShape.appendPath();
+
+        shape.points.forEach(point => {
+          this.currentShape.createPoint(point.anchor, null, point.anchored || false, this.currentShape);
+        });
+
+        this.currentShape.drawPath();
+      });
     }
 
     mouseHandler(event)
@@ -221,140 +270,61 @@
       this.mousePosition.y = event.clientY + window.scrollY;
     }
 
-    resizeHandler()
-    {
-      this.resizing = true;
-
-      this.canvas.classList.add('is-hidden');
-
-      this.resizeTimeout && clearTimeout(this.resizeTimeout);
-
-      this.resizeTimeout = window.setTimeout(this.timeOutHandler.bind(this), 1000);
-    }
-
-    timeOutHandler()
-    {
-      this.resizeTimeout = window.setTimeout(() => {
-        this.destroy();
-        this.createBlobs();
-        this.canvas.classList.remove('is-hidden');
-      }, 500);
-    }
-
     animationFrame(newTime)
     {
       window.requestAnimationFrame(this.animationFrameBound);
 
-      const timeElapsed = (newTime | 0) - this.previousTime;
-
-      if (timeElapsed < this.fpsInterval) {
-        return;
-      }
-
-      this.previousTime = newTime - (this.previousTime % this.fpsInterval);
-
-      const mouseRect = [
-        this.mousePosition.y - this.mouseRadiusHalf, // 0 Top
-        this.mousePosition.x + this.mouseRadiusHalf, // 1 Right
-        this.mousePosition.y + this.mouseRadiusHalf, // 2 Bottom
-        this.mousePosition.x - this.mouseRadiusHalf  // 3 Left
-      ];
+      const mouseRect = {
+        top: this.mousePosition.y - this.mouseRadiusHalf,
+        right: this.mousePosition.x + this.mouseRadiusHalf,
+        bottom: this.mousePosition.y + this.mouseRadiusHalf,
+        left: this.mousePosition.x - this.mouseRadiusHalf
+      };
 
       this.blobs.forEach(blob => {
-        let pointIndex = (blob.blobInfo.data.length - 1);
+        blob.points.forEach(point => {
+          if (point.anchored) {
+            return;
+          }
 
-        while (pointIndex > -1) {
-          const point = blob.points[pointIndex];
-          const currentFrame = point.randomSeed + this.time;
+          const currentFrame = point.randomSeeds[0] + this.time;
 
-          point.velocity.x += point.randomSeed4 * Math.cos(currentFrame / point.randomSeed2) * .4;
-          point.velocity.y -= point.randomSeed5 * Math.sin(currentFrame / point.randomSeed3) * .4;
+          point.velocity.x += point.randomSeeds[3] * Math.cos(currentFrame / point.randomSeeds[1]) * .2;
+          point.velocity.y -= point.randomSeeds[4] * Math.sin(currentFrame / point.randomSeeds[2]) * .2;
+
+          const pointCanvasPosition = {
+            x: blob.position.x + point.x,
+            y: blob.position.y + point.y
+          };
 
           // Check bluntly if the point is in distance to be affected by the mouse radius
-          if (point.position.x > mouseRect[3] && point.position.x < mouseRect[1] && point.position.y > mouseRect[0] && point.position.y < mouseRect[2]) {
-            const deltaX = point.position.x - this.mousePosition.x;
-            const deltaY = point.position.y - this.mousePosition.y;
-            const strength = Math.max(0, this.mouseRadiusHalf - Math.hypot(deltaX, deltaY)) * .02;
+          if (pointCanvasPosition.x > mouseRect.left && pointCanvasPosition.x < mouseRect.right && pointCanvasPosition.y > mouseRect.top && pointCanvasPosition.y < mouseRect.bottom) {
+            const deltaX = pointCanvasPosition.x - this.mousePosition.x;
+            const deltaY = pointCanvasPosition.y - this.mousePosition.y;
+            const strength = Math.max(0, this.mouseRadiusHalf - Math.hypot(deltaX, deltaY)) * .01;
             const mouseAngle = Math.atan2(deltaY, deltaX);
 
             point.velocity.x += Math.cos(mouseAngle) * strength;
-            point.velocity.y += Math.sin(mouseAngle) * strength
+            point.velocity.y += Math.sin(mouseAngle) * strength;
           }
 
-          point.velocity.x += (point.anchor.x - point.position.x) * .02;
-          point.velocity.y += (point.anchor.y - point.position.y) * .02;
+          point.velocity.x += (point.anchor.x - point.position.x) * .01;
+          point.velocity.y += (point.anchor.y - point.position.y) * .01;
 
           point.position.x += point.velocity.x;
           point.position.y += point.velocity.y;
 
-          point.velocity.x *= .7;
-          point.velocity.y *= .7;
+          point.velocity.x *= .95;
+          point.velocity.y *= .95;
 
-          point.object.x = point.position.x;
-          point.object.y = point.position.y;
+          point.x = point.position.x;
+          point.y = point.position.y;
+        });
 
-          point.object.draw();
-
-          pointIndex--;
-        }
-
-        // Draw body
-        let pathParts = '';
-        pointIndex = 0;
-
-        // Move to first point
-        const lastPoint = blob.points[blob.blobInfo.data.length - 1].position;
-        const firstPoint = blob.points[0].position;
-
-        const startPoint = {
-          x: (lastPoint.x + firstPoint.x) / 2,
-          y: (lastPoint.y + firstPoint.y) / 2
-        };
-
-        pathParts = pathParts.concat(`M${startPoint.x}, ${startPoint.y}`);
-
-        const pointsAmountMinOne = blob.blobInfo.data.length - 1;
-
-        // Create continuous bezier curve parts
-        while (pointIndex < pointsAmountMinOne) {
-          const currentPoint = blob.points[pointIndex].position;
-          const nextPoint = blob.points[pointIndex + 1].position;
-
-          const controlPoint = {
-            x: (currentPoint.x + nextPoint.x) / 2,
-            y: (currentPoint.y + nextPoint.y) / 2
-          };
-
-          pathParts = pathParts.concat(` Q${currentPoint.x}, ${currentPoint.y}`);
-          pathParts = pathParts.concat(` ${controlPoint.x}, ${controlPoint.y}`);
-
-          pointIndex++;
-        }
-
-        // Add last curve
-        const currentPoint = blob.points[pointsAmountMinOne].position;
-
-        const endPoint = {
-          x: (currentPoint.x + firstPoint.x) / 2,
-          y: (currentPoint.y + firstPoint.y) / 2
-        };
-
-        pathParts = pathParts.concat(` Q${currentPoint.x}, ${currentPoint.y}`);
-        pathParts = pathParts.concat(` ${endPoint.x}, ${endPoint.y}`);
-
-        blob.blobPath.setAttribute('d', pathParts);
+        blob.drawPath();
       });
 
       this.time++;
-    }
-
-    destroy()
-    {
-      this.canvas.querySelectorAll('path').forEach(path => {
-        this.canvas.removeChild(path);
-      });
-
-      this.blobs = [];
     }
   }
 
@@ -389,12 +359,12 @@
       }
     }
 
-    path {
-      fill: url(#grad1);
+    svg {
+      overflow: visible;
     }
 
-    path:first-child {
-      fill: #F0834A;
+    svg > svg:first-of-type path {
+      fill: url(#grad1);
     }
   }
 
