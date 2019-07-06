@@ -10,7 +10,7 @@
   position: relative;
   overflow: hidden;
   margin: 0 1.5rem;
-  padding: 3em 3em 9em;
+  padding: 7em 3em 9em;
   font-size: 1rem;
   background: $cl-white;
   box-shadow: 0 2rem 3.5rem 0 rgba($cl-black, .12);
@@ -38,6 +38,17 @@
   }
 }
 
+.member__avatar {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  img {
+    width: 22.1em;
+    height: auto;
+  }
+}
+
 .member__name {
   color: $cl-primary;
   font: {
@@ -48,7 +59,9 @@
 }
 
 .member__description {
+  padding-right: 2em;
   font-size: 1.6em;
+  line-height: 1.43;
 }
 
 .member__anchor {
@@ -68,6 +81,6 @@
 
   &:hover {
     color: $cl-white;
-    box-shadow: 0 -10em 0 0 $cl-secondary inset;
+    box-shadow: 0 -5em 0 0 $cl-secondary inset;
   }
 }
