@@ -1,0 +1,39 @@
+.section {
+  margin: 20rem;
+
+  .section__container > div {
+    width: 50%;
+  }
+}
+
+.section--left {
+
+}
+
+.section--center {
+
+  .section__container {
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+.section--right {
+
+}
+
+.section__container {
+  display: flex;
+  width: 100%;
+  max-width: 129rem;
+  margin: 0 auto;
+}
+
+.section__container--wide {
+  max-width: 135rem;
+}
+
+.section__description {
+  margin: 0 0 6rem;
+  font-size: 2rem;
+}

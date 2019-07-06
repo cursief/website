@@ -33,7 +33,7 @@ function htmlTask() {
 
 // SCSS
 function scssTask() {
-  return gulp.src(`${config.source}/**/*.scss`, { base: `${config.source}` })
+  return gulp.src(`${config.source}/scss/**/*.scss`, { base: `${config.source}/scss` })
   .pipe(scss())
   .on('error', notify.onError('SCSS compile error: <%= error.message %>'))
   .pipe(autoprefixer({ browsers: 'last 2 versions' }))
@@ -74,7 +74,7 @@ function reloadTask(done) {
 function watchTask() {
   gulp.watch(`${config.source}/images/**/*`, gulp.series(imagesTask, reloadTask));
   gulp.watch(`${config.source}/*.html`, gulp.series(htmlTask, reloadTask));
-  gulp.watch(`${config.source}/*.scss`, scssTask);
+  gulp.watch(`${config.source}/scss/**/*.scss`, scssTask);
   gulp.watch(`${config.source}/js/**/*.js`, jsTask);
 }
 
