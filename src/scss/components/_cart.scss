@@ -1,0 +1,38 @@
+.cart {
+  $padding-horizontal: 1em;
+
+  position: fixed;
+  bottom: 1.7em;
+  left: 1.7em;
+  height: 2.66em;
+  border-radius: 1.33em;
+  background: {
+    color: $cl-primary;
+    image: svg-uri('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path fill="#{$cl-white}" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>');
+    size: 1.33em;
+    repeat: no-repeat;
+    position: $padding-horizontal .6em;
+  };
+  padding-left: 1.3em + $padding-horizontal * 1.5;
+  padding-right: $padding-horizontal * 1.25;
+  font-size: 1.8rem;
+  color: $cl-white;
+  line-height: 2.66em;
+  box-shadow: 0 2rem 3.5rem 0 rgba($cl-black, .12);
+}
+
+.cart__amount {
+  position: absolute;
+  top: -.285em;
+  right: -.285em;
+  width: 1.74em;
+  height: 1.74em;
+  border-radius: 50%;
+  background: $cl-white;
+  border: 0.14em solid $cl-primary;
+  line-height: 1.6;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: $cl-black;
+}

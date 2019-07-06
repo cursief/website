@@ -7,8 +7,12 @@ export default class Member
     this.cart = cart;
   }
 
-  addToCart()
+  addToCart(event)
   {
+    if (event.target.classList.contains('member__anchor')) {
+      return;
+    }
+
     if (this.cart.contains(this)) {
       this.cart.remove(this);
       return;

@@ -2,8 +2,15 @@ export default class Cart
 {
   constructor()
   {
-    this.element = document.querySelector('.cart');
+    this.base = document.querySelector('.cart');
+
+    this.elements = {
+      amount: this.base.querySelector('.cart__amount'),
+    };
+
     this.contents = [];
+
+    this.update();
   }
 
   add(member)
@@ -14,7 +21,7 @@ export default class Cart
     }
 
     this.contents.push(member);
-    console.log(this.contents);
+    this.update();
   }
 
   remove(member)
@@ -26,8 +33,7 @@ export default class Cart
     }
 
     this.contents.splice(index, 1);
-
-    console.log(this.contents);
+    this.update();
   }
 
   contains(member)
@@ -37,5 +43,10 @@ export default class Cart
     }
 
     return false;
+  }
+
+  update()
+  {
+    this.elements.amount.textContent = this.contents.length;
   }
 }
