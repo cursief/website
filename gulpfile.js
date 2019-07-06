@@ -65,3 +65,4 @@ function watchTask() {
 
 // Default task
 gulp.task('default', gulp.series(clean, gulp.parallel(htmlTask, scssTask, imagesTask), gulp.parallel(serve, watchTask)));
+gulp.task('build', gulp.series(clean, gulp.parallel(htmlTask, scssTask, imagesTask)));
