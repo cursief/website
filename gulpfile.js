@@ -4,7 +4,6 @@ const gulp         = require('gulp'),
       autoprefixer = require('gulp-autoprefixer'),
       rollup       = require('rollup').rollup,
       terser       = require('rollup-plugin-terser').terser,
-      file         = require('gulp-file'),
       notify       = require('gulp-notify'),
       browserSync  = require('browser-sync').create();
 
@@ -42,19 +41,28 @@ function scssTask() {
 }
 
 // JS
-function jsTask() {
+function jsBuildTask() {
   return rollup({
     input: `${config.source}/js/index.js`,
     plugins: [ terser() ]
   })
   .then(bundle => {
-    return bundle.generate({
+    return bundle.write({
       format: 'iife'
     });
+  });
+}
+
+function jsWatchTask() {
+  return rollup({
+    input: `${config.source}/js/index.js`,
   })
-  .then(generated => {
-    return file(config.js.bundleName, generated.output[0].code, { src: true })
-    .pipe(gulp.dest(config.destination))
+  .then(bundle => {
+    return bundle.write({
+      file: `${config.destination}/${config.js.bundleName}`,
+      format: 'iife',
+      sourcemap: true
+    });
   });
 }
 
@@ -81,9 +89,9 @@ function watchTask() {
   gulp.watch(`${config.source}/images/**/*`, gulp.series(imagesTask, reloadTask));
   gulp.watch(`${config.source}/*.html`, gulp.series(htmlTask, reloadTask));
   gulp.watch(`${config.source}/scss/**/*.scss`, scssTask);
-  gulp.watch(`${config.source}/js/**/*.js`, gulp.series(jsTask, reloadTask));
+  gulp.watch(`${config.source}/js/**/*.js`, gulp.series(jsWatchTask, reloadTask));
 }
 
 // Default task
-gulp.task('default', gulp.series(clean, gulp.parallel(htmlTask, scssTask, imagesTask, jsTask), gulp.parallel(serve, watchTask)));
-gulp.task('build', gulp.series(clean, gulp.parallel(htmlTask, scssTask, imagesTask, jsTask)));
+gulp.task('default', gulp.series(clean, gulp.parallel(htmlTask, scssTask, imagesTask, jsWatchTask), gulp.parallel(serve, watchTask)));
+gulp.task('build', gulp.series(clean, gulp.parallel(htmlTask, scssTask, imagesTask, jsBuildTask)));
