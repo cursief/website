@@ -2,7 +2,7 @@ export default class ActiveSection
 {
   /**
    * Constructor.
-   * Checks which section is in viewport and updates its class accordingly.
+   * Check which section is in viewport and updates its class accordingly.
    *
    * @param {string} selector Selector for which elements to check and update.
    */

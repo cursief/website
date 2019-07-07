@@ -185,7 +185,7 @@
             </ul>
           </div>
           <div class="section__column">
-            <h1>Clients & Projects</h1>
+            <h1>Clients &amp; Projects</h1>
             <p class="section__description">Members of Cursief have worked for a wide range of clients in a bunch of different sectors. Big, small, start-up, enterprise, everything is possible.</p>
             <a class="readmore" title="View a few cases from our members" href="#">View some cases</a>
           </div>
@@ -211,10 +211,8 @@
             <div class="contact__form">
               <div class="contact__row">Hi Cursief,</div>
               <div class="contact__row">
-                <span>I'm</span> <input class="contact__input" type="text" placeholder="Your name">, <span>from <input class="contact__input" type="text" placeholder="Company"></span>
-              </div>
-              <div class="contact__row request-sentence">and we are looking for someone who can help us with a <div class="request-sentence__main" data-type="main"></div>with <div class="request-sentence__extra"></div>.</div>
-              <div class="contact__row options">
+                <span>I'm</span> <input class="contact__input" type="text" placeholder="Your name" data-bind="contact-input-name" required>, <span>from <input class="contact__input" type="text" placeholder="Company" data-bind="contact-input-company" required></span> and we are looking for someone who can help us with a <div class="request-sentence__main" data-type="main"></div>with <div class="request-sentence__extra"></div>.</div>
+              <div class="contact__row contact__row--options">
                 <input class="option" id="option-static" type="checkbox" data-type="main" value="static">
                 <label class="button button--option" for="option-static">Static</label>
                 <input class="option" id="option-dynamic" data-other="option-static" type="checkbox" data-type="main" value="dynamic">
@@ -252,7 +250,7 @@
                 <input type="date">
               </div>
               <div class="contact__row contact__row--footnote">Thanks in advance!</div>
-              <div class="contact__row">{{Your name}}, {{Company}}</div>
+              <div class="contact__row"><span data-bound="contact-input-name"></span>, <span data-bound="contact-input-company"></span></div>
             </div>
           </div>
         </div>
@@ -264,7 +262,7 @@
         <a class="footer__logo" href="#home">
           <img src="images/logo.svg" alt="">
         </a>
-        <span>© 2019 Cursief. All rights reserved.</span>
+        <span>&copy; 2019 Cursief. All rights reserved.</span>
         <ul class="social social--footer">
           <li class="social-item">
             <a class="social-item__anchor" href="#" title="Go to our Twitter profile">
