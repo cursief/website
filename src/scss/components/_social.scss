@@ -16,5 +16,11 @@
 
 .social-item__anchor {
   margin-left: 1.5rem;
-  color: $cl-white;
+  outline: none;
+  transition: opacity 200ms;
+
+  &:hover,
+  &:focus {
+    opacity: .6;
+  }
 }

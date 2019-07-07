@@ -9,14 +9,39 @@
   line-height: 1.3;
   letter-spacing: .1rem;
   border-radius: 5rem;
+  outline: none;
+  transition: {
+    property: background-color, box-shadow;
+    duration: 200ms;
+  };
 }
 
 .button--primary {
   background-color: $cl-secondary;
   box-shadow: 0 .5rem 1rem 0 rgba($cl-black, .3);
+
+  &:hover,
+  &:focus {
+    background-color: darken($cl-secondary, 12%);
+  }
+
+  &:active {
+    background-color: darken($cl-secondary, 12%);
+    box-shadow: 0 .1rem .3rem 0 rgba($cl-black, .9);
+  }
 }
 
 .button--secondary {
   background-color: $cl-quaternary;
   box-shadow: 0 .5rem 1rem 0 rgba($cl-black, .3);
+
+  &:hover,
+  &:focus {
+    background-color: darken($cl-quaternary, 12%);
+  }
+
+  &:active {
+    background-color: darken($cl-quaternary, 12%);
+    box-shadow: 0 .1rem .3rem 0 rgba($cl-black, .9);
+  }
 }

@@ -5,7 +5,7 @@
   overflow-x: auto;
   max-width: 100%;
   margin: 0;
-  padding: 0 0 10rem 0;
+  padding: 6rem 0 10rem 0;
   list-style: none;
 }
 
@@ -21,6 +21,7 @@
   background: $cl-white;
   box-shadow: 0 2rem 3.5rem 0 rgba($cl-black, .12);
   border-radius: .8rem;
+  outline: none;
   transition: transform 300ms;
 
   &:nth-child(1),
@@ -28,7 +29,9 @@
     width: 19rem;
     font-size: .57143rem; // 16px
 
-    &:hover {
+    &:hover,
+    &:focus,
+    &:focus-within {
       z-index: 2;
       transform: scale(1.7196);
     }
@@ -39,7 +42,9 @@
     width: 25.5rem;
     font-size: .75rem;
 
-    &:hover {
+    &:hover,
+    &:focus,
+    &:focus-within {
       z-index: 2;
       transform: scale(1.34299);
     }
@@ -82,12 +87,15 @@
   font-size: 1.6em;
   color: $cl-secondary;
   box-shadow: 0 0 0 0 $cl-secondary inset;
+  outline: none;
   transition: {
     property: color, box-shadow;
     duration: 300ms;
   }
 
-  &:hover {
+  &:hover,
+  &:focus,
+  &:focus-within {
     color: $cl-white;
     box-shadow: 0 -5em 0 0 $cl-secondary inset;
   }
