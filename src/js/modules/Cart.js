@@ -87,13 +87,21 @@ export default class Cart
 
     window.setTimeout(() => {
       cartItemElement.remove();
-    }, 300);
+    }, 500);
 
     // Remove the item from the contents array
     this.contents.splice(index, 1);
 
-    // Trigger an update
-    this.update();
+    let timeOut = 10;
+
+    if (this.base.classList.contains('is-expanded')) {
+      timeOut = 200;
+    }
+
+    window.setTimeout(() => {
+      // Trigger a delayed update
+      this.update();
+    }, timeOut);
   }
 
   /**

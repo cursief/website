@@ -55,10 +55,6 @@ $cart-margin: .5em;
       margin-top: 0;
     }
 
-    .cart-content {
-      padding-top: $cart-margin;
-    }
-
     .cart__amount-holder {
       transform: translate(-1.2em, .9em);
     }
@@ -130,6 +126,7 @@ $cart-margin: .5em;
 
 .cart-content {
   width: 100%;
+  padding-top: $cart-margin;
   background: $cl-white;
   overflow: hidden;
   cursor: default;
@@ -146,13 +143,18 @@ $cart-margin: .5em;
   overflow: hidden;
   transition: {
     property: transform, opacity, max-height, padding;
-    duration: 400ms;
+    timing-function: linear;
+    duration: 200ms;
   };
 
   &.is-removed {
     transform: scale(.8);
     max-height: 0;
     opacity: 0;
+  }
+
+  &--placeholder {
+    max-height: 6em;
   }
 }
 
@@ -172,7 +174,6 @@ $cart-margin: .5em;
   &--placeholder {
     flex-direction: column;
     box-shadow: none;
-    columns: desaturate($cl-primary, 50%);
     white-space: nowrap;
 
     &::before {
