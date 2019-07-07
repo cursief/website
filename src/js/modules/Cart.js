@@ -17,7 +17,7 @@ export default class Cart
     };
 
     this.contents = [];
-    this.previousContents = [];
+    this.previousContentLength = -1;
 
     this.base.addEventListener('click', this.handleClick.bind(this));
 
@@ -79,13 +79,29 @@ export default class Cart
       return;
     }
 
-    member.cartItemElement.remove();
+    member.cartItemElement.classList.add('is-removed');
+
+    // Make a reference to the current item, otherwise it might be overwritten
+    // by the time we want to remove it
+    const cartItemElement = member.cartItemElement;
+
+    window.setTimeout(() => {
+      cartItemElement.remove();
+    }, 500);
 
     // Remove the item from the contents array
     this.contents.splice(index, 1);
 
-    // Trigger an update
-    this.update();
+    let timeOut = 10;
+
+    if (this.base.classList.contains('is-expanded')) {
+      timeOut = 200;
+    }
+
+    window.setTimeout(() => {
+      // Trigger a delayed update
+      this.update();
+    }, timeOut);
   }
 
   /**
@@ -122,7 +138,14 @@ export default class Cart
       }
     }
 
-    this.updateSize();
+    if (this.contents.length !== this.previousContentLength) {
+      this.base.classList.remove('is-updated');
+      void this.base.offsetWidth;
+
+      this.base.classList.add('is-updated');
+      this.updateSize();
+      this.previousContentLength = this.contents.length;
+    }
   }
 
   /**
@@ -132,12 +155,17 @@ export default class Cart
   {
     if (this.base.classList.contains('is-expanded')) {
       let contentHeight = Array.from(this.elements.content.children).reduce((acc, child) => {
-        const childStyle = window.getComputedStyle(child);
+        if (child.classList.contains('is-removed')) {
+          return acc;
+        }
         const childRect = child.getBoundingClientRect();
-        return acc + childRect['height'] + parseInt(childStyle.marginTop, 10) + parseInt(childStyle.marginBottom, 10);
+        return acc + childRect['height'];
       }, 0);
 
       contentHeight = Math.min(contentHeight, 360);
+
+      const contentStyle = window.getComputedStyle(this.elements.content);
+      contentHeight += parseInt(contentStyle['paddingTop'], 10);
 
       if (contentHeight === 360) {
         this.elements.content.classList.add('has-scrollbar');
@@ -167,7 +195,7 @@ export default class Cart
 
     // Click is on a remove button
     if (event.target.classList.contains('cart-item__remove')) {
-      event.target.parentNode.member.handleClick(event);
+      event.target.parentNode.parentNode.member.handleClick(event);
     }
   }
 }
