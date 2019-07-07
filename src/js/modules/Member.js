@@ -16,6 +16,7 @@ export default class Member
     this.fullName = this.base.querySelector('.member__name').textContent;
 
     this.base.addEventListener('click', this.handleClick.bind(this));
+    this.base.addEventListener('keypress', this.handleClick.bind(this));
     this.cart = cart;
   }
 
@@ -26,6 +27,14 @@ export default class Member
    */
   handleClick(event)
   {
+    // Check if it's a KeyboardEvent
+    if (event instanceof KeyboardEvent) {
+      // Only allow Enter to continue the callback
+      if (event.keyCode !== 13) {
+        return;
+      }
+    }
+
     // Cancel the callback when clicking on the portfolio link
     if (event.target.classList.contains('member__anchor')) {
       return;
