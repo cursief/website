@@ -28,7 +28,8 @@ export default class Cart
     const cartItemTemplate = document.querySelector('#cart-item');
     const cartItemFrag = document.importNode(cartItemTemplate.content, true);
 
-    // We will lose the reference to the appended node, so we make a copy
+    // We will lose the reference of the appended element when appending with the
+    // fragment, so we make a copy
     const cartItemElement = cartItemFrag.children[0];
 
     cartItemElement.elements = {
@@ -55,8 +56,6 @@ export default class Cart
     if (index === -1) {
       return;
     }
-
-    console.log(member);
 
     member.cartItemElement.remove();
 
@@ -99,9 +98,9 @@ export default class Cart
       let contentHeight = Array.from(this.elements.content.children).reduce((acc, child) => {
         const childStyle = window.getComputedStyle(child);
         const childRect = child.getBoundingClientRect();
-
         return acc + childRect['height'] + parseInt(childStyle.marginTop, 10) + parseInt(childStyle.marginBottom, 10);
       }, 0);
+
       contentHeight = Math.min(contentHeight, 360);
 
       if (contentHeight === 360) {
