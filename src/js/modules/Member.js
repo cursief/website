@@ -1,9 +1,13 @@
 export default class Member
 {
-  constructor(element, cart)
+  constructor(base, cart)
   {
-    this.element = element;
-    this.element.addEventListener('click', this.addToCart.bind(this));
+    this.base = base;
+
+    this.avatarUrl = this.base.querySelector('.member__avatar img').getAttribute('src');
+    this.fullName = this.base.querySelector('.member__name').textContent;
+
+    this.base.addEventListener('click', this.addToCart.bind(this));
     this.cart = cart;
   }
 

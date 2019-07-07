@@ -53,7 +53,7 @@
                 <div class="member__avatar">
                   <img src="images/avatar-gideon.png" alt="">
                 </div>
-                <div class="member__name">Member<br>name</div>
+                <div class="member__name">Gideon Heilbron A</div>
                 <div class="member__title"></div>
               </div>
               <div class="member__description">
@@ -68,7 +68,7 @@
                 <div class="member__avatar">
                   <img src="images/avatar-murtada.png" alt="">
                 </div>
-                <div class="member__name">Member<br>name</div>
+                <div class="member__name">Murtada al Mousawy A</div>
                 <div class="member__title"></div>
               </div>
               <div class="member__description">
@@ -83,7 +83,7 @@
                 <div class="member__avatar">
                   <img src="images/avatar-gideon.png" alt="">
                 </div>
-                <div class="member__name">Member<br>name</div>
+                <div class="member__name">Gideon Heilbron B</div>
                 <div class="member__title"></div>
               </div>
               <div class="member__description">
@@ -98,7 +98,7 @@
                 <div class="member__avatar">
                   <img src="images/avatar-murtada.png" alt="">
                 </div>
-                <div class="member__name">Member<br>name</div>
+                <div class="member__name">Murtada al Mousawy B</div>
                 <div class="member__title"></div>
               </div>
               <div class="member__description">
@@ -113,7 +113,7 @@
                 <div class="member__avatar">
                   <img src="images/avatar-gideon.png" alt="">
                 </div>
-                <div class="member__name">Member<br>name</div>
+                <div class="member__name">Gideon Heilbron C</div>
                 <div class="member__title"></div>
               </div>
               <div class="member__description">
@@ -141,8 +141,26 @@
     <div class="cart">
       <span class="cart__label">Team</span>
       <div class="cart__amount"></div>
+      <div class="cart__content-holder">
+        <div class="cart-content"></div>
+      </div>
     </div>
     <footer></footer>
+
+    <template id="cart-item">
+      <div class="cart-item">
+        <div class="cart-item__image"></div>
+        <div class="cart-item__title"></div>
+        <div class="cart-item__remove"></div>
+      </div>
+    </template>
+
+    <template id="cart-item-placeholder">
+      <div class="cart-item cart-item--placeholder">
+        <div class="cart-item__title">Add members to build your team!</div>
+      </div>
+    </template>
+
     <script src="app.js"></script>
   </body>
 </html>
