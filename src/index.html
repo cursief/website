@@ -10,22 +10,22 @@
   <body>
     <header class="header header--primary">
         <div class="header__container">
-        <a class="header__logo" href="#" title="Cursief web collective">
+        <a class="header__logo" href="#home" title="Cursief web collective">
           <img src="images/logo.svg" alt="Cursief logo">
         </a>
         <nav class="navigation">
           <ul class="navigation__list">
             <li class="navigation__item">
-              <a class="navigation__anchor" href="#">Introduction</a>
+              <a class="navigation__anchor" href="#introduction">Introduction</a>
             </li>
             <li class="navigation__item">
-              <a class="navigation__anchor" href="#">Members</a>
+              <a class="navigation__anchor" href="#members">Members</a>
             </li>
             <li class="navigation__item">
-              <a class="navigation__anchor" href="#">Clients</a>
+              <a class="navigation__anchor" href="#clients">Clients</a>
             </li>
             <li class="navigation__item">
-              <a class="navigation__anchor" href="#">Contact</a>
+              <a class="navigation__anchor" href="#contact">Contact</a>
             </li>
           </ul>
         </nav>
@@ -54,7 +54,7 @@
         <a class="button button--primary" href="#">Build your team</a>
       </div>
     </header>
-    <main>
+    <main id="home">
       <section class="banner">
         <div class="banner__container">
           <h1 class="banner__heading">We help you make<br>the best digital products.</h1>
@@ -64,19 +64,19 @@
           </div>
         </div>
       </section>
-      <section class="section section--left section--intro">
+      <section class="section section--left section--intro" id="introduction">
         <div class="section__container">
-          <div class="section__text">
+          <div class="section__column section__text">
             <h1>We are the web generation</h1>
             <p class="section__description">Cursief is a pool of web-veterans with years of experience creating websites, webshops and webapps. Being bundled under one name gives us a lot of flexibility taking on small and large projects, our members scale depending on what you need for your company and project.</p>
             <a class="readmore" href="#" title="Read more about what Cursief is">Read more</a>
           </div>
-          <div class="section__media">
-            <img src="images/introduction.png" alt="">
+          <div class="section__column section__media">
+            <img src="images/introduction.svg" alt="">
           </div>
         </div>
       </section>
-      <section class="section section--center">
+      <section class="section section--center" id="members">
         <div class="section__container section__container--wide">
           <h1>Choose your own <span class="strikethrough">adventure</span> team</h1>
           <p class="section__description">Not every project needs an agency with project managers, marketeers and a big building. Pay only for who/what you really need!</p>
@@ -94,7 +94,7 @@
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nisi rerum sapiente error exercitationem fugiat, cumque harum quibusdam sed a ipsam, officia adipisci reprehenderit magni dolor voluptatum. Deserunt, nisi, quibusdam.
             </div>
             <div class="member__footer">
-              <a href="#" class="member__anchor" title="Go to Gideon Heilbron's portfolio" target="_blank" rel="noopener noreferrer">Visit my portfolio</a>
+              <a class="member__anchor" title="Go to Gideon Heilbron's portfolio" href="https://gideonheilbron.nl" target="_blank" rel="noopener noreferrer">Visit my portfolio</a>
             </div>
           </li>
           <li class="member" role="button" tabindex="0"> <!-- Add to cart should be triggered by space/enter key -->
@@ -109,7 +109,7 @@
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nisi rerum sapiente error exercitationem fugiat, cumque harum quibusdam sed a ipsam, officia adipisci reprehenderit magni dolor voluptatum. Deserunt, nisi, quibusdam.
             </div>
             <div class="member__footer">
-              <a href="#" class="member__anchor" title="Go to Murtada al Mousawy's portfolio" target="_blank" rel="noopener noreferrer">Visit my portfolio</a>
+              <a class="member__anchor" title="Go to Murtada al Mousawy's portfolio" href="https://murtada.nl/" target="_blank" rel="noopener noreferrer">Visit my portfolio</a>
             </div>
           </li>
           <li class="member" role="button" tabindex="0"> <!-- Add to cart should be triggered by space/enter key -->
@@ -124,7 +124,7 @@
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nisi rerum sapiente error exercitationem fugiat, cumque harum quibusdam sed a ipsam, officia adipisci reprehenderit magni dolor voluptatum. Deserunt, nisi, quibusdam.
             </div>
             <div class="member__footer">
-              <a href="#" class="member__anchor" title="Go to Gideon Heilbron's portfolio" target="_blank" rel="noopener noreferrer">Visit my portfolio</a>
+              <a class="member__anchor" title="Go to Gideon Heilbron's portfolio" href="https://gideonheilbron.nl" target="_blank" rel="noopener noreferrer">Visit my portfolio</a>
             </div>
           </li>
           <li class="member" role="button" tabindex="0"> <!-- Add to cart should be triggered by space/enter key -->
@@ -139,7 +139,7 @@
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nisi rerum sapiente error exercitationem fugiat, cumque harum quibusdam sed a ipsam, officia adipisci reprehenderit magni dolor voluptatum. Deserunt, nisi, quibusdam.
             </div>
             <div class="member__footer">
-              <a href="#" class="member__anchor" title="Go to Murtada al Mousawy's portfolio" target="_blank" rel="noopener noreferrer">Visit my portfolio</a>
+              <a class="member__anchor" title="Go to Murtada al Mousawy's portfolio" href="https://murtada.nl/" target="_blank" rel="noopener noreferrer">Visit my portfolio</a>
             </div>
           </li>
           <li class="member" role="button" tabindex="0"> <!-- Add to cart should be triggered by space/enter key -->
@@ -154,14 +154,15 @@
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nisi rerum sapiente error exercitationem fugiat, cumque harum quibusdam sed a ipsam, officia adipisci reprehenderit magni dolor voluptatum. Deserunt, nisi, quibusdam.
             </div>
             <div class="member__footer">
-              <a href="#" class="member__anchor" title="Go to Gideon Heilbron's portfolio" target="_blank" rel="noopener noreferrer">Visit my portfolio</a>
+              <a class="member__anchor" title="Go to Gideon Heilbron's portfolio" href="https://gideonheilbron.nl" target="_blank" rel="noopener noreferrer">Visit my portfolio</a>
             </div>
           </li>
         </ul>
       </section>
-      <section class="section section--right">
+
+      <section class="section section--right" id="clients">
         <div class="section__container">
-          <div>
+          <div class="section__column">
             <ul class="clients">
               <li class="client">
                 <img src="images/client-redkiwi.png" alt="RedKiwi logo">
@@ -183,28 +184,84 @@
               </li>
             </ul>
           </div>
-          <div>
+          <div class="section__column">
             <h1>Clients & Projects</h1>
             <p class="section__description">Members of Cursief have worked for a wide range of clients in a bunch of different sectors. Big, small, start-up, enterprise, everything is possible.</p>
             <a class="readmore" title="View a few cases from our members" href="#">View some cases</a>
           </div>
         </div>
       </section>
-      <section>
 
-      </section>
-      <div class="cart">
+      <div class="cart" role="switch" aria-checked="false">
         <span class="cart__label">Team</span>
         <div class="cart__amount"></div>
         <div class="cart__content-holder">
           <div class="cart-content"></div>
         </div>
       </div>
+
+      <section class="section section--contact" id="contact">
+        <div class="section__container">
+          <h1>Contact</h1>
+          <div class="contact">
+            <img class="contact__stamp contact__stamp--1" src="images/stamp-1.svg" alt="">
+            <img class="contact__stamp contact__stamp--2" src="images/stamp-2.svg" alt="">
+            <div class="contact__form">
+              <div class="contact__row">Hi Cursief,</div>
+              <div class="contact__row">
+                <span>I'm</span> <input class="contact__input" type="text" placeholder="Your name">, <span>from <input class="contact__input" type="text" placeholder="Company"></span>
+              </div>
+              <div class="contact__row request-sentence">and we are looking for someone who can help us with a <div class="request-sentence__main" data-type="main"></div>with <div class="request-sentence__extra"></div>.</div>
+              <div class="contact__row options">
+                <input class="option" id="option-static" type="checkbox" data-type="main" value="static">
+                <label class="button button--option" for="option-static">Static</label>
+                <input class="option" id="option-dynamic" data-other="option-static" type="checkbox" data-type="main" value="dynamic">
+                <label class="button button--option" for="option-dynamic">Dynamic</label>
+                <input class="option" id="option-campaign" type="checkbox" data-type="main" value="campaign">
+                <label class="button button--option" for="option-campaign">Campaign</label>
+                <input class="option" id="option-website" type="checkbox" data-type="main" value="website">
+                <label class="button button--option" for="option-website">Website</label>
+                <input class="option" id="option-webshop" data-other="option-website" type="checkbox" data-type="main" value="web shop">
+                <label class="button button--option" for="option-webshop">Web shop</label>
+                <input class="option" id="option-webapp" data-other="option-website,option-existingcontent" type="checkbox" data-type="main" value="web app">
+                <label class="button button--option" for="option-webapp">Web app</label>
+                <input class="option" id="option-existingcontent" type="checkbox" data-type="extra" value="existing content">
+                <label class="button button--option" for="option-existingcontent">Existing content</label>
+                <input class="option" id="option-newcontent" data-other="option-existingcontent" type="checkbox" data-type="extra" value="new content">
+                <label class="button button--option" for="option-newcontent">New content</label>
+              </div>
+              <div class="contact__row">
+                <span>Our budget is around</span>
+                <select name="" id="">
+                  <option value="">Not yet defined</option>
+                  <option value="">€ 500 - € 1.500</option>
+                  <option value="">€ 1.500 - € 4.000</option>
+                  <option value="">€ 4.000 - € 8.000</option>
+                  <option value="">€ 8.000 - € 15.000</option>
+                  <option value="">More than € 15.000</option>
+                </select>
+              </div>
+              <div class="contact__row">
+                <span>The deadline is</span>
+                <label>
+                  <input type="checkbox">
+                  <span>already defined</span>
+                </label>
+                <input type="date">
+              </div>
+              <div class="contact__row contact__row--footnote">Thanks in advance!</div>
+              <div class="contact__row">{{Your name}}, {{Company}}</div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="footer footer--primary">
       <div class="footer__container">
-        <img class="footer__logo" src="images/logo.svg" alt="">
+        <a class="footer__logo" href="#home">
+          <img src="images/logo.svg" alt="">
+        </a>
         <span>© 2019 Cursief. All rights reserved.</span>
         <ul class="social social--footer">
           <li class="social-item">

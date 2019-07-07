@@ -10,6 +10,7 @@
   letter-spacing: .1rem;
   border-radius: 5rem;
   outline: none;
+  user-select: none;
   transition: {
     property: background-color, box-shadow;
     duration: 200ms;
@@ -44,4 +45,16 @@
     background-color: darken($cl-quaternary, 12%);
     box-shadow: 0 .1rem .3rem 0 rgba($cl-black, .9);
   }
+}
+
+.button--option {
+  display: inline-block;
+  margin: 0 1em 1em 0;
+  color: $cl-black;
+  background-color: $cl-white;
+  box-shadow: 0 .5rem 1rem 0 rgba($cl-black, .3);
+  cursor: pointer;
+  user-select: none;
+  transition-property: color, background-color, box-shadow;
+  transition-duration: 200ms;
 }

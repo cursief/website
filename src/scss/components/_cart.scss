@@ -3,7 +3,7 @@ $cart-margin: .5em;
 
 .cart {
   z-index: 10;
-  position: sticky;
+  position: fixed;
   bottom: 1.7em;
   left: 1.7em;
   float: left;

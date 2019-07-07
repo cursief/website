@@ -22,7 +22,7 @@
 
 .client {
   margin: 1rem 3rem;
-  animation: fadeIn 800ms both;
+  animation: fadeIn 800ms both cubic-bezier(0.215, 0.61, 0.355, 1);
 
   @for $i from 1 through 6 {
 
