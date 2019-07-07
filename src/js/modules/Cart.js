@@ -103,7 +103,13 @@ export default class Cart
         return acc + childRect['height'] + parseInt(childStyle.marginTop, 10) + parseInt(childStyle.marginBottom, 10);
       }, 0);
       contentHeight = Math.min(contentHeight, 360);
-      console.log(contentHeight);
+
+      if (contentHeight === 360) {
+        this.elements.content.classList.add('has-scrollbar');
+      } else {
+        this.elements.content.classList.remove('has-scrollbar');
+      }
+
       this.elements.contentHolder.style.height = `${contentHeight}px`;
     } else {
       this.elements.contentHolder.style.height = 0;
