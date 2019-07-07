@@ -28,7 +28,7 @@
 .banner__container {
   z-index: 2;
   position: relative;
-  max-width: 129rem;
+  max-width: $container-max-width;
   margin: 0 auto;
 }
 

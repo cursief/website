@@ -1,4 +1,16 @@
 .footer--primary {
   padding: 3rem 0;
+  color: $cl-white;
+  font-size: 1.2rem;
   background-color: $cl-tertiary;
+}
+
+.footer__container {
+  display: flex;
+  max-width: $container-max-width;
+  margin: 0 auto;
+}
+
+.footer__logo {
+  margin-right: auto;
 }
