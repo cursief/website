@@ -3,10 +3,13 @@ $cart-margin: .5em;
 
 .cart {
   z-index: 10;
-  position: fixed;
+  position: sticky;
   bottom: 1.7em;
   left: 1.7em;
+  float: left;
+  display: block;
   min-height: 2.66em;
+  margin-bottom: 3rem;
   border-radius: 1.33em;
   background: {
     color: $cl-primary;
