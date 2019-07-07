@@ -74,14 +74,20 @@ $cart-margin: .5em;
     property: width, height, margin;
     duration: 400ms;
   };
+
+
 }
 
 .cart-content {
   width: 100%;
   background: $cl-white;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   cursor: default;
+
+  &.has-scrollbar {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 }
 
 .cart-item {
