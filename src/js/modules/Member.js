@@ -16,6 +16,7 @@ export default class Member
     this.fullName = this.base.querySelector('.member__name').textContent;
 
     this.base.addEventListener('click', this.handleClick.bind(this));
+    this.base.addEventListener('keypress', this.handleClick.bind(this));
     this.cart = cart;
   }
 
