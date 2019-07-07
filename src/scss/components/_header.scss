@@ -1,1 +1,23 @@
+.header--primary {
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin-top: 3rem;
+  font-size: 1.6rem;
+  padding: 2rem 0;
+}
 
+.header__container {
+  display: flex;
+  max-width: 129rem;
+  margin: 0 auto;
+}
+
+.header__logo {
+  display: flex;
+  align-content: center;
+  margin-right: 7rem;
+}

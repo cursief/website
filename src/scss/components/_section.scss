@@ -1,8 +1,16 @@
 .section {
-  margin: 20rem;
+  margin: 20rem 0;
 
   .section__container > div {
     width: 50%;
+  }
+}
+
+.section--intro {
+  margin-top: 6rem;
+
+  .section__text {
+    margin-top: 8rem;
   }
 }
 
@@ -31,6 +39,14 @@
 
 .section__container--wide {
   max-width: 135rem;
+}
+
+.section__text {
+
+}
+
+.section__media {
+
 }
 
 .section__description {

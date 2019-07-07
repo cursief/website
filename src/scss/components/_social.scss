@@ -1,0 +1,15 @@
+.social {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0 4rem 0 auto;
+}
+
+.social__item {
+
+}
+
+.social__anchor {
+  color: $cl-white;
+}

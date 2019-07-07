@@ -1,0 +1,49 @@
+.banner {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 95vh;
+  color: $cl-white;
+  background-image: linear-gradient(168deg, #4735E2 40%, #3D3398 100%);
+
+  &:after {
+    content: '';
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: {
+      repeat: no-repeat;
+      size: cover;
+      position: center calc(100% + .2rem);
+      image: url('images/banner.svg');
+    };
+  }
+}
+
+.banner__container {
+  z-index: 2;
+  position: relative;
+  max-width: 129rem;
+  margin: 0 auto;
+}
+
+.banner__heading {
+  max-width: 60%;
+  color: $cl-white;
+  font-size: 8rem;
+}
+
+.banner__content {
+  max-width: 60%;
+  line-height: 1.55;
+
+  .button {
+    float: left;
+    margin-top: 2rem;
+  }
+}
