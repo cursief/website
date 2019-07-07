@@ -12,8 +12,9 @@
 
 .header__container {
   display: flex;
-  max-width: 129rem;
+  max-width: $container-max-width;
   margin: 0 auto;
+  padding: 0 3rem;
 }
 
 .header__logo {

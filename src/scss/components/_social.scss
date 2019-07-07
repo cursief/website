@@ -6,10 +6,21 @@
   margin: 0 4rem 0 auto;
 }
 
-.social__item {
+.social--footer {
+  margin: 0 0 0 4rem;
+}
+
+.social-item {
 
 }
 
-.social__anchor {
-  color: $cl-white;
+.social-item__anchor {
+  margin-left: 1.5rem;
+  outline: none;
+  transition: opacity 200ms;
+
+  &:hover,
+  &:focus {
+    opacity: .6;
+  }
 }

@@ -11,9 +11,13 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  margin: 0;
+  margin: 0 0 5rem;
   padding: 0;
   list-style: none;
+
+  @include media($screen-md) {
+    margin-bottom: 0;
+  }
 }
 
 .client {

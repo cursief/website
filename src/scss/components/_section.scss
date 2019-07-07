@@ -1,8 +1,16 @@
 .section {
-  margin: 20rem 0;
+  margin: 10rem 0;
+
+  @include media($screen-md) {
+    margin: 20rem 0;
+  }
 
   .section__container > div {
-    width: 50%;
+    width: 100%;
+
+    @include media($screen-md) {
+      width: 50%;
+    }
   }
 }
 
@@ -32,9 +40,17 @@
 
 .section__container {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
-  max-width: 129rem;
+  max-width: $container-max-width;
   margin: 0 auto;
+  padding: 0 3rem;
+  text-align: center;
+
+  @include media($screen-md) {
+    flex-wrap: nowrap;
+    text-align: left;
+  }
 }
 
 .section__container--wide {
@@ -50,6 +66,6 @@
 }
 
 .section__description {
-  margin: 0 0 6rem;
+  margin: 0;
   font-size: 2rem;
 }
