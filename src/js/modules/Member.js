@@ -42,11 +42,13 @@ export default class Member
 
     // Remove the member if it's already in the cart
     if (this.cart.contains(this)) {
+      this.base.classList.remove('is-selected');
       this.cart.remove(this);
       return;
     }
 
     // Add the member to the cart
+    this.base.classList.add('is-selected');
     this.cart.add(this);
   }
 }

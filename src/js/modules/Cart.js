@@ -37,6 +37,28 @@ export default class Cart
       return;
     }
 
+    // Get the member's position
+    const memberRect = member.base.getBoundingClientRect();
+    const cartRect = this.base.getBoundingClientRect();
+    const memberStyle = window.getComputedStyle(member.base);
+    const targetPos = {
+      x: cartRect.left + cartRect.width * .5 - memberRect.left - memberRect.width * .5,
+      y: this.base.offsetTop + cartRect.height * .5 - memberRect.top - memberRect.height * .5
+    };
+
+    // Start 'add member' animation
+    const clone = member.base.cloneNode(true);
+    clone.classList.add('is-cloned');
+    clone.style.top = `${memberRect.top}px`;
+    clone.style.left = `${memberRect.left - parseInt(memberStyle.marginLeft, 10)}px`;
+    document.body.appendChild(clone);
+    void clone.offsetWidth;
+    clone.style.transform = `translate(${targetPos.x}px, ${targetPos.y}px) scale(.1)`;
+
+    setTimeout(() => {
+      clone.remove();
+    }, 500);
+
     // Create a new element from the cart-item's template
     const cartItemTemplate = document.querySelector('#cart-item');
     const cartItemFrag = document.importNode(cartItemTemplate.content, true);
