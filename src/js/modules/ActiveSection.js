@@ -11,7 +11,7 @@ export default class ActiveSection
     this.sections = document.querySelectorAll(selector);
 
     this.options = {
-      threshold: .5 // When the element is at least 50% visible in viewport
+      threshold: .75 // When the element is at least 50% visible in viewport
     };
 
     // Initialize IntersectionObserver when available

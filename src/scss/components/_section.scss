@@ -20,6 +20,18 @@ svg {
   @include media($screen-md) {
     padding: 18rem 0 0;
   }
+
+  &.is-active {
+
+    .section__column {
+      opacity: 1;
+    }
+  }
+
+  .section__column {
+    opacity: 0;
+    transition: opacity 500ms;
+  }
 }
 
 .section--intro {
@@ -35,6 +47,11 @@ svg {
 }
 
 .section--center {
+
+  .section__column {
+    width: 100%;
+    text-align: center;
+  }
 
   .section__container {
     align-items: center;
