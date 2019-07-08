@@ -45,13 +45,17 @@ a {
     position: absolute;
     top: 70%;
     left: 0;
-    width: 100%;
+    width: 0;
     height: .6rem;
     background-color: $cl-warning;
     border-radius: .6rem;
     transform: rotate(-10deg);
     transform-origin: left bottom;
-    animation: strike 700ms both cubic-bezier(0.215, 0.61, 0.355, 1) 300ms;
+    transition: width 700ms cubic-bezier(0.215, 0.61, 0.355, 1) 300ms;
+
+    .section.is-active & {
+      width: 100%;
+    }
   }
 }
 

@@ -18,7 +18,7 @@ export default class ContactForm
       shadowElement.classList.add(input.classList[0], 'is-shadow');
       shadowElement.style.display = 'inline';
 
-      input.setAttribute('placeholder', `  ${input.getAttribute('placeholder')}  `);
+      input.setAttribute('placeholder', `${input.getAttribute('placeholder')}`);
 
       this.base.appendChild(shadowElement);
 

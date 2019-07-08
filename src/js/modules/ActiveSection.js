@@ -20,11 +20,8 @@ export default class ActiveSection
         entries.forEach(function(entry) {
           // Check if intersecting
           if (entry.isIntersecting) {
-            const otherActiveSections = document.querySelectorAll(`${selector}.is-active`);
-            otherActiveSections.forEach(activeSection => activeSection.classList.remove('is-active'));
             entry.target.classList.add('is-active');
-          } else {
-            entry.target.classList.remove('is-active');
+            sectionObserver.unobserve(entry.target);
           }
         });
       }, this.options);
