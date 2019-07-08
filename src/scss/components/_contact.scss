@@ -105,6 +105,7 @@
   -webkit-appearance: none;
   font-family: inherit;
   font-size: 2rem;
+  padding: 0;
   border: none;
   color: $cl-primary;
   box-shadow: 0 .2rem 0 0 $cl-primary;
@@ -122,7 +123,6 @@
   }
 
   &:valid:not(:focus) {
-    padding: 0;
     box-shadow: 0 .2rem 0 0 transparentize($cl-primary, 1);
   }
 
@@ -162,5 +162,37 @@
 .request-sentence__extra {
   &:not(:empty) {
     margin-right: 0;
+  }
+}
+
+.contact__budget-slider {
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: .4em;
+    cursor: pointer;
+    background: $cl-primary;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 2.4em;
+    width: 2.4em;
+    border-radius: 50%;
+    background: $cl-primary;
+    cursor: pointer;
+    transform: translateY(-1.1em);
+  }
+
+  &:hover::-webkit-slider-thumb {
+    box-shadow: 0 0 5px $cl-primary;
   }
 }
