@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <g id="2.0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-840.000000, -2332.000000)" fill="#F0834A" fill-rule="nonzero">
+            <g id="Members" transform="translate(47.000000, 1712.000000)">
+                <g id="Card-3" transform="translate(505.000000, 199.000000)">
+                    <g id="Normal" transform="translate(30.000000, 417.000000)">
+                        <path d="M274,20 L260,20 L260,6 L267,6 L267,4 L260,4 C258.89,4 258,4.9 258,6 L258,20 C258,21.1 258.89,22 260,22 L274,22 C275.1,22 276,21.1 276,20 L276,13 L274,13 L274,20 Z M269,4 L269,6 L272.59,6 L262.76,15.83 L264.17,17.24 L274,7.41 L274,11 L276,11 L276,4 L269,4 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
