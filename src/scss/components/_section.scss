@@ -24,10 +24,23 @@ main {
   @include media($screen-md) {
     padding: 18rem 0 0;
   }
+
+  &.is-active {
+
+    .section__column {
+      opacity: 1;
+    }
+  }
+
+  .section__column {
+    opacity: 0;
+    transition: opacity 500ms;
+  }
 }
 
 .section--intro {
   margin-top: 6rem;
+  padding-top: 0;
 
   .section__text {
     margin-top: 8rem;
@@ -39,6 +52,11 @@ main {
 }
 
 .section--center {
+
+  .section__column {
+    width: 100%;
+    text-align: center;
+  }
 
   .section__container {
     align-items: center;
