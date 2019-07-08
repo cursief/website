@@ -42,6 +42,7 @@ export default class Cart
     };
 
     // Start 'add member' animation
+    member.base.classList.add('is-animating');
     const cloneHolder = document.createElement('div');
     cloneHolder.classList.add('clone');
 
@@ -59,6 +60,7 @@ export default class Cart
 
     setTimeout(() => {
       cloneHolder.remove();
+      member.base.classList.remove('is-animating');
     }, 700);
 
     setTimeout(() => {

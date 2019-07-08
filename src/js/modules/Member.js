@@ -36,7 +36,8 @@ export default class Member
     }
 
     // Cancel the callback when clicking on the portfolio link
-    if (event.target.classList.contains('member__anchor')) {
+    if (event.target.classList.contains('member__anchor')
+        || this.base.classList.contains('is-animating')) {
       return;
     }
 
@@ -49,6 +50,7 @@ export default class Member
 
     // Add the member to the cart
     this.base.classList.add('is-selected');
+    this.base.blur();
     this.cart.add(this);
   }
 }
