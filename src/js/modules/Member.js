@@ -33,6 +33,8 @@ export default class Member
       if (event.keyCode !== 13) {
         return;
       }
+    } else {
+      this.base.blur();
     }
 
     // Cancel the callback when clicking on the portfolio link
@@ -50,7 +52,6 @@ export default class Member
 
     // Add the member to the cart
     this.base.classList.add('is-selected');
-    this.base.blur();
     this.cart.add(this);
   }
 }

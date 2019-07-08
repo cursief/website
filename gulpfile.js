@@ -35,7 +35,7 @@ function scssTask() {
   return gulp.src(`${config.source}/scss/**/*.scss`, { base: `${config.source}/scss` })
   .pipe(scss())
   .on('error', notify.onError('SCSS compile error: <%= error.message %>'))
-  .pipe(autoprefixer({ browsers: 'last 2 versions' }))
+  .pipe(autoprefixer({ browsers: 'last 1 version, chrome > 70, not dead' }))
   .pipe(gulp.dest(config.destination))
   .pipe(browserSync.stream());
 }
