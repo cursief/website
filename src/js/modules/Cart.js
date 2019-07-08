@@ -32,11 +32,6 @@ export default class Cart
    */
   add(member)
   {
-    // Check if already added
-    if (this.contents.indexOf(member) !== -1) {
-      return;
-    }
-
     // Get the member's position
     const memberRect = member.base.getBoundingClientRect();
     const cartRect = this.base.getBoundingClientRect();
@@ -47,45 +42,59 @@ export default class Cart
     };
 
     // Start 'add member' animation
+    const cloneHolder = document.createElement('div');
+    cloneHolder.classList.add('clone');
+
     const clone = member.base.cloneNode(true);
     clone.classList.add('is-cloned');
-    clone.style.top = `${memberRect.top}px`;
-    clone.style.left = `${memberRect.left - parseInt(memberStyle.marginLeft, 10)}px`;
-    document.body.appendChild(clone);
-    void clone.offsetWidth;
-    clone.style.transform = `translate(${targetPos.x}px, ${targetPos.y}px) scale(.1)`;
+    cloneHolder.style.top = `${memberRect.top}px`;
+    cloneHolder.style.left = `${memberRect.left - parseInt(memberStyle.marginLeft, 10)}px`;
+    cloneHolder.appendChild(clone);
+    document.body.appendChild(cloneHolder);
+
+    void cloneHolder.offsetWidth;
+
+    cloneHolder.style.transform = `translateX(${targetPos.x}px)`;
+    clone.style.transform = `translateY(${targetPos.y}px) scale(.1)`;
 
     setTimeout(() => {
-      clone.remove();
-    }, 500);
+      cloneHolder.remove();
+    }, 700);
 
-    // Create a new element from the cart-item's template
-    const cartItemTemplate = document.querySelector('#cart-item');
-    const cartItemFrag = document.importNode(cartItemTemplate.content, true);
+    setTimeout(() => {
+      // Check if already added
+      if (this.contents.indexOf(member) !== -1) {
+        return;
+      }
 
-    // We will lose the reference of the appended element when appending with the
-    // fragment, so we make a copy
-    const cartItemElement = cartItemFrag.children[0];
+      // Create a new element from the cart-item's template
+      const cartItemTemplate = document.querySelector('#cart-item');
+      const cartItemFrag = document.importNode(cartItemTemplate.content, true);
 
-    cartItemElement.elements = {
-      image: cartItemElement.querySelector('.cart-item__image'),
-      title: cartItemElement.querySelector('.cart-item__title'),
-      remove: cartItemElement.querySelector('.cart-item__remove')
-    };
+      // We will lose the reference of the appended element when appending with the
+      // fragment, so we make a copy
+      const cartItemElement = cartItemFrag.children[0];
 
-    cartItemElement.elements.image.style.backgroundImage = `url('${member.avatarUrl}')`;
-    cartItemElement.elements.title.textContent = member.fullName;
-    cartItemElement.member = member;
+      cartItemElement.elements = {
+        image: cartItemElement.querySelector('.cart-item__image'),
+        title: cartItemElement.querySelector('.cart-item__title'),
+        remove: cartItemElement.querySelector('.cart-item__remove')
+      };
 
-    this.elements.content.appendChild(cartItemElement);
+      cartItemElement.elements.image.style.backgroundImage = `url('${member.avatarUrl}')`;
+      cartItemElement.elements.title.textContent = member.fullName;
+      cartItemElement.member = member;
 
-    member.cartItemElement = cartItemElement;
+      this.elements.content.appendChild(cartItemElement);
 
-    // Add the item to the contents array
-    this.contents.push(member);
+      member.cartItemElement = cartItemElement;
 
-    // Trigger an update
-    this.update();
+      // Add the item to the contents array
+      this.contents.push(member);
+
+      // Trigger an update
+      this.update();
+    }, 700);
   }
 
   /**

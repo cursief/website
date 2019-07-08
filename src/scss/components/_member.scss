@@ -26,30 +26,32 @@
   user-select: none;
   transition: transform 300ms cubic-bezier(0.215, 0.61, 0.355, 1);
 
-  &:nth-child(1),
-  &:nth-child(5) {
-    width: 19rem;
-    font-size: .57143rem; // 16px
-    transition-duration: 500ms;
+  .members & {
+    &:nth-child(1),
+    &:nth-child(5) {
+      width: 19rem;
+      font-size: .57143rem; // 16px
+      transition-duration: 500ms;
 
-    &:hover,
-    &:focus,
-    &:focus-within {
-      z-index: 2;
-      transform: scale(1.7196);
+      &:hover,
+      &:focus,
+      &:focus-within {
+        z-index: 2;
+        transform: scale(1.7196);
+      }
     }
-  }
 
-  &:nth-child(2),
-  &:nth-child(4) {
-    width: 25.5rem;
-    font-size: .75rem;
+    &:nth-child(2),
+    &:nth-child(4) {
+      width: 25.5rem;
+      font-size: .75rem;
 
-    &:hover,
-    &:focus,
-    &:focus-within {
-      z-index: 2;
-      transform: scale(1.34299);
+      &:hover,
+      &:focus,
+      &:focus-within {
+        z-index: 2;
+        transform: scale(1.34299);
+      }
     }
   }
 
@@ -72,18 +74,6 @@
   &.is-selected {
     &::after {
       opacity: 1;
-    }
-  }
-
-  &.is-cloned {
-    z-index: 9;
-    position: fixed;
-    box-shadow: none;
-    opacity: .7;
-    backface-visibility: hidden;
-    transition: {
-      duration: 500ms;
-      timing-function: ease-in;
     }
   }
 }

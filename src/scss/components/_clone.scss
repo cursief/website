@@ -1,0 +1,18 @@
+.clone {
+  z-index: 9;
+  position: fixed;
+  box-shadow: none;
+  opacity: .7;
+  backface-visibility: hidden;
+  pointer-events: none;
+  transition: {
+    property: transform;
+    duration: 700ms;
+    timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+  }
+
+  .member {
+    transition-timing-function: cubic-bezier(0.3, 0.27, 0.07, -.8);
+    transition-duration: 700ms;
+  }
+}
