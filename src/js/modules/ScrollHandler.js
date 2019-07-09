@@ -18,8 +18,14 @@ export default class ScrollHandler
      header: document.querySelector('.header--primary')
    };
 
+   // Sections
+   this.sections = document.querySelectorAll('main section');
+
    this.elements.header.dataset.isSticky = 'false';
    this.elements.header.stickyFrom = this.elements.header.getBoundingClientRect()['top'];
+
+   // Run the throttler once at page load.
+   this.throttleScroll();
  }
 
   /**
@@ -56,6 +62,16 @@ export default class ScrollHandler
     } else {
       if (this.elements.header.dataset.isSticky === 'true') {
         this.elements.header.dataset.isSticky = 'false';
+      }
+    }
+
+    // Sections
+    for (let sectionIndex = this.sections.length - 1; sectionIndex > -1; sectionIndex--) {
+      const section = this.sections[sectionIndex];
+
+      if (section.offsetTop - scrollY < window.innerHeight * .5) {
+        section.classList.add('is-active');
+        break;
       }
     }
   }
