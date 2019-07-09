@@ -9,6 +9,28 @@
   height: 9rem;
   font-size: 1.6rem;
   padding: 2rem 0;
+
+  &::before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(168deg, #4735E2 40%, #3D3398 100%);
+    opacity: 0;
+    transition: {
+      property: opacity;
+      duration: 300ms;
+    }
+  }
+
+  &[data-is-sticky='true'] {
+    &::before {
+      opacity: 1;
+    }
+  }
 }
 
 .header__container {
