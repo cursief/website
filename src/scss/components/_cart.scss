@@ -174,7 +174,7 @@ $cart-margin: .5em;
   &--placeholder {
     flex-direction: column;
     box-shadow: none;
-    white-space: nowrap;
+    text-align: center;
 
     &::before {
       content: '';
