@@ -51,7 +51,7 @@ export default class Member
     }
 
     // Add the member to the cart
-    this.base.classList.add('is-selected');
     this.cart.add(this);
+    this.base.classList.add('is-selected');
   }
 }
