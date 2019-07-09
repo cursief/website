@@ -49,7 +49,8 @@ export default class Cart
     const clone = member.base.cloneNode(true);
     clone.classList.add('is-cloned');
     cloneHolder.style.top = `${memberRect.top}px`;
-    cloneHolder.style.left = `${memberRect.left - parseInt(memberStyle.marginLeft, 10)}px`;
+    cloneHolder.style.left = `${memberRect.left}px`;
+
     cloneHolder.appendChild(clone);
     document.body.appendChild(cloneHolder);
 
