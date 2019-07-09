@@ -6,8 +6,9 @@ export default class ScrollHandler
   */
  constructor()
  {
-   this.debounceTimeOut = 50;
-   this.throttleTimeOut = 50;
+   this.activeThreshold = .5; // Percentage of a section that should be scrolled past to activate
+   this.debounceTimeOut = 100;
+   this.throttleTimeOut = 100;
    this.pastMoment = Date.now();
 
    this.timer = 0;
@@ -24,8 +25,8 @@ export default class ScrollHandler
    this.elements.header.dataset.isSticky = 'false';
    this.elements.header.stickyFrom = this.elements.header.getBoundingClientRect()['top'];
 
-   // Run the throttler once at page load.
-   this.throttleScroll();
+   // Run the callback once at page load.
+   this.handleScroll();
  }
 
   /**
@@ -69,9 +70,14 @@ export default class ScrollHandler
     for (let sectionIndex = this.sections.length - 1; sectionIndex > -1; sectionIndex--) {
       const section = this.sections[sectionIndex];
 
-      if (section.offsetTop - scrollY < window.innerHeight * .5) {
+      // Section is already active, continue to next section
+      if (section.isActive) {
+        continue;
+      }
+
+      if (scrollY + window.innerHeight > section.offsetTop + section.clientHeight * this.activeThreshold) {
         section.classList.add('is-active');
-        break;
+        section.isActive = true;
       }
     }
   }
