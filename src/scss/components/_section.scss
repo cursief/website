@@ -19,10 +19,10 @@ main {
 }
 
 .section {
-  padding: 5rem 0;
+  padding: 5rem 0 2rem;
 
   @include media($screen-md) {
-    padding: 18rem 0 0;
+    padding: 14rem 0 4rem;
   }
 
   &.is-active {
@@ -39,12 +39,7 @@ main {
 }
 
 .section--intro {
-  margin-top: 6rem;
-  padding-top: 0;
-
-  .section__text {
-    margin-top: 8rem;
-  }
+  margin-top: 0;
 }
 
 .section--left {
