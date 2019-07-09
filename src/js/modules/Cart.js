@@ -218,17 +218,17 @@ export default class Cart
    *
    * @param {MouseEvent} event
    */
-  handleClick(event)
+  handleClick(event = false)
   {
     // Click is on the cart's body
-    if (event.target == this.base) {
+    if (!event || event.target == this.base) {
       this.base.classList.toggle('is-expanded');
 
       this.updateSize();
     }
 
     // Click is on a remove button
-    if (event.target.classList.contains('cart-item__remove')) {
+    if (event && event.target.classList.contains('cart-item__remove')) {
       event.target.parentNode.parentNode.member.handleClick(event);
     }
   }
