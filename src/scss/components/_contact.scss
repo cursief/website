@@ -72,7 +72,10 @@
   position: absolute;
 
   .section.is-active & {
-    animation: stamp 300ms both cubic-bezier(.215, .61, .355, 1);
+    animation-name: stamp;
+    animation-duration: 300ms;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(.215, .61, .355, 1);
   }
 }
 
