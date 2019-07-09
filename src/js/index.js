@@ -4,7 +4,13 @@ import ContactForm from './modules/ContactForm';
 import ScrollHandler from './modules/ScrollHandler';
 
 window.addEventListener('load', () => {
-  new Members(new Cart());
+  const cart = new Cart();
+
+  new Members(cart);
   new ContactForm('.contact__form');
-  new ScrollHandler();
+  new ScrollHandler({
+    header: '.header--primary',
+    sections: 'main section',
+    cart: cart
+  });
 });
