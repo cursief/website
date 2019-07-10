@@ -12,6 +12,17 @@
 
 .navigation__item {
   margin-right: 3rem;
+  animation-name: fadeIn;
+  animation-duration: 800ms;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+  @for $i from 1 through 4 {
+
+    &:nth-child(#{$i}) {
+      animation-delay: 150ms * $i + 200ms;
+    }
+  }
 }
 
 .navigation__anchor {

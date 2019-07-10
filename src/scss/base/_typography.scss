@@ -28,14 +28,6 @@ a {
   font-family: $font-primary;
 }
 
-@keyframes strike {
-  from {
-    width: 0;
-  } to {
-    width: 100%;
-  }
-}
-
 .strikethrough {
   position: relative;
   display: inline-block;

@@ -33,6 +33,14 @@
       opacity: .95;
     }
   }
+
+  .social {
+    animation: fadeIn 800ms both 1000ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  .button {
+    animation: fadeIn 800ms both 1200ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
 }
 
 .header__container {
@@ -46,4 +54,5 @@
   display: flex;
   align-content: center;
   margin-right: 7rem;
+  animation: fadeIn 800ms both 300ms cubic-bezier(0.215, 0.61, 0.355, 1);
 }

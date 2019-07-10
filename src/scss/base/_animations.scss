@@ -1,0 +1,53 @@
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
+  } to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+
+  from {
+    transform: scale(1.2);
+  } to {
+    transform: scale(1);
+  }
+}
+
+@keyframes slideUp {
+
+  0% {
+    opacity: 0;
+    transform: scale(.5) translate3d(0, 100%, 0);
+  } 50% {
+    opacity: 1;
+    transform: scale(.5) translate3d(0, 0, 0)
+  } 100% {
+    opacity: 1;
+    transform: scale(1) translate3d(0, 0, 0)
+  }
+}
+
+@keyframes slideUpShadow {
+
+  0% {
+    box-shadow: 0 0 .3rem .1rem rgba($cl-black, .3);
+  } 50% {
+    box-shadow: 0 0 .3rem .1rem rgba($cl-black, .3);
+  } 100% {
+    box-shadow: 0 -1rem 4rem 0 rgba($cl-black, .15);
+  }
+}
+
+@keyframes stamp {
+
+  from {
+    opacity: 0;
+    transform: scale(5);
+  } to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
