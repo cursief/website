@@ -232,7 +232,9 @@
           <div class="contact">
             <img class="contact__stamp contact__stamp--1" src="images/stamp-1.svg" alt="">
             <img class="contact__stamp contact__stamp--2" src="images/stamp-2.svg" alt="">
+            <div class="contact__steps-overview"></div>
             <div class="contact-form">
+              <!-- Start form -->
               <div class="contact-form__step contact__selection">
                 <div class="contact-form__step-content">
                   <p>Members you've selected:</p>
@@ -244,108 +246,105 @@
                   <a href="/email">hello@cursief.co</a>
                 </div>
               </div>
-              <div class="contact-form__step is-hidden">
+
+              <!-- Step 1 -->
+              <div class="contact-form__step">
                 <div class="contact-form__step-content">
-                  <p class="contact-form__question">What's your name?</p>
-                  <div class="contact-form__option"><input type="text" placeholder="Your name goes here"></div>
-                  <p class="contact-form__question">Are you contacting us on behalf of a company?</p>
-                  <div class="contact-form__option"><input type="radio" id="contact-form_company-yes" name="contact-form_company"><label for="contact-form_company-yes">Yes</label></div>
-                  <div class="contact-form__option"><input type="radio" id="contact-form_company-no" name="contact-form_company"><label for="contact-form_company-no">No</label></div>
-                  <div class="contact-form__option"><input type="text" name="contact-form_company-name" placeholder="Company name goes here"></div>
+                  <h3 class="contact-form__step-title">1. Personal info</h3>
+                  <p class="contact-form__question">What do you call yourself?</p>
+                  <div class="contact-form__option"><input type="text" placeholder="Your name goes here" required></div>
+                  <p class="contact-form__question">On what address can we email you?</p>
+                  <div class="contact-form__option"><input type="email" placeholder="Your email" required></div>
+                  <p class="contact-form__question contact-form__question--optional">What number should we call you on?</p>
+                  <div class="contact-form__option"><input type="tel" placeholder="Your phone number"></div>
                 </div>
               </div>
-              <div class="contact-form__step is-hidden">
+
+              <!-- Step 2 -->
+              <div class="contact-form__step">
                 <div class="contact-form__step-content">
+                  <h3 class="contact-form__step-title">2. Company</h3>
+                  <p class="contact-form__question contact-form__question--optional">Are you contacting us on behalf of a company?</p>
+                  <div class="required-group">
+                    <div class="contact-form__option"><input type="radio" id="contact-form_company-yes" name="contact-form_company" value="Yes" data-bind="contact-form_company-name"><label for="contact-form_company-yes">Yes</label></div>
+                    <div class="contact-form__option"><input type="radio" id="contact-form_company-no" name="contact-form_company" value="No" data-bind="contact-form_company-name"><label for="contact-form_company-no">No</label></div>
+                    <div class="contact-form__option"><input type="text" name="contact-form_company-name" placeholder="Company name goes here" data-active-if="Yes" disabled required></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="contact-form__step">
+                <div class="contact-form__step-content">
+                  <h3 class="contact-form__step-title">3. Products</h3>
                   <p class="contact-form__question">What kind of product(s) are you looking for?</p>
-                  <div class="contact-form__option"><input type="checkbox" name="contact-form_product-website" id="contact-form_product-website"><label for="contact-form_product-website">Website</label></div>
-                  <div class="contact-form__option"><input type="checkbox" name="contact-form_product-webapp"  id="contact-form_product-webapp"><label for="contact-form_product-webapp">Web app</label></div>
-                  <div class="contact-form__option"><input type="checkbox" name="contact-form_product-webshop" id="contact-form_product-webshop"><label for="contact-form_product-webshop">Web shop</label></div>
-                  <p class="contact-form__question">Do you need content for the project?</p>
-                  <div class="contact-form__option"><input type="checkbox" name="contact-form_content-provided" id="contact-form_content-provided"><label for="contact-form_content-provided">Content will be provided</label></div>
-                  <div class="contact-form__option"><input type="checkbox" name="contact-form_content-new" id="contact-form_content-new"><label for="contact-form_content-new">We'll need new content</label></div>
+                  <div class="required-group">
+                    <div class="contact-form__option"><input type="checkbox" name="contact-form_product-website" id="contact-form_product-website" value="Website" data-unchecked-value=""><label for="contact-form_product-website">Website</label></div>
+                    <div class="contact-form__option"><input type="checkbox" name="contact-form_product-webapp"  id="contact-form_product-webapp" value="Web app" data-unchecked-value=""><label for="contact-form_product-webapp">Web app</label></div>
+                    <div class="contact-form__option"><input type="checkbox" name="contact-form_product-webshop" id="contact-form_product-webshop" value="Web shop" data-unchecked-value=""><label for="contact-form_product-webshop">Web shop</label></div>
+                    <div class="contact-form__option"><input type="checkbox" name="contact-form_product-not-sure" id="contact-form_product-not-sure" value="Not sure" data-unchecked-value=""><label for="contact-form_product-not-sure">I'm not sure</label></div>
+                  </div>
                 </div>
               </div>
-              <div class="contact-form__step is-hidden">
+
+              <!-- Step 4 -->
+              <div class="contact-form__step">
                 <div class="contact-form__step-content">
+                  <h3 class="contact-form__step-title">4. Content</h3>
+                  <p class="contact-form__question">Do you need content for the project?</p>
+                  <div class="required-group">
+                    <div class="contact-form__option"><input type="checkbox" name="contact-form_content-provided" id="contact-form_content-provided" value="Content provided" data-unchecked-value=""><label for="contact-form_content-provided">Content will be provided</label></div>
+                    <div class="contact-form__option"><input type="checkbox" name="contact-form_content-new" id="contact-form_content-new" value="New content" data-unchecked-value=""><label for="contact-form_content-new">We'll need new content</label></div>
+                    <div class="contact-form__option"><input type="checkbox" name="contact-form_content-not-sure" id="contact-form_content-not-sure" value="Not sure" data-unchecked-value=""><label for="contact-form_content-not-sure">I'm not sure</label></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 5 -->
+              <div class="contact-form__step">
+                <div class="contact-form__step-content">
+                  <h3 class="contact-form__step-title">5. Budget</h3>
                   <p class="contact-form__question">What is your budget?</p>
                   <div class="contact-form__option">
                     <select name="" id="">
-                      <option value="">Not yet defined</option>
-                      <option value="">€ 500 - € 1.500</option>
-                      <option value="">€ 1.500 - € 4.000</option>
-                      <option value="">€ 4.000 - € 8.000</option>
-                      <option value="">€ 8.000 - € 15.000</option>
-                      <option value="">More than € 15.000</option>
+                      <option value="Not yet defined">Not yet defined</option>
+                      <option value="€ 500 - € 1.500">€ 500 - € 1.500</option>
+                      <option value="€ 1.500 - € 4.000">€ 1.500 - € 4.000</option>
+                      <option value="€ 4.000 - € 8.000">€ 4.000 - € 8.000</option>
+                      <option value="€ 8.000 - € 15.000">€ 8.000 - € 15.000</option>
+                      <option value="More than € 15.000">More than € 15.000</option>
                     </select>
                   </div>
-
-                  <p class="contact-form__question">Have you set a deadline?</p>
-                  <div class="contact-form__option"><input type="radio" id="contact-form_deadline-yes" name="contact-form_deadline"><label for="contact-form_deadline-yes">Yes</label></div>
-                  <div class="contact-form__option"><input type="radio" id="contact-form_deadline-no" name="contact-form_deadline"><label for="contact-form_deadline-no">No</label></div>
-                  <div class="contact-form__option"><input type="date"></div>
                 </div>
               </div>
-              <div class="contact-form__step is-hidden">
+
+                <!-- Step 6 -->
+              <div class="contact-form__step">
+                <div class="contact-form__step-content">
+                  <h3 class="contact-form__step-title">6. Deadline</h3>
+                  <p class="contact-form__question">Have you set a deadline?</p>
+                  <div class="required-group">
+                    <div class="contact-form__option"><input type="radio" id="contact-form_deadline-yes" name="contact-form_deadline" data-bind="contact-form_deadline-date" value="Yes"><label for="contact-form_deadline-yes">Yes</label></div>
+                    <div class="contact-form__option"><input type="radio" id="contact-form_deadline-no" name="contact-form_deadline" data-bind="contact-form_deadline-date" value="No"><label for="contact-form_deadline-no">No</label></div>
+                    <div class="contact-form__option"><input type="date" name="contact-form_deadline-date" data-active-if="Yes" disabled required></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- End form -->
+              <div class="contact-form__step">
                 <div class="contact-form__step-content">
                   <p>Great! You're all set!</p>
                   <p>Here's the info we've gathered so far:</p>
                   <p>{{ form_overview }}</p>
+                  <div class="button button--primary submit-button is-hidden">Submit</div>
                 </div>
               </div>
               <div class="contact-form__step-nav is-hidden">
-                <div class="button button--tertiary button--arrow-left prev-step-button">Go back</div>
-                <div class="button button--secondary button--arrow-right next-step-button">Continue</div>
-                <div class="button button--primary submit-button is-hidden">Submit</div>
+                <!-- <div class="button button--tertiary button--arrow-left prev-step-button">Go back</div> -->
+                <a class="next-step-button">Continue to next step</a>
               </div>
             </form>
-            <!-- <div class="contact__form">
-              <div class="contact__row">Hi Cursief,</div>
-              <div class="contact__row">
-                <span>I'm</span> <input class="contact__input" type="text" placeholder="insert your name" data-bind="contact-input-name" required>, <span>from <input class="contact__input" type="text" placeholder="insert your company name" data-bind="contact-input-company" required></span> and we are looking for someone who can help us with a <div class="request-sentence__main" data-type="main"></div>with <div class="request-sentence__extra"></div>.</div>
-              <div class="contact__row contact__row--options">
-                <input class="option" id="option-static" type="checkbox" data-type="main" value="static">
-                <label class="button button--option" for="option-static">Static</label>
-                <input class="option" id="option-dynamic" data-other="option-static" type="checkbox" data-type="main" value="dynamic">
-                <label class="button button--option" for="option-dynamic">Dynamic</label>
-                <input class="option" id="option-campaign" type="checkbox" data-type="main" value="campaign">
-                <label class="button button--option" for="option-campaign">Campaign</label>
-                <input class="option" id="option-website" type="checkbox" data-type="main" value="website">
-                <label class="button button--option" for="option-website">Website</label>
-                <input class="option" id="option-webshop" data-other="option-website" type="checkbox" data-type="main" value="web shop">
-                <label class="button button--option" for="option-webshop">Web shop</label>
-                <input class="option" id="option-webapp" data-other="option-website,option-existingcontent" type="checkbox" data-type="main" value="web app">
-                <label class="button button--option" for="option-webapp">Web app</label>
-                <input class="option" id="option-existingcontent" type="checkbox" data-type="extra" value="existing content">
-                <label class="button button--option" for="option-existingcontent">Existing content</label>
-                <input class="option" id="option-newcontent" data-other="option-existingcontent" type="checkbox" data-type="extra" value="new content">
-                <label class="button button--option" for="option-newcontent">New content</label>
-              </div>
-              <div class="contact__row">
-                <span>We probably need</span> {{List of selected members}}
-              </div>
-              <div class="contact__row">
-                <span>Our budget is around</span>
-                <input type="range" class="contact__budget-slider" value="0" min="0" max="6">
-                <select name="" id="">
-                  <option value="">Not yet defined</option>
-                  <option value="">€ 500 - € 1.500</option>
-                  <option value="">€ 1.500 - € 4.000</option>
-                  <option value="">€ 4.000 - € 8.000</option>
-                  <option value="">€ 8.000 - € 15.000</option>
-                  <option value="">More than € 15.000</option>
-                </select>
-              </div>
-              <div class="contact__row">
-                <span>The deadline is</span>
-                <label>
-                  <input type="checkbox">
-                  <span>already defined</span>
-                </label>
-                <input type="date">
-              </div>
-              <div class="contact__row contact__row--footnote">Thanks in advance!</div>
-              <div class="contact__row"><span data-bound="contact-input-name"></span>, <span data-bound="contact-input-company"></span></div>
-            </div> -->
           </div>
         </div>
       </section>
@@ -373,7 +372,7 @@
               <img src="images/icon-github.svg" alt="">
             </a>
           </li>
-<!--           <li class="social-item">
+          <!-- <li class="social-item">
             <a class="social-item__anchor" href="#" target="_blank" rel="noopener noreferrer" title="Go to our Dribbble page">
               <img src="images/icon-dribbble.svg" alt="">
             </a>
@@ -397,6 +396,13 @@
         <div class="cart-item__content cart-item__content--placeholder">
           <div class="cart-item__title">Click on a member to add them to your team!</div>
         </div>
+      </div>
+    </template>
+
+    <template id="overview-step">
+      <div class="overview-step">
+        <h3 class="overview-step__title"></h3>
+        <p class="overview-step__content"></p>
       </div>
     </template>
 

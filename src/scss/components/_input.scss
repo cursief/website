@@ -1,12 +1,15 @@
 input[type='text'],
 input[type='email'],
+input[type='tel'],
+input[type='date'],
 textarea {
   appearance: none;
   padding: .4em;
-  border: .1em solid $cl-primary;
+  border: .1em solid lighten($cl-body, 50%);
   border-radius: .2em;
   font-size: inherit;
   font-family: $font-body;
+  color: $cl-body;
   outline: none;
   cursor: text;
 

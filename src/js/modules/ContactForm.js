@@ -15,70 +15,112 @@ export default class ContactForm
       steps: this.base.querySelectorAll('.contact-form__step'),
       stepNav: this.base.querySelector('.contact-form__step-nav'),
       nextButton: this.base.querySelector('.contact-form__step-nav .next-step-button'),
-      submitButton: this.base.querySelector('.contact-form__step-nav .submit-button'),
-      questions: this.base.querySelectorAll('.contact-form__question')
+      submitButton: this.base.querySelector('.submit-button'),
+      questions: this.base.querySelectorAll('.contact-form__question'),
+      overview: this.base.querySelector('.contact__steps-overview'),
+      overviewStepTemplate: this.base.querySelector('.steps-overview')
     };
 
-    this.elements.questions.forEach((question, index) => {
-      question.textContent = `${index + 1}. ${question.textContent}`;
+    // Steps
+    const overviewStepTemplate = document.querySelector('#overview-step');
+
+    this.elements.steps.forEach((stepElement, index) => {
+      const overviewStepFrag = document.importNode(overviewStepTemplate.content, true);
+
+      const stepTitle = stepElement.querySelector('.contact-form__step-title');
+
+      if (!stepTitle) {
+        return;
+      }
+
+      // We will lose the reference of the appended element when appending with the
+      // fragment, so we make a copy
+      const overviewStepElement = overviewStepFrag.children[0];
+
+      overviewStepElement.elements = {
+        title: overviewStepElement.querySelector('.overview-step__title'),
+        content: overviewStepElement.querySelector('.overview-step__content')
+      };
+
+      overviewStepElement.elements.title.addEventListener('click', (event) => {
+        if (!event.target.parentNode.getAttribute('disabled')) {
+          this.goToStep(index);
+        }
+      });
+
+      overviewStepElement.setAttribute('disabled', true);
+
+      overviewStepElement.elements.title.textContent = stepTitle.textContent;
+
+      this.elements.overview.appendChild(overviewStepElement);
+
+      stepElement.overviewStepElement = overviewStepElement;
     });
 
+    // Bound inputs
+    this.base.querySelectorAll('input[data-bind]').forEach(input => {
+      input.addEventListener('change', (event) => {
+        const boundElement = this.base.querySelector(`[name='${event.target.dataset.bind}']`);
+
+        if (boundElement.dataset.activeIf === input.value) {
+          boundElement.removeAttribute('disabled');
+        } else {
+          boundElement.setAttribute('disabled', true);
+        }
+      });
+    });
+
+    // Navigation
     const prevButtons = this.base.querySelectorAll('.prev-step-button');
     const nextButtons = this.base.querySelectorAll('.next-step-button');
 
     prevButtons.forEach(button => button.addEventListener('click', this.prevStep.bind(this)));
     nextButtons.forEach(button => button.addEventListener('click', this.nextStep.bind(this)));
 
+    this.updateStepHeights();
+
+    this.nextStep();
+  }
+
+  updateStepHeights(onlyActiveStep)
+  {
+    if (onlyActiveStep) {
+      const step = this.elements.steps[this.currentStep];
+
+      if (step.overviewStepElement.classList.contains('is-valid')) {
+        return;
+      }
+
+      if (step.clientHeight === 0) {
+        return;
+      }
+
+      const prevHeight = step.dataset.height;
+      step.style.height = 'auto';
+
+      if (prevHeight === `${step.clientHeight}px`) {
+        return;
+      }
+
+      step.dataset.height = `${step.clientHeight}px`;
+      step.style.height = prevHeight;
+      void step.offsetWidth;
+
+      step.style.height = step.dataset.height;
+
+      return;
+    }
+
     this.elements.steps.forEach((step, index) => {
       step.dataset.height = `${step.clientHeight}px`;
 
-      if (index !== 0) {
+      if (index == this.currentStep) {
+        step.style.height = step.dataset.height;
+      }
+
+      if (index !== this.currentStep) {
         step.style.height = 0;
       }
-    });
-
-    this.nextStep();
-
-    // Inputs
-    this.inputs = this.base.querySelectorAll('.contact__input');
-
-    this.inputs.forEach(input => {
-      const shadowElement = document.createElement('div');
-      shadowElement.classList.add(input.classList[0], 'is-shadow');
-      shadowElement.style.display = 'inline';
-
-      input.setAttribute('placeholder', `${input.getAttribute('placeholder')}`);
-
-      this.base.appendChild(shadowElement);
-
-      input.shadowElement = shadowElement;
-
-      input.boundElements = document.querySelectorAll(`[data-bound='${input.dataset.bind}']`);
-
-      input.addEventListener('input', () => {
-        this.updateField(input);
-      });
-
-      input.addEventListener('blur', this.resetField.bind(this, input));
-
-      this.resetField(input);
-    });
-
-    // Options
-    this.selectedOptions = {
-      main: [],
-      extra: []
-    };
-
-    this.availableOptions = this.base.querySelectorAll('.option');
-
-    this.sentenceParts = {
-      main: this.base.querySelector('.request-sentence__main'),
-      extra: this.base.querySelector('.request-sentence__extra'),
-    };
-
-    this.availableOptions.forEach((option, optionIndex) => {
-      option.addEventListener('click', this.selectOption.bind(this, option, optionIndex));
     });
   }
 
@@ -97,70 +139,22 @@ export default class ContactForm
     input.style.width = `${input.shadowElement.offsetWidth + 1}px`;
   }
 
-  resetField(input)
-  {
-    if (input.value.trim().length === 0) {
-      this.updateField(input, input.getAttribute('placeholder'));
-    } else {
-      input.value = input.value.trim();
-      this.updateField(input);
-    }
-  }
-
-  selectOption(option, optionIndex)
-  {
-    const selectedType = this.selectedOptions[option.dataset.type];
-
-    if (option.checked) {
-      selectedType[optionIndex] = option;
-    } else {
-      const index = selectedType.indexOf(option);
-      if (index !== -1) selectedType[index] = null
-    }
-
-    this.generateRequestSentence();
-  }
-
-  generateRequestSentence()
-  {
-    for (let optionType in this.selectedOptions) {
-      const options = this.selectedOptions[optionType];
-      const addedOptions = [];
-      this.sentenceParts[optionType].innerHTML = '';
-
-      options.forEach(option => {
-        if (option === null) {
-          return;
-        }
-
-        const newPart = document.createElement('span');
-        addedOptions.length > 0 && this.sentenceParts[optionType].appendChild(document.createTextNode(' '));
-        addedOptions.push(newPart);
-
-        const prefixAnd = options.some(otherOption => {
-          if (!option.dataset.other
-              || otherOption === option
-              || otherOption === null) {
-            return;
-          }
-
-          const otherOptions = option.dataset.other.split(',');
-          return otherOptions.indexOf(otherOption.id) !== -1;
-        });
-
-        newPart.textContent = (prefixAnd ? 'and ' : '') + option.value;
-
-        this.sentenceParts[optionType].appendChild(newPart);
-      });
-    }
-  }
-
-  nextStep()
+  goToStep(stepNumber, skipUpdate)
   {
     const currentStepEl = this.elements.steps[this.currentStep];
-    const nextStepEl = this.elements.steps[this.currentStep + 1];
+    const nextStepEl = this.elements.steps[stepNumber];
 
     if (currentStepEl) {
+
+      if (!skipUpdate) {
+        this.updateOverview();
+
+        if (currentStepEl.overviewStepElement
+            && !currentStepEl.valid) {
+          return;
+        }
+      }
+
       currentStepEl.style.height = 0;
       currentStepEl.classList.add('is-hidden');
     }
@@ -175,55 +169,129 @@ export default class ContactForm
 
       // Fix browser automatically scrolling the content to input element
       nextStepEl.scrollTop = 0;
+      nextStepEl.parentNode.parentNode.parentNode.parentNode.scrollTop = 0;
 
-      this.currentStep++;
+      nextStepEl.overviewStepElement && nextStepEl.overviewStepElement.removeAttribute('disabled');
+
+      if (currentStepEl
+        && stepNumber === this.currentStep + 1
+        && currentStepEl.overviewStepElement) {
+        currentStepEl.overviewStepElement.classList.add('is-finished');
+      }
+
+      this.currentStep = stepNumber;
 
       if (this.currentStep > 0) {
         this.elements.stepNav.classList.remove('is-hidden');
+
+        if (this.currentStep == this.elements.steps.length - 1) {
+          this.elements.stepNav.classList.add('is-hidden');
+          this.elements.submitButton.classList.remove('is-hidden');
+        } else {
+          this.elements.stepNav.classList.remove('is-hidden');
+          this.elements.submitButton.classList.add('is-hidden');
+        }
       } else {
         this.elements.stepNav.classList.add('is-hidden');
-      }
-
-      if (this.currentStep == this.elements.steps.length - 1) {
-        this.elements.nextButton.classList.add('is-hidden');
-        this.elements.submitButton.classList.remove('is-hidden');
       }
     }
   }
 
+  nextStep()
+  {
+    this.goToStep(this.currentStep + 1);
+  }
+
   prevStep()
   {
+    this.goToStep(this.currentStep - 1, true);
+  }
+
+  updateOverview()
+  {
     const currentStepEl = this.elements.steps[this.currentStep];
-    const prevStepEl = this.elements.steps[this.currentStep - 1];
 
-    if (currentStepEl) {
-      currentStepEl.style.height = 0;
-      currentStepEl.classList.add('is-hidden');
+    if (!currentStepEl.overviewStepElement) {
+      return;
     }
 
-    if (prevStepEl) {
-      prevStepEl.style.height = prevStepEl.dataset.height;
-      prevStepEl.classList.remove('is-hidden');
+    // Update overview
+    const answerTexts = [];
+    const validAnswers = [];
+    const invalidAnswers = [];
 
-      // Focus the first interactive element in this step
-      const inputElement = prevStepEl.querySelectorAll('input, select')[0];
-      inputElement && inputElement.focus();
+    const stepAnswers = currentStepEl.querySelectorAll('.contact-form__option:not(.is-hidden) input, .contact-form__option:not(.is-hidden) textarea, .contact-form__option:not(.is-hidden) select');
 
-      // Fix browser automatically scrolling the content to input element
-      prevStepEl.scrollTop = 0;
+    stepAnswers.forEach(answer => {
+      // If radio or select
+      if (answer.nodeName == 'INPUT') {
+        if (answer.type == 'checkbox') {
+          if (answer.checked) {
+            answerTexts.push(answer.value);
+          } else if (answer.dataset.uncheckedValue.length > 0) {
+            answerTexts.push(answer.dataset.uncheckedValue);
+          }
+        } else if (answer.type == 'radio') {
+          if (answer.checked) {
+            if (!answer.dataset.bind) {
+              answerTexts.push(answer.value);
+            } else {
+              const boundAnswer = this.base.querySelector(`[name='${answer.dataset.bind}']`);
 
-      this.currentStep--;
-
-      if (this.currentStep < 1) {
-        this.elements.stepNav.classList.add('is-hidden');
-      } else {
-        this.elements.stepNav.classList.remove('is-hidden');
+              if (boundAnswer.value.length > 0) {
+                answerTexts.push(boundAnswer.value);
+              } else if (boundAnswer.getAttribute('required') !== null) {
+                answerTexts.push('Not specified');
+              }
+            }
+          }
+        } else if (answer.getAttribute('disabled') === null
+                   && !answer.dataset.activeIf) {
+          if (answer.value.length > 0) {
+            answerTexts.push(answer.value);
+          } else if (answer.getAttribute('required') !== null) {
+            answerTexts.push('Not specified');
+          }
+        }
+      } else if (answer.nodeName == 'SELECT') {
+        if (answer.value.length > 0) {
+          answerTexts.push(answer.value);
+        } else {
+          answerTexts.push('Not specified');
+        }
       }
 
-      if (this.currentStep < this.elements.steps.length - 1) {
-        this.elements.nextButton.classList.remove('is-hidden');
-        this.elements.submitButton.classList.add('is-hidden');
+      if (answer.validity && answer.validity.valid) {
+        validAnswers.push(answer);
+        answer.parentNode.classList.remove('is-invalid');
+        answer.parentNode.classList.remove(`is-invalid--${answer.type || 'default'}`);
+        answer.classList.remove('is-invalid');
+      } else if (answer.getAttribute('required') !== null) {
+        invalidAnswers.push(answer);
+        answer.parentNode.classList.add(`is-invalid--${answer.type || 'default'}`);
+        answer.parentNode.classList.add('is-invalid');
+        answer.classList.add('is-invalid');
       }
+    });
+
+    const requiredGroup = currentStepEl.querySelector('.required-group');
+
+    if (requiredGroup
+        && requiredGroup.querySelectorAll('input:checked').length < 1) {
+      answerTexts.push('Not specified');
     }
+
+    if (stepAnswers.length === validAnswers.length) {
+      currentStepEl.valid = true;
+      currentStepEl.overviewStepElement.classList.add('is-valid');
+    } else {
+      invalidAnswers[0].focus();
+      currentStepEl.valid = false;
+      currentStepEl.overviewStepElement.classList.remove('is-valid');
+    }
+
+    this.updateStepHeights(true);
+
+    currentStepEl.overviewStepElement.elements.content.textContent = answerTexts.join('\n');
   }
 }

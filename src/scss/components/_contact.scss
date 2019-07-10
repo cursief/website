@@ -1,10 +1,10 @@
 .contact {
+  display: flex;
   opacity: 0;
   position: relative;
   width: 100%;
-  max-width: 90rem;
+  max-width: 100rem;
   margin: 0 auto;
-  padding: 6rem 6rem 2rem;
   background-color: $cl-white;
   border-radius: .2rem;
   transform: scale(.5) translate3d(0, 100%, 0);
@@ -209,6 +209,11 @@
   }
 }
 
+.contact-form {
+  width: 100%;
+  padding-bottom: 6.4rem;
+}
+
 .contact-form__step {
   position: relative;
   overflow: hidden;
@@ -227,6 +232,10 @@
       transform: scale(1);
     }
   }
+
+  .submit-button {
+    margin: 2rem auto 0 0;
+  }
 }
 
 .contact-form__step::after,
@@ -244,18 +253,26 @@
 .contact-form__step-content {
   display: flex;
   flex-direction: column;
-  max-width: 60rem;
-  margin: 0 auto;
-  padding: 6rem 0;
+  max-width: 48rem;
+  width: 100%;
+  padding: 6rem 2rem 6rem 6rem;
+  color: darken($cl-primary, 30%);
+}
+
+.contact-form__step-title {
+  margin-top: 0;
 }
 
 .contact-form__step-nav {
+  position: absolute;
+  bottom: 0;
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
-  max-width: 62rem;
-  height: 11rem;
-  margin: 0 auto;
+  justify-content: flex-end;
+  max-width: 66rem;
+  width: 100%;
+  height: 6.4rem;
+  padding: 0 2rem 0 6rem;
   overflow: hidden;
   transition: {
     property: height, opacity, transform;
@@ -263,16 +280,37 @@
     timing-function: linear;
   };
 
-  .button {
-    margin: 0 1rem;
-
-    &.is-hidden {
-      display: none;
-    }
+  &::after {
+    height: 4rem;
   }
 
   &.is-hidden {
     height: 0;
+  }
+
+  .next-step-button {
+    display: inline-block;
+    color: $cl-secondary;
+    cursor: pointer;
+    user-select: none;
+
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 2.4rem;
+      height: 2.4rem;
+      margin-left: .5ch;
+      background: {
+        image: svg-uri('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#{$cl-secondary}" d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>');
+        size: 2.4rem;
+        repeat: no-repeat;
+      };
+      vertical-align: top;
+    }
+  }
+
+  .is-hidden {
+    display: none;
   }
 
   > * {
@@ -282,21 +320,124 @@
 
 .contact-form__question {
   max-width: 60rem;
-  margin: 0 0 1em 0;
+  margin: 0 0 .5em 0;
   text-align: left;
+}
+
+.contact-form__question--optional {
+  &::after {
+    content: ' (optional)';
+    color: transparentize(darken($cl-body, 30%), .4);
+    font-size: .8em;
+  }
 }
 
 .contact-form__option {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin-bottom: .5em;
-  padding-left: 1.75ch;
+
+  &.is-invalid {
+    &::after {
+      content: 'This answer is required.';
+      margin: .25em 0 0;
+      width: 100%;
+      flex-shrink: 0;
+      color: $cl-negative;
+      font-size: .8em;
+    }
+  }
+
+  &.is-invalid--email {
+    &::after {
+      content: 'Double check your email please.'
+    }
+  }
 
   > * {
     cursor: pointer;
   }
 
   + .contact-form__question {
-    margin-top: 2em;
+    margin-top: 1em;
   }
+}
+
+
+.contact__steps-overview {
+  max-width: 28rem;
+  min-width: 28rem;
+  padding: 4rem 2rem 2rem 4rem;
+  background-color: $cl-primary;
+  color: $cl-white;
+}
+
+.overview-step {
+  position: relative;
+  padding-left: 3rem;
+  padding-bottom: 3rem;
+
+  &::before {
+    content: '';
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    margin: .6rem 1ch 0 0;
+    background: darken($cl-primary, 30%);
+    vertical-align: top;
+  }
+
+  &:not(:last-child) {
+    &::after {
+      content: '';
+      position: absolute;
+      top: .4rem;
+      left: .5rem;
+      display: inline-block;
+      width: .25rem;
+      height: 100%;
+      margin: .5rem 1ch 0 0;
+      background: darken($cl-primary, 30%);
+      vertical-align: top;
+    }
+  }
+
+  &:not([disabled]) {
+    &::before {
+      background-color: $cl-white;
+    }
+
+    &.is-finished {
+      &::after {
+        background-color: $cl-white;
+      }
+    }
+  }
+}
+
+.overview-step__title {
+  display: inline-block;
+  margin: 0 0 .5em;
+  font-size: 2rem;
+  cursor: pointer;
+
+  [disabled] & {
+    color: darken($cl-primary, 30%);
+    cursor: default;
+  }
+}
+
+.overview-step__content {
+  margin: 0;
+  line-height: 1.5;
+  color: transparentize($cl-white, .4);
+  font-size: 1.8rem;
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
