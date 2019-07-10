@@ -48,6 +48,7 @@ function jsBuildTask() {
   })
   .then(bundle => {
     return bundle.write({
+      file: `${config.destination}/${config.js.bundleName}`,
       format: 'iife'
     });
   });
@@ -55,7 +56,7 @@ function jsBuildTask() {
 
 function jsWatchTask() {
   return rollup({
-    input: `${config.source}/js/index.js`,
+    input: `${config.source}/js/index.js`
   })
   .then(bundle => {
     return bundle.write({
