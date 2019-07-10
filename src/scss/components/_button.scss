@@ -1,8 +1,10 @@
 .button {
   display: flex;
+  border: 0;
   padding: 1.5rem 2.5rem;
   color: $cl-white;
   font: {
+    family: $font-body;
     size: 1.6rem;
     weight: 700;
   };
@@ -10,6 +12,7 @@
   letter-spacing: .1rem;
   border-radius: 5rem;
   outline: none;
+  cursor: pointer;
   user-select: none;
   transition: {
     property: background-color, box-shadow;
@@ -47,6 +50,21 @@
   }
 }
 
+.button--tertiary {
+  background-color: lighten($cl-body, 20%);
+  box-shadow: 0 .5rem 1rem 0 rgba($cl-black, .3);
+
+  &:hover,
+  &:focus {
+    background-color: lighten($cl-body, 8%);
+  }
+
+  &:active {
+    background-color: lighten($cl-body, 8%);
+    box-shadow: 0 .1rem .3rem 0 rgba($cl-black, .9);
+  }
+}
+
 .button--option {
   display: inline-block;
   margin: 0 1em 1em 0;
@@ -57,4 +75,43 @@
   user-select: none;
   transition-property: color, background-color, box-shadow;
   transition-duration: 200ms;
+}
+
+.button--arrow-right,
+.button--arrow-left {
+  &::before,
+  &::after {
+    content: '';
+    display: inline-block;
+    width: .5em;
+    height: 1.3em;
+    background: {
+      position: 50%;
+      repeat: no-repeat;
+    };
+    vertical-align: top;
+  }
+}
+
+.button--arrow-left {
+  &::after {
+    display: none;
+  }
+
+  &::before {
+    order: 0;
+    background-image: svg-uri('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#{$cl-white}" d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>');
+    margin-right: 1ch;
+  }
+}
+
+.button--arrow-right {
+  &::after {
+    margin-left: 1ch;
+    background-image: svg-uri('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#{$cl-white}" d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>');
+  }
+
+  &::before {
+    display: none;
+  }
 }

@@ -227,7 +227,73 @@
           <div class="contact">
             <img class="contact__stamp contact__stamp--1" src="images/stamp-1.svg" alt="">
             <img class="contact__stamp contact__stamp--2" src="images/stamp-2.svg" alt="">
-            <div class="contact__form">
+            <div class="contact-form">
+              <div class="contact-form__step contact__selection">
+                <div class="contact-form__step-content">
+                  <p>Members you've selected:</p>
+                  <div>{{ team_overview }}</div>
+                  <p>That's a great looking team you've assembled!</p>
+                  <p>You can contact us through our interactive form or just send us an e-mail!</p>
+                  <button class="button button--primary button--arrow-right next-step-button">Answer a few questions</button>
+                  <span class="separator">or</span>
+                  <a href="/email">hello@cursief.co</a>
+                </div>
+              </div>
+              <div class="contact-form__step is-hidden">
+                <div class="contact-form__step-content">
+                  <p class="contact-form__question">What's your name?</p>
+                  <div class="contact-form__option"><input type="text" placeholder="Your name goes here"></div>
+                  <p class="contact-form__question">Are you contacting us on behalf of a company?</p>
+                  <div class="contact-form__option"><input type="radio" id="contact-form_company-yes" name="contact-form_company"><label for="contact-form_company-yes">Yes</label></div>
+                  <div class="contact-form__option"><input type="radio" id="contact-form_company-no" name="contact-form_company"><label for="contact-form_company-no">No</label></div>
+                  <div class="contact-form__option"><input type="text" name="contact-form_company-name" placeholder="Company name goes here"></div>
+                </div>
+              </div>
+              <div class="contact-form__step is-hidden">
+                <div class="contact-form__step-content">
+                  <p class="contact-form__question">What kind of product(s) are you looking for?</p>
+                  <div class="contact-form__option"><input type="checkbox" name="contact-form_product-website" id="contact-form_product-website"><label for="contact-form_product-website">Website</label></div>
+                  <div class="contact-form__option"><input type="checkbox" name="contact-form_product-webapp"  id="contact-form_product-webapp"><label for="contact-form_product-webapp">Web app</label></div>
+                  <div class="contact-form__option"><input type="checkbox" name="contact-form_product-webshop" id="contact-form_product-webshop"><label for="contact-form_product-webshop">Web shop</label></div>
+                  <p class="contact-form__question">Do you need content for the project?</p>
+                  <div class="contact-form__option"><input type="checkbox" name="contact-form_content-provided" id="contact-form_content-provided"><label for="contact-form_content-provided">Content will be provided</label></div>
+                  <div class="contact-form__option"><input type="checkbox" name="contact-form_content-new" id="contact-form_content-new"><label for="contact-form_content-new">We'll need new content</label></div>
+                </div>
+              </div>
+              <div class="contact-form__step is-hidden">
+                <div class="contact-form__step-content">
+                  <p class="contact-form__question">What is your budget?</p>
+                  <div class="contact-form__option">
+                    <select name="" id="">
+                      <option value="">Not yet defined</option>
+                      <option value="">€ 500 - € 1.500</option>
+                      <option value="">€ 1.500 - € 4.000</option>
+                      <option value="">€ 4.000 - € 8.000</option>
+                      <option value="">€ 8.000 - € 15.000</option>
+                      <option value="">More than € 15.000</option>
+                    </select>
+                  </div>
+
+                  <p class="contact-form__question">Have you set a deadline?</p>
+                  <div class="contact-form__option"><input type="radio" id="contact-form_deadline-yes" name="contact-form_deadline"><label for="contact-form_deadline-yes">Yes</label></div>
+                  <div class="contact-form__option"><input type="radio" id="contact-form_deadline-no" name="contact-form_deadline"><label for="contact-form_deadline-no">No</label></div>
+                  <div class="contact-form__option"><input type="date"></div>
+                </div>
+              </div>
+              <div class="contact-form__step is-hidden">
+                <div class="contact-form__step-content">
+                  <p>Great! You're all set!</p>
+                  <p>Here's the info we've gathered so far:</p>
+                  <p>{{ form_overview }}</p>
+                </div>
+              </div>
+              <div class="contact-form__step-nav is-hidden">
+                <div class="button button--tertiary button--arrow-left prev-step-button">Go back</div>
+                <div class="button button--secondary button--arrow-right next-step-button">Continue</div>
+                <div class="button button--primary submit-button is-hidden">Submit</div>
+              </div>
+            </form>
+            <!-- <div class="contact__form">
               <div class="contact__row">Hi Cursief,</div>
               <div class="contact__row">
                 <span>I'm</span> <input class="contact__input" type="text" placeholder="insert your name" data-bind="contact-input-name" required>, <span>from <input class="contact__input" type="text" placeholder="insert your company name" data-bind="contact-input-company" required></span> and we are looking for someone who can help us with a <div class="request-sentence__main" data-type="main"></div>with <div class="request-sentence__extra"></div>.</div>
@@ -274,7 +340,7 @@
               </div>
               <div class="contact__row contact__row--footnote">Thanks in advance!</div>
               <div class="contact__row"><span data-bound="contact-input-name"></span>, <span data-bound="contact-input-company"></span></div>
-            </div>
+            </div> -->
           </div>
         </div>
       </section>

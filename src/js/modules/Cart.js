@@ -224,6 +224,8 @@ export default class Cart
     if (!event || event.target == this.base) {
       this.base.classList.toggle('is-expanded');
 
+      this.activated = true;
+
       this.updateSize();
     }
 

@@ -90,7 +90,6 @@ export default class ScrollHandler
         && scrollY + windowHalfHeight > contactSection.offsetTop
         && scrollY + windowHalfHeight < contactSection.offsetTop + contactSection.clientHeight
         && !this.cart.base.classList.contains('is-expanded')) {
-      this.cart.activated = true;
       this.cart.handleClick();
     }
   }
