@@ -27,7 +27,7 @@
   width: 100%;
   max-width: 90rem;
   margin: 0 auto;
-  padding: 10rem 6rem 7rem;
+  padding: 6rem 6rem 2rem;
   background-color: $cl-white;
   border-radius: .2rem;
   transform: scale(.5) translate3d(0, 100%, 0);
@@ -36,7 +36,7 @@
     animation: slideUp 1000ms both cubic-bezier(.215, .61, .355, 1);
   }
 
-  &:after {
+  &::after {
     content: '';
     z-index: 1;
     position: absolute;
@@ -70,6 +70,7 @@
 
 .contact__stamp {
   position: absolute;
+  z-index: 3;
 
   .section.is-active & {
     animation-name: stamp;
@@ -201,5 +202,134 @@
 
   &:hover::-webkit-slider-thumb {
     box-shadow: 0 0 5px $cl-primary;
+  }
+}
+
+.contact__selection {
+  .contact-form__step-content {
+    align-items: center;
+  }
+
+  .button {
+    font-size: 2rem;
+  }
+
+  .separator {
+    color: lighten($cl-body, 30%);
+    margin: 2.7rem 0 1rem;
+
+    &::before,
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 1em;
+      height: .05em;
+      margin: 1ch;
+      background: lighten($cl-body, 30%);
+      vertical-align: middle;
+    }
+  }
+
+  p {
+    max-width: 45rem;
+    text-align: center;
+  }
+
+  a {
+    font-family: house-script, sans-serif;
+    color: $cl-primary;
+    font-size: 5rem;
+  }
+}
+
+.contact-form__step {
+  position: relative;
+  overflow: hidden;
+  transition: {
+    property: height, opacity, transform;
+    duration: 500ms;
+  };
+
+  &.is-hidden {
+    opacity: .5;
+    transform: scale(.8);
+  }
+
+  &:not(.is-hidden) {
+    + .contact-form__step {
+      transform: scale(1);
+    }
+  }
+}
+
+.contact-form__step::after,
+.contact-form__step-nav::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 6rem;
+  background-image: linear-gradient(180deg, transparentize($cl-white, 1), $cl-white);
+}
+
+.contact-form__step-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 6rem 0;
+}
+
+.contact-form__step-nav {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  max-width: 62rem;
+  height: 11rem;
+  margin: 0 auto;
+  overflow: hidden;
+  transition: {
+    property: height, opacity, transform;
+    duration: 200ms;
+    timing-function: linear;
+  };
+
+  .button {
+    margin: 0 1rem;
+
+    &.is-hidden {
+      display: none;
+    }
+  }
+
+  &.is-hidden {
+    height: 0;
+  }
+
+  > * {
+    flex-shrink: 0;
+  }
+}
+
+.contact-form__question {
+  max-width: 60rem;
+  margin: 0 0 1em 0;
+  text-align: left;
+}
+
+.contact-form__option {
+  display: flex;
+  align-items: center;
+  margin-bottom: .5em;
+  padding-left: 1.75ch;
+
+  > * {
+    cursor: pointer;
+  }
+
+  + .contact-form__question {
+    margin-top: 2em;
   }
 }

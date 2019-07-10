@@ -9,6 +9,35 @@ export default class ContactForm
   constructor(selector)
   {
     this.base = document.querySelector(selector);
+    this.currentStep = -1;
+
+    this.elements = {
+      steps: this.base.querySelectorAll('.contact-form__step'),
+      stepNav: this.base.querySelector('.contact-form__step-nav'),
+      nextButton: this.base.querySelector('.contact-form__step-nav .next-step-button'),
+      submitButton: this.base.querySelector('.contact-form__step-nav .submit-button'),
+      questions: this.base.querySelectorAll('.contact-form__question')
+    };
+
+    this.elements.questions.forEach((question, index) => {
+      question.textContent = `${index + 1}. ${question.textContent}`;
+    });
+
+    const prevButtons = this.base.querySelectorAll('.prev-step-button');
+    const nextButtons = this.base.querySelectorAll('.next-step-button');
+
+    prevButtons.forEach(button => button.addEventListener('click', this.prevStep.bind(this)));
+    nextButtons.forEach(button => button.addEventListener('click', this.nextStep.bind(this)));
+
+    this.elements.steps.forEach((step, index) => {
+      step.dataset.height = `${step.clientHeight}px`;
+
+      if (index !== 0) {
+        step.style.height = 0;
+      }
+    });
+
+    this.nextStep();
 
     // Inputs
     this.inputs = this.base.querySelectorAll('.contact__input');
@@ -92,7 +121,8 @@ export default class ContactForm
     this.generateRequestSentence();
   }
 
-  generateRequestSentence() {
+  generateRequestSentence()
+  {
     for (let optionType in this.selectedOptions) {
       const options = this.selectedOptions[optionType];
       const addedOptions = [];
@@ -122,6 +152,78 @@ export default class ContactForm
 
         this.sentenceParts[optionType].appendChild(newPart);
       });
+    }
+  }
+
+  nextStep()
+  {
+    const currentStepEl = this.elements.steps[this.currentStep];
+    const nextStepEl = this.elements.steps[this.currentStep + 1];
+
+    if (currentStepEl) {
+      currentStepEl.style.height = 0;
+      currentStepEl.classList.add('is-hidden');
+    }
+
+    if (nextStepEl) {
+      nextStepEl.style.height = nextStepEl.dataset.height;
+      nextStepEl.classList.remove('is-hidden');
+
+      // Focus the first interactive element in this step
+      const inputElement = nextStepEl.querySelectorAll('input, select')[0];
+      inputElement && inputElement.focus();
+
+      // Fix browser automatically scrolling the content to input element
+      nextStepEl.scrollTop = 0;
+
+      this.currentStep++;
+
+      if (this.currentStep > 0) {
+        this.elements.stepNav.classList.remove('is-hidden');
+      } else {
+        this.elements.stepNav.classList.add('is-hidden');
+      }
+
+      if (this.currentStep == this.elements.steps.length - 1) {
+        this.elements.nextButton.classList.add('is-hidden');
+        this.elements.submitButton.classList.remove('is-hidden');
+      }
+    }
+  }
+
+  prevStep()
+  {
+    const currentStepEl = this.elements.steps[this.currentStep];
+    const prevStepEl = this.elements.steps[this.currentStep - 1];
+
+    if (currentStepEl) {
+      currentStepEl.style.height = 0;
+      currentStepEl.classList.add('is-hidden');
+    }
+
+    if (prevStepEl) {
+      prevStepEl.style.height = prevStepEl.dataset.height;
+      prevStepEl.classList.remove('is-hidden');
+
+      // Focus the first interactive element in this step
+      const inputElement = prevStepEl.querySelectorAll('input, select')[0];
+      inputElement && inputElement.focus();
+
+      // Fix browser automatically scrolling the content to input element
+      prevStepEl.scrollTop = 0;
+
+      this.currentStep--;
+
+      if (this.currentStep < 1) {
+        this.elements.stepNav.classList.add('is-hidden');
+      } else {
+        this.elements.stepNav.classList.remove('is-hidden');
+      }
+
+      if (this.currentStep < this.elements.steps.length - 1) {
+        this.elements.nextButton.classList.remove('is-hidden');
+        this.elements.submitButton.classList.add('is-hidden');
+      }
     }
   }
 }
