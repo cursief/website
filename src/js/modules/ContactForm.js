@@ -99,6 +99,7 @@ export default class ContactForm
       step.style.height = 'auto';
 
       if (prevHeight === `${step.clientHeight}px`) {
+        step.style.height = prevHeight;
         return;
       }
 
