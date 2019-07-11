@@ -3,7 +3,8 @@
   opacity: 0;
   position: relative;
   width: 100%;
-  max-width: 100rem;
+  max-width: 83rem;
+  min-height: 66rem;
   margin: 0 auto;
   background-color: $cl-white;
   border-radius: .2rem;
@@ -253,14 +254,19 @@
 .contact-form__step-content {
   display: flex;
   flex-direction: column;
-  max-width: 48rem;
   width: 100%;
-  padding: 6rem 2rem 6rem 6rem;
+  max-width: 57rem;
+  margin: 0 auto;
+  padding: 9rem 6rem 6rem 6rem;
   color: darken($cl-primary, 30%);
 }
 
 .contact-form__step-title {
   margin-top: 0;
+
+  &:first-child {
+    max-width: calc(100% - 17rem);
+  }
 }
 
 .contact-form__step-nav {
@@ -269,10 +275,9 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
-  max-width: 66rem;
   width: 100%;
   height: 6.4rem;
-  padding: 0 2rem 0 6rem;
+  padding: 0 6rem 0 6rem;
   overflow: hidden;
   transition: {
     property: height, opacity, transform;
@@ -366,11 +371,22 @@
 
 
 .contact__steps-overview {
-  max-width: 28rem;
-  min-width: 28rem;
+  width: 26rem;
+  flex-shrink: 0;
   padding: 4rem 2rem 2rem 4rem;
   background-color: $cl-primary;
   color: $cl-white;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: {
+    property: width, padding;
+    duration: 400ms;
+  };
+
+  [data-step='0'] & {
+    width: 0;
+    padding: 4rem 0 2rem 0;
+  }
 }
 
 .overview-step {
@@ -440,4 +456,20 @@
   white-space: pre;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.team-overview {
+  max-height: 30rem;
+
+  &.is-hidden {
+    max-height: 0;
+  }
+}
+
+.team-overview__title {
+  margin: 2em 0;
+}
+
+.team-overview__message {
+  margin: 2em 0;
 }

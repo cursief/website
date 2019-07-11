@@ -4,6 +4,7 @@ input[type='tel'],
 input[type='date'],
 textarea {
   appearance: none;
+  width: 100%;
   padding: .4em;
   border: .1em solid lighten($cl-body, 50%);
   border-radius: .2em;

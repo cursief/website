@@ -16,6 +16,10 @@ $cart-margin: .5em;
   line-height: 2.66em;
   box-shadow: 0 2rem 3.5rem 0 rgba($cl-black, .12);
   cursor: pointer;
+  transition: {
+    property: transform, opacity;
+    duration: 300ms;
+  };
 
   &::before {
     content: '';
@@ -57,6 +61,11 @@ $cart-margin: .5em;
     .cart__amount-holder {
       transform: translate(-1.2em, .9em);
     }
+  }
+
+  &.is-hidden {
+    opacity: 0;
+    transform: translateY(100%) scale(.9);
   }
 
   > * {
@@ -219,4 +228,8 @@ $cart-margin: .5em;
     position: 50%;
   };
   cursor: pointer;
+}
+
+.overview-member {
+  width: calc(50% - 4rem);
 }

@@ -13,9 +13,15 @@ export default class Cart
     this.elements = {
       amount: this.base.querySelector('.cart__amount'),
       contentHolder: this.base.querySelector('.cart__content-holder'),
-      content: this.base.querySelector('.cart-content')
+      content: this.base.querySelector('.cart-content'),
+      teamOverview: document.body.querySelector('.team-overview'),
+      teamOverviewContent: document.body.querySelector('.team-overview__content'),
+      teamOverviewMembers: document.body.querySelector('.team-overview__members'),
+      teamOverviewTitle: document.body.querySelector('.team-overview__title'),
+      teamOverviewMessage: document.body.querySelector('.team-overview__message')
     };
 
+    this.hidden = false;
     this.contents = [];
     this.previousContentLength = -1;
 
@@ -233,5 +239,50 @@ export default class Cart
     if (event && event.target.classList.contains('cart-item__remove')) {
       event.target.parentNode.parentNode.member.handleClick(event);
     }
+  }
+
+  removeFromContactForm()
+  {
+    this.hidden = false;
+    this.base.classList.remove('is-hidden');
+    this.elements.teamOverview.classList.add('is-hidden');
+  }
+
+  showInContactForm()
+  {
+    this.hidden = true;
+    this.base.classList.add('is-hidden');
+
+    // Empty the overview
+    this.elements.teamOverviewMembers.innerHTML = '';
+
+    // Create a new element from the cart-item's template
+    const cartItemTemplate = document.querySelector('#overview-member');
+
+    this.contents.forEach(member => {
+      const cartItemFrag = document.importNode(cartItemTemplate.content, true);
+
+      // We will lose the reference of the appended element when appending with the
+      // fragment, so we make a copy
+      const overviewMemberElement = cartItemFrag.children[0];
+
+      overviewMemberElement.elements = {
+        image: overviewMemberElement.querySelector('.overview-member__image'),
+        title: overviewMemberElement.querySelector('.overview-member__title'),
+        remove: overviewMemberElement.querySelector('.overview-member__remove')
+      };
+
+      overviewMemberElement.elements.image.style.backgroundImage = `url('${member.avatarUrl}')`;
+      overviewMemberElement.elements.title.textContent = member.fullName;
+      overviewMemberElement.member = member;
+
+      this.elements.teamOverviewMembers.appendChild(overviewMemberElement);
+    });
+
+    this.elements.teamOverview.style.height = `${this.elements.teamOverviewContent.clientHeight}px`;
+
+    console.log(`${overviewRect['height']}px`);
+
+    this.elements.teamOverview.classList.remove('is-hidden');
   }
 }

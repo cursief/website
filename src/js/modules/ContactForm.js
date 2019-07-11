@@ -12,6 +12,7 @@ export default class ContactForm
     this.currentStep = -1;
 
     this.elements = {
+      contact: this.base.querySelector('.contact'),
       steps: this.base.querySelectorAll('.contact-form__step'),
       stepNav: this.base.querySelector('.contact-form__step-nav'),
       nextButton: this.base.querySelector('.contact-form__step-nav .next-step-button'),
@@ -181,6 +182,8 @@ export default class ContactForm
       }
 
       this.currentStep = stepNumber;
+
+      this.elements.contact.dataset.step = stepNumber;
 
       if (this.currentStep > 0) {
         this.elements.stepNav.classList.remove('is-hidden');

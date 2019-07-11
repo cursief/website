@@ -6,27 +6,30 @@ export default class ScrollHandler
   */
  constructor(selectors)
  {
-   this.activeThreshold = .75; // Percentage of a contactSection that should be scrolled past to activate
-   this.debounceTimeOut = 100;
-   this.throttleTimeOut = 100;
-   this.pastMoment = Date.now();
+    this.activeThreshold = .75; // Percentage of a contactSection that should be scrolled past to activate
+    this.debounceTimeOut = 100;
+    this.throttleTimeOut = 100;
+    this.pastMoment = Date.now();
 
-   this.timer = 0;
-   window.addEventListener('scroll', this.throttleScroll.bind(this));
+    this.timer = 0;
+    window.addEventListener('scroll', this.throttleScroll.bind(this));
 
-   // Elements
-   this.elements = {
-     header: document.querySelector(selectors.header),
-     sections: document.querySelectorAll(selectors.sections)
-   };
+    // Elements
+    this.elements = {
+      header: document.querySelector(selectors.header),
+      sections: document.querySelectorAll(selectors.sections)
+    };
 
-   this.elements.header.dataset.isSticky = 'false';
-   this.elements.header.stickyFrom = this.elements.header.getBoundingClientRect()['top'];
+    this.elements.membersSection = this.elements.sections[2];
+    this.elements.contactSection = this.elements.sections[4];
 
-   this.cart = selectors.cart;
+    this.elements.header.dataset.isSticky = 'false';
+    this.elements.header.stickyFrom = parseInt(window.getComputedStyle(this.elements.header)['marginTop'], 10);
 
-   // Run the callback once at page load.
-   this.handleScroll();
+    this.cart = selectors.cart;
+
+    // Run the callback once at page load.
+    this.handleScroll();
  }
 
   /**
@@ -84,13 +87,24 @@ export default class ScrollHandler
     }
 
     // Cart
-    const contactSection = this.elements.sections[2];
 
-    if (!this.cart.activated
-        && scrollY + windowHalfHeight > contactSection.offsetTop
-        && scrollY + windowHalfHeight < contactSection.offsetTop + contactSection.clientHeight
+    // Open cart when passing by the members section
+    if (window.innerWidth > 640
+        && !this.cart.activated
+        && scrollY + windowHalfHeight > this.elements.membersSection.offsetTop
+        && scrollY + windowHalfHeight < this.elements.membersSection.offsetTop + this.elements.membersSection.clientHeight
         && !this.cart.base.classList.contains('is-expanded')) {
       this.cart.handleClick();
+    }
+
+    // Hide cart when at the contact section
+    if (scrollY + windowHalfHeight > this.elements.contactSection.offsetTop
+        && scrollY + windowHalfHeight < this.elements.contactSection.offsetTop + this.elements.contactSection.clientHeight) {
+      if (!this.cart.hidden) {
+        this.cart.showInContactForm();
+      }
+    } else if (this.cart.hidden) {
+      this.cart.removeFromContactForm();
     }
   }
 }

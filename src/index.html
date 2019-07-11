@@ -229,7 +229,7 @@
       <section class="section section--contact" id="contact">
         <div class="section__container">
           <h1>Contact</h1>
-          <div class="contact">
+          <div class="contact" data-step="0">
             <img class="contact__stamp contact__stamp--1" src="images/stamp-1.svg" alt="">
             <img class="contact__stamp contact__stamp--2" src="images/stamp-2.svg" alt="">
             <div class="contact__steps-overview"></div>
@@ -237,9 +237,13 @@
               <!-- Start form -->
               <div class="contact-form__step contact__selection">
                 <div class="contact-form__step-content">
-                  <p>Members you've selected:</p>
-                  <div>{{ team_overview }}</div>
-                  <p>That's a great looking team you've assembled!</p>
+                  <div class="team-overview is-hidden">
+                    <div class="team-overview__content">
+                      <div class="team-overview__title"></div>
+                      <div class="team-overview__members"></div>
+                      <div class="team-overview__message"></div>
+                    </div>
+                  </div>
                   <p>You can contact us through our interactive form or just send us an e-mail!</p>
                   <button class="button button--primary button--arrow-right next-step-button">Answer a few questions</button>
                   <span class="separator">or</span>
@@ -403,6 +407,16 @@
       <div class="overview-step">
         <h3 class="overview-step__title"></h3>
         <p class="overview-step__content"></p>
+      </div>
+    </template>
+
+    <template id="overview-member">
+      <div class="overview-member">
+        <div class="overview-member__content">
+          <div class="overview-member__image"></div>
+          <div class="overview-member__title"></div>
+          <div class="overview-member__remove"></div>
+        </div>
       </div>
     </template>
 
