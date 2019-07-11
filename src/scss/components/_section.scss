@@ -1,7 +1,7 @@
 .section {
   padding: 5rem 0 2rem;
 
-  @include media($screen-md) {
+  @include media($screen-sm) {
     padding: 14rem 0 4rem;
   }
 
@@ -20,6 +20,14 @@
 
 .section--intro {
   margin-top: 0;
+
+  .section__media {
+    display: none;
+
+    @include media($screen-sm) {
+      display: block;
+    }
+  }
 }
 
 .section--left {
@@ -30,7 +38,10 @@
 
   .section__column {
     width: 100%;
-    text-align: center;
+
+    @include media($screen-sm) {
+      text-align: center;
+    }
   }
 
   .section__container {
@@ -63,12 +74,11 @@
   width: 100%;
   max-width: $container-max-width;
   margin: 0 auto;
-  padding: 0 3rem;
-  text-align: center;
+  padding: 0 2rem;
 
-  @include media($screen-md) {
+  @include media($screen-sm) {
     flex-wrap: nowrap;
-    text-align: left;
+    padding: 0 3rem;
   }
 }
 
@@ -79,7 +89,7 @@
 .section__column {
     width: 100%;
 
-    @include media($screen-md) {
+    @include media($screen-sm) {
       width: 50%;
     }
   }
@@ -98,6 +108,10 @@
 
 .section__description {
   margin: 0;
-  font-size: 2rem;
+  font-size: 1.8rem;
   line-height: 1.5;
+
+  @include media($screen-sm) {
+    font-size: 2rem;
+  }
 }

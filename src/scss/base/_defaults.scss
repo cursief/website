@@ -16,12 +16,6 @@ html {
   }
 }
 
-@mixin media($min-width) {
-  @media screen and (min-width: $min-width) {
-    @content
-  }
-}
-
 main {
   margin-top: -12rem;
 }

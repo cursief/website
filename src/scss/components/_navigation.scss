@@ -1,6 +1,11 @@
 .navigation {
   display: flex;
   align-items: center;
+  margin-left: auto;
+
+  @include media($screen-sm) {
+    margin-left: 0;
+  }
 }
 
 .navigation__list {
@@ -22,6 +27,10 @@
     &:nth-child(#{$i}) {
       animation-delay: 150ms * $i + 200ms;
     }
+  }
+
+  &:last-child {
+    margin-right: 0;
   }
 }
 

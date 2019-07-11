@@ -9,15 +9,23 @@ body {
   color: $cl-body;
   font: {
     family: $font-body;
-    size: 20px;
+    size: 1.8rem;
   };
+
+  @include media($screen-sm) {
+    font-size: 2rem;
+  }
 }
 
 h1 {
   font-family: $font-primary;
   color: $cl-primary;
-  font-size: 6rem;
+  font-size: 4rem;
   margin: 0 0 2.5rem;
+
+  @include media($screen-sm) {
+    font-size: 6rem;
+  }
 }
 
 a {

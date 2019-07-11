@@ -7,7 +7,7 @@
   padding: 0;
   list-style: none;
 
-  @include media($screen-md) {
+  @include media($screen-sm) {
     margin-bottom: 0;
   }
 }

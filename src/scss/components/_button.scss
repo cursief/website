@@ -1,14 +1,14 @@
 .button {
   display: flex;
+  flex-shrink: 0;
   border: 0;
-  padding: 1.5rem 2.5rem;
+  padding: 1rem 2rem;
   color: $cl-white;
   font: {
     family: $font-body;
     size: 1.6rem;
     weight: 700;
   };
-  line-height: 1.3;
   letter-spacing: .1rem;
   border-radius: 5rem;
   outline: none;
@@ -36,6 +36,7 @@
 }
 
 .button--secondary {
+  padding: 1.5rem 2.5rem;
   background-color: $cl-quaternary;
   box-shadow: 0 .5rem 1rem 0 rgba($cl-black, .3);
 
