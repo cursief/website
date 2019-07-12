@@ -108,10 +108,34 @@
 
 .section__description {
   margin: 0;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   line-height: 1.5;
 
   @include media($screen-sm) {
     font-size: 2rem;
+  }
+}
+
+.section__note {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 2rem 0 0;
+  color: $cl-primary;
+  font-size: 2rem;
+  text-align: right;
+
+  @include media($screen-sm) {
+    display: none;
+  }
+
+  &:after {
+    content: '';
+    display: inline-block;
+    width: 4rem;
+    height: 4rem;
+    margin-left: 1rem;
+    background-size: 100%;
+    background-image: url("images/icon-swipe.svg");
   }
 }

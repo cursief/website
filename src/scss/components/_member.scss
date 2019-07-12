@@ -1,11 +1,12 @@
 .members {
   scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
   display: flex;
   align-items: stretch;
   overflow-x: auto;
   max-width: 100%;
   margin: 0;
-  padding: 6rem 2rem 6rem;
+  padding: 2rem 2rem 6rem;
   list-style: none;
 
   @include media($screen-sm) {
@@ -47,6 +48,10 @@
   }
 
   .members & {
+
+    &:nth-child(1) {
+      margin-left: 0;
+    }
 
     &:nth-child(1),
     &:nth-child(5) {
