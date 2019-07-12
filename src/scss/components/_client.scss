@@ -14,11 +14,22 @@
 
 .client {
   opacity: 0;
-  margin: 1rem 3rem;
-  transition: opacity 800ms cubic-bezier(0.215, 0.61, 0.355, 1) 300ms;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-shrink: 1;
+  width: 50%;
+  margin: 1rem 0rem;
+  padding: 0 1rem;
+  transition: opacity 800ms cubic-bezier(.215, .61, .355, 1) 300ms;
 
   .section.is-active & {
     opacity: 1;
+  }
+
+  @include media($screen-sm) {
+    width: auto;
+    margin: 1rem 3rem;
   }
 
   @for $i from 1 through 6 {
@@ -26,6 +37,10 @@
     &:nth-child(#{$i}) {
       transition-delay: 150ms * $i;
     }
+  }
+
+  img {
+    max-width: 100%;
   }
 
   .section.is-active {
