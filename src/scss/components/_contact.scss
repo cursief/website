@@ -4,7 +4,6 @@
   position: relative;
   width: 100%;
   max-width: 83rem;
-  min-height: 66rem;
   margin: 0 auto;
   background-color: $cl-white;
   border-radius: .2rem;
@@ -52,12 +51,22 @@
   top: 5.5rem;
   right: 14rem;
   animation-delay: 900ms;
+  display: none;
+
+  @include media($screen-lg) {
+    display: block;
+  }
 }
 
 .contact__stamp--2 {
   top: 4rem;
   right: 3rem;
   animation-delay: 1300ms;
+  display: none;
+
+  @include media($screen-lg) {
+    display: block;
+  }
 }
 
 .contact__form {
@@ -247,8 +256,12 @@
   bottom: 0;
   display: block;
   width: 100%;
-  height: 6rem;
+  height: 2rem;
   background-image: linear-gradient(180deg, transparentize($cl-white, 1), $cl-white);
+
+  @include media($screen-lg) {
+    height: 6rem;
+  }
 }
 
 .contact-form__step-content {
@@ -257,8 +270,12 @@
   width: 100%;
   max-width: 57rem;
   margin: 0 auto;
-  padding: 9rem 6rem 6rem 6rem;
+  padding: 2rem;
   color: darken($cl-primary, 30%);
+
+  @include media($screen-lg) {
+    padding: 9rem 6rem 6rem;
+  }
 }
 
 .contact-form__step-title {
@@ -459,17 +476,113 @@
 }
 
 .team-overview {
-  max-height: 30rem;
+  width: 100%;
+  overflow: hidden;
+  transition: height 200ms;
 
   &.is-hidden {
-    max-height: 0;
+    height: 0;
+  }
+}
+
+.team-overview__members {
+  padding: 0 1rem;
+
+  &:not(:empty) {
+    padding-bottom: 1rem;
   }
 }
 
 .team-overview__title {
-  margin: 2em 0;
+  &:not(:empty) {
+    padding: 0 0 2em;
+  }
 }
 
 .team-overview__message {
-  margin: 2em 0;
+  &:not(:empty) {
+    padding: 0 0 2em;
+  }
+}
+
+.overview-member {
+  max-height: 4em;
+  transition: {
+    property: transform, opacity, max-height, padding;
+    timing-function: linear;
+    duration: 200ms;
+  };
+
+  &.is-removed {
+    transform: scale(.8);
+    max-height: 0;
+    opacity: 0;
+  }
+
+  &--placeholder {
+    max-height: 6em;
+  }
+}
+
+.overview-member__content {
+  display: flex;
+  align-items: center;
+  width: calc(100% - $cart-margin * 2);
+  margin: 0 0 $cart-margin;
+  padding: $cart-margin;
+  border-radius: 1.33em * .33;
+  overflow: hidden;
+  box-shadow:
+    0 3px 2px -2px transparentize($cl-body, .7),
+    0 3px 8px -2px transparentize($cl-body, .7);
+
+
+  &--placeholder {
+    flex-direction: column;
+    box-shadow: none;
+    text-align: center;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 2em;
+      height: 2em;
+      margin-bottom: .5em;
+      background: {
+        image: svg-uri('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#{$cl-body}" d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>');
+        size: contain;
+      }
+    }
+  }
+
+  > * {
+    flex-shrink: 0;
+  }
+}
+
+.overview-member__image {
+  width: 2em;
+  height: 2em;
+  margin-right: 1ch;
+  border-radius: 50%;
+  background-size: cover;
+}
+
+.overview-member__title {
+  font-size: 1em;
+  line-height: 1;
+  color: $cl-body;
+}
+
+.overview-member__remove {
+  width: 1.5em;
+  height: 1.5em;
+  margin-left: auto;
+  background: {
+    image: svg-uri('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#{$cl-body}" d="M7 11v2h10v-2H7zm5-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>');
+    size: 1.33em;
+    repeat: no-repeat;
+    position: 50%;
+  };
+  cursor: pointer;
 }

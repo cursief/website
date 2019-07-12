@@ -98,7 +98,7 @@ export default class ScrollHandler
     }
 
     // Hide cart when at the contact section
-    if (scrollY + windowHalfHeight > this.elements.contactSection.offsetTop
+    if (scrollY + window.innerHeight * .75 > this.elements.contactSection.offsetTop
         && scrollY + windowHalfHeight < this.elements.contactSection.offsetTop + this.elements.contactSection.clientHeight) {
       if (!this.cart.hidden) {
         this.cart.showInContactForm();

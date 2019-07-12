@@ -6,9 +6,11 @@ export default class Cart
    * child elements.
    * Setup the main click handler.
    */
-  constructor()
+  constructor(contactForm)
   {
     this.base = document.querySelector('.cart');
+
+    this.contactForm = contactForm;
 
     this.elements = {
       amount: this.base.querySelector('.cart__amount'),
@@ -279,10 +281,19 @@ export default class Cart
       this.elements.teamOverviewMembers.appendChild(overviewMemberElement);
     });
 
+    if (this.contents.length === 0) {
+      this.elements.teamOverviewTitle.textContent = `You haven't added any members yet!`;
+    } else {
+      this.elements.teamOverviewTitle.textContent = `That's a great looking team you've assembled!`;
+    }
+
     this.elements.teamOverview.style.height = `${this.elements.teamOverviewContent.clientHeight}px`;
 
-    console.log(`${overviewRect['height']}px`);
-
+    console.log(this.elements.teamOverviewContent.clientHeight);
     this.elements.teamOverview.classList.remove('is-hidden');
+
+    setTimeout(() => {
+      this.contactForm.updateStepHeights(true);
+    }, 100);
   }
 }

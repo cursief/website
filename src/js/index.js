@@ -4,9 +4,9 @@ import ContactForm from './modules/ContactForm';
 import ScrollHandler from './modules/ScrollHandler';
 
 window.addEventListener('load', () => {
-  const cart = new Cart();
+  const contactForm = new ContactForm('.section--contact');
+  const cart = new Cart(contactForm);
   new Members(cart);
-  new ContactForm('.section--contact');
   new ScrollHandler({
     header: '.header--primary',
     sections: 'main section',

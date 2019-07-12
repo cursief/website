@@ -78,9 +78,13 @@ export default class ContactForm
     prevButtons.forEach(button => button.addEventListener('click', this.prevStep.bind(this)));
     nextButtons.forEach(button => button.addEventListener('click', this.nextStep.bind(this)));
 
-    this.updateStepHeights();
-
     this.nextStep();
+
+    void this.base.offsetWidth;
+
+    setTimeout(() => {
+      this.updateStepHeights();
+    }, 1);
   }
 
   updateStepHeights(onlyActiveStep)
@@ -88,15 +92,12 @@ export default class ContactForm
     if (onlyActiveStep) {
       const step = this.elements.steps[this.currentStep];
 
-      if (step.overviewStepElement.classList.contains('is-valid')) {
-        return;
-      }
-
       if (step.clientHeight === 0) {
         return;
       }
 
       const prevHeight = step.dataset.height;
+
       step.style.height = 'auto';
 
       if (prevHeight === `${step.clientHeight}px`) {
@@ -292,9 +293,8 @@ export default class ContactForm
       invalidAnswers[0].focus();
       currentStepEl.valid = false;
       currentStepEl.overviewStepElement.classList.remove('is-valid');
+      this.updateStepHeights(true);
     }
-
-    this.updateStepHeights(true);
 
     currentStepEl.overviewStepElement.elements.content.textContent = answerTexts.join('\n');
   }

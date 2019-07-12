@@ -70,8 +70,7 @@ $cart-margin: .5em;
   }
 
   &.is-hidden {
-    opacity: 0;
-    transform: translateY(100%) scale(.9);
+    transform: translateY(calc(100% + 5rem));
   }
 
   > * {
@@ -234,8 +233,4 @@ $cart-margin: .5em;
     position: 50%;
   };
   cursor: pointer;
-}
-
-.overview-member {
-  width: calc(50% - 4rem);
 }
