@@ -1,10 +1,14 @@
 .footer--primary {
   overflow: hidden;
   width: 100%;
-  padding: 3rem 0;
+  padding: 1.5rem 0;
   color: $cl-white;
   font-size: 1.2rem;
   background-color: $cl-tertiary;
+
+  @include media($screen-sm) {
+    padding: 3rem 0;
+  }
 }
 
 .footer__container {
@@ -12,11 +16,20 @@
   align-items: center;
   max-width: $container-max-width;
   margin: 0 auto;
-  padding: 0 3rem;
+  padding: 0 2rem;
+
+  @include media($screen-sm) {
+    padding: 0 3rem;
+  }
 }
 
 .footer__logo {
-  margin-right: auto;
+  display: none;
+
+  @include media($screen-sm) {
+    display: block;
+    margin-right: auto;
+  }
 
   img {
     vertical-align: middle;

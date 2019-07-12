@@ -4,8 +4,8 @@ $cart-margin: .5em;
 .cart {
   z-index: 10;
   position: fixed;
-  bottom: 1.7em;
-  left: 1.7em;
+  bottom: 1.11em;
+  left: 1.11em;
   float: left;
   display: block;
   min-height: 2.66em;
@@ -21,6 +21,11 @@ $cart-margin: .5em;
     duration: 300ms;
   };
 
+  @include media($screen-sm) {
+    bottom: 1.7em;
+    left: 1.7em;
+  }
+
   &::before {
     content: '';
     display: block;
@@ -34,6 +39,7 @@ $cart-margin: .5em;
   }
 
   &.is-updated {
+
     &::before {
       transform: translate(-.5em, -.5em) scale(1);
       opacity: 0;
