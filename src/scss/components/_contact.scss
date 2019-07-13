@@ -183,28 +183,27 @@
 }
 
 .contact__selection {
+  transform: translateY(6rem);
+  margin-top: -6rem;
+
+  &.is-hidden {
+    margin: 0;
+  }
+
   .contact-form__step-content {
     align-items: center;
+    text-align: center;
+    padding: 7rem 0 6rem;
+    max-width: 100%;
   }
 
   .button {
     font-size: 2rem;
   }
 
-  .separator {
-    color: lighten($cl-body, 30%);
-    margin: 2.7rem 0 1rem;
-
-    &::before,
-    &::after {
-      content: '';
-      display: inline-block;
-      width: 1em;
-      height: .05em;
-      margin: 1ch;
-      background: lighten($cl-body, 30%);
-      vertical-align: middle;
-    }
+  .contact-form__step-title:first-child {
+    max-width: 34rem;
+    margin-bottom: 0;
   }
 
   p {
@@ -212,23 +211,80 @@
     text-align: center;
   }
 
-  a {
-    font-family: house-script, sans-serif;
-    color: $cl-primary;
-    font-size: 5rem;
+  .email-link {
+    text-align: center;
+    color: $cl-white;
+    text-shadow: 0 -1px transparentize($cl-black, .5);
+    transition: text-shadow 200ms;
+
+    &:hover {
+      text-shadow: 0 3px .25em transparentize($cl-black, .5);
+    }
+
+    span {
+      display: block;
+      margin-top: -.2em;
+      font-family: house-script, sans-serif;
+      color: $cl-white;
+      font-size: 5rem;
+    }
+  }
+}
+
+.horizontal-separator {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 2rem;
+
+  .separator {
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    color: lighten($cl-body, 30%);
+    line-height: 2.8rem;
+    background: $cl-white;
+    border-radius: 50%;
+  }
+}
+
+.horizontal-separator__section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  width: 50%;
+  min-height: 20rem;
+
+  &:first-child {
+    background-image: linear-gradient(168deg, #4735E2 40%, #3D3398 100%);
+    border-right: .3rem solid $cl-white;
+  }
+
+  &:last-child {
+    flex-direction: column;
+    background-image: linear-gradient(168deg, $cl-secondary 40%, darken($cl-secondary, 20%) 100%);
+    border-left: .3rem solid $cl-white;
   }
 }
 
 .contact-form {
   width: 100%;
   padding-bottom: 6.4rem;
+  transition: padding 200ms;
+
+  [data-step='0'] & {
+    padding: 0;
+  }
 }
 
 .contact-form__step {
   position: relative;
   overflow: hidden;
   transition: {
-    property: height, opacity, transform;
+    property: height, opacity, transform, margin;
     duration: 500ms;
   };
 
@@ -476,32 +532,27 @@
 }
 
 .team-overview {
+  max-width: 45rem;
   width: 100%;
-  overflow: hidden;
-  transition: height 200ms;
-
-  &.is-hidden {
-    height: 0;
-  }
 }
 
 .team-overview__members {
-  padding: 0 1rem;
+  margin: 3rem 0 0;
+  min-height: 7rem;
 
-  &:not(:empty) {
-    padding-bottom: 1rem;
-  }
-}
-
-.team-overview__title {
-  &:not(:empty) {
-    padding: 0 0 2em;
-  }
-}
-
-.team-overview__message {
-  &:not(:empty) {
-    padding: 0 0 2em;
+  &:empty {
+    &::before {
+      content: 'Insert team members here';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 6rem;
+      border: .1rem dashed lighten($cl-body, 30%);
+      margin: 0 1rem;
+      border-radius: 1.33em * .33;
+      color: lighten($cl-body, 30%);
+      animation: pulse 200ms;
+    }
   }
 }
 

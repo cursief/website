@@ -26,6 +26,10 @@ export default class ContactForm
     const overviewStepTemplate = document.querySelector('#overview-step');
 
     this.elements.steps.forEach((stepElement, index) => {
+      if (index === 0) {
+        return;
+      }
+
       const overviewStepFrag = document.importNode(overviewStepTemplate.content, true);
 
       const stepTitle = stepElement.querySelector('.contact-form__step-title');

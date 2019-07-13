@@ -237,18 +237,26 @@
               <!-- Start form -->
               <div class="contact-form__step contact__selection">
                 <div class="contact-form__step-content">
-                  <h3>Get in touch with your own team of superstars.</h3>
+                  <h3 class="contact-form__step-title">Get in touch with your own team of superstars.</h3>
                   <div class="team-overview is-hidden">
                     <div class="team-overview__content">
-                      <div class="team-overview__title"></div>
+                      <p class="team-overview__title"></p>
                       <div class="team-overview__members"></div>
-                      <div class="team-overview__message"></div>
                     </div>
                   </div>
-                  <p>You can contact us through our interactive form or just send us an e-mail!</p>
-                  <button class="button button--primary button--arrow-right next-step-button">Answer a few questions</button>
-                  <span class="separator">or</span>
-                  <a href="/email">hello@cursief.co</a>
+                  <p>You can contact us through our interactive form or just send us an e-mail.</p>
+                  <div class="horizontal-separator">
+                    <div class="horizontal-separator__section">
+                      <button class="button button--primary button--arrow-right next-step-button">Answer a few questions</button>
+                    </div>
+                    <span class="separator">or</span>
+                    <div class="horizontal-separator__section">
+                      <a href="/email" class="email-link">
+                        Mail us at:
+                        <span>hello@cursief.co</span>
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -408,16 +416,6 @@
       <div class="overview-step">
         <h3 class="overview-step__title"></h3>
         <p class="overview-step__content"></p>
-      </div>
-    </template>
-
-    <template id="overview-member">
-      <div class="overview-member">
-        <div class="overview-member__content">
-          <div class="overview-member__image"></div>
-          <div class="overview-member__title"></div>
-          <div class="overview-member__remove"></div>
-        </div>
       </div>
     </template>
 

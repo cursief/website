@@ -28,6 +28,7 @@ export default class Cart
     this.previousContentLength = -1;
 
     this.base.addEventListener('click', this.handleClick.bind(this));
+    this.elements.teamOverviewContent.addEventListener('click', this.handleClick.bind(this));
 
     // Trigger an update
     this.update();
@@ -98,7 +99,13 @@ export default class Cart
 
       this.elements.content.appendChild(cartItemElement);
 
+      // Also append to overview
+      const overviewItemElement = cartItemElement.cloneNode(true);
+      overviewItemElement.member = member;
+      this.elements.teamOverviewMembers.appendChild(overviewItemElement);
+
       member.cartItemElement = cartItemElement;
+      member.overviewItemElement = overviewItemElement;
 
       // Add the item to the contents array
       this.contents.push(member);
@@ -122,13 +129,16 @@ export default class Cart
     }
 
     member.cartItemElement.classList.add('is-removed');
+    member.overviewItemElement.classList.add('is-removed');
 
     // Make a reference to the current item, otherwise it might be overwritten
     // by the time we want to remove it
     const cartItemElement = member.cartItemElement;
+    const overviewItemElement = member.overviewItemElement;
 
     window.setTimeout(() => {
       cartItemElement.remove();
+      overviewItemElement.remove();
     }, 500);
 
     // Remove the item from the contents array
@@ -168,13 +178,18 @@ export default class Cart
     this.elements.amount.textContent = this.contents.length;
 
     if (this.contents.length === 0) {
+      this.elements.teamOverviewTitle.textContent = `Scroll up to pick out members for your team!`;
+
       const placeholderItemTemplate = document.querySelector('#cart-item-placeholder');
       const placeholderItemFrag = document.importNode(placeholderItemTemplate.content, true);
 
       const placeholderItem = placeholderItemFrag.children[0];
       this.elements.content.appendChild(placeholderItem);
     } else {
+      this.elements.teamOverviewTitle.textContent = `That's a great looking team you've assembled!`;
+
       const placeholderItem = this.base.querySelector('.cart-item--placeholder');
+
       if (placeholderItem) {
         placeholderItem.remove();
       }
@@ -187,6 +202,8 @@ export default class Cart
       this.base.classList.add('is-updated');
       this.updateSize();
       this.previousContentLength = this.contents.length;
+
+      this.contactForm.updateStepHeights(true);
     }
   }
 
@@ -247,53 +264,11 @@ export default class Cart
   {
     this.hidden = false;
     this.base.classList.remove('is-hidden');
-    this.elements.teamOverview.classList.add('is-hidden');
   }
 
   showInContactForm()
   {
     this.hidden = true;
     this.base.classList.add('is-hidden');
-
-    // Empty the overview
-    this.elements.teamOverviewMembers.innerHTML = '';
-
-    // Create a new element from the cart-item's template
-    const cartItemTemplate = document.querySelector('#overview-member');
-
-    this.contents.forEach(member => {
-      const cartItemFrag = document.importNode(cartItemTemplate.content, true);
-
-      // We will lose the reference of the appended element when appending with the
-      // fragment, so we make a copy
-      const overviewMemberElement = cartItemFrag.children[0];
-
-      overviewMemberElement.elements = {
-        image: overviewMemberElement.querySelector('.overview-member__image'),
-        title: overviewMemberElement.querySelector('.overview-member__title'),
-        remove: overviewMemberElement.querySelector('.overview-member__remove')
-      };
-
-      overviewMemberElement.elements.image.style.backgroundImage = `url('${member.avatarUrl}')`;
-      overviewMemberElement.elements.title.textContent = member.fullName;
-      overviewMemberElement.member = member;
-
-      this.elements.teamOverviewMembers.appendChild(overviewMemberElement);
-    });
-
-    if (this.contents.length === 0) {
-      this.elements.teamOverviewTitle.textContent = `You haven't added any members yet!`;
-    } else {
-      this.elements.teamOverviewTitle.textContent = `That's a great looking team you've assembled!`;
-    }
-
-    this.elements.teamOverview.style.height = `${this.elements.teamOverviewContent.clientHeight}px`;
-
-    console.log(this.elements.teamOverviewContent.clientHeight);
-    this.elements.teamOverview.classList.remove('is-hidden');
-
-    setTimeout(() => {
-      this.contactForm.updateStepHeights(true);
-    }, 100);
   }
 }
