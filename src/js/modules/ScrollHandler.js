@@ -12,12 +12,12 @@ export default class ScrollHandler
     this.pastMoment = Date.now();
 
     this.timer = 0;
-    window.addEventListener('scroll', this.throttleScroll.bind(this));
+    window.addEventListener('scroll', this.throttleScroll.bind(this), { passive: true });
 
     // Elements
     this.elements = {
       header: document.querySelector(selectors.header),
-      sections: document.querySelectorAll(selectors.sections)
+      sections: Array.from(document.querySelectorAll(selectors.sections))
     };
 
     this.elements.membersSection = this.elements.sections[2];
@@ -71,7 +71,7 @@ export default class ScrollHandler
     }
 
     // Sections
-    for (let sectionIndex = this.elements.sections.length - 1; sectionIndex > -1; sectionIndex--) {
+    for (let sectionIndex = 0; sectionIndex < this.elements.sections.length; sectionIndex++) {
       const section = this.elements.sections[sectionIndex];
 
       // Section is already active, continue to next section
@@ -79,27 +79,30 @@ export default class ScrollHandler
         continue;
       }
 
-      if (scrollY + window.innerHeight > section.offsetTop + section.clientHeight * (1 - this.activeThreshold)
-          && scrollY < section.offsetTop + section.clientHeight * this.activeThreshold) {
+      const sectionY = section.offsetTop;
+
+      if (scrollY + window.innerHeight > sectionY + section.clientHeight * (1 - this.activeThreshold)
+          && scrollY < sectionY + section.clientHeight * this.activeThreshold) {
         section.classList.add('is-active');
         section.isActive = true;
+        this.elements.sections.splice(sectionIndex, 1);
       }
     }
 
     // Cart
+    const memberSectionY = this.elements.membersSection.offsetTop;
 
     // Open cart when passing by the members section
     if (window.innerWidth > 640
         && !this.cart.activated
-        && scrollY + windowHalfHeight > this.elements.membersSection.offsetTop
-        && scrollY + windowHalfHeight < this.elements.membersSection.offsetTop + this.elements.membersSection.clientHeight
+        && scrollY + windowHalfHeight > memberSectionY
+        && scrollY + windowHalfHeight < memberSectionY + this.elements.membersSection.clientHeight
         && !this.cart.base.classList.contains('is-expanded')) {
       this.cart.handleClick();
     }
 
     // Hide cart when at the contact section
-    if (scrollY + window.innerHeight * .75 > this.elements.contactSection.offsetTop
-        && scrollY + windowHalfHeight < this.elements.contactSection.offsetTop + this.elements.contactSection.clientHeight) {
+    if (scrollY + window.innerHeight * .75 > this.elements.contactSection.offsetTop) {
       if (!this.cart.hidden) {
         this.cart.showInContactForm();
       }

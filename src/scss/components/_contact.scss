@@ -215,10 +215,15 @@
     text-align: center;
     color: $cl-white;
     text-shadow: 0 -1px transparentize($cl-black, .5);
-    transition: text-shadow 200ms;
+    transform: translateY(1px);
+    transition: {
+      property: text-shadow, transform;
+      duration: 200ms;
+    }
 
     &:hover {
       text-shadow: 0 3px .25em transparentize($cl-black, .5);
+      transform: translateY(-1px);
     }
 
     span {
