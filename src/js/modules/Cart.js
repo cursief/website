@@ -44,7 +44,6 @@ export default class Cart
     // Get the member's position
     const memberRect = member.base.getBoundingClientRect();
     const cartRect = this.base.getBoundingClientRect();
-    const memberStyle = window.getComputedStyle(member.base);
     const targetPos = {
       x: cartRect.left + cartRect.width * .5 - memberRect.left - memberRect.width * .5,
       y: this.base.offsetTop + cartRect.height * .5 - memberRect.top - memberRect.height * .5
@@ -90,11 +89,13 @@ export default class Cart
       cartItemElement.elements = {
         image: cartItemElement.querySelector('.cart-item__image'),
         title: cartItemElement.querySelector('.cart-item__title'),
+        subtitle: cartItemElement.querySelector('.cart-item__subtitle'),
         remove: cartItemElement.querySelector('.cart-item__remove')
       };
 
       cartItemElement.elements.image.style.backgroundImage = `url('${member.avatarUrl}')`;
       cartItemElement.elements.title.textContent = member.fullName;
+      cartItemElement.elements.subtitle.textContent = member.title;
       cartItemElement.member = member;
 
       this.elements.content.appendChild(cartItemElement);

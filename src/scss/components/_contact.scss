@@ -192,7 +192,6 @@
 
   .contact-form__step-content {
     align-items: center;
-    text-align: center;
     padding: 7rem 0 6rem;
     max-width: 100%;
   }
@@ -204,6 +203,10 @@
   .contact-form__step-title:first-child {
     max-width: 34rem;
     margin-bottom: 0;
+  }
+
+  .contact-form__step-title {
+    text-align: center;
   }
 
   p {

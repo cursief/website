@@ -14,6 +14,7 @@ export default class Member
 
     this.avatarUrl = this.base.querySelector('.member__avatar img').getAttribute('src');
     this.fullName = this.base.querySelector('.member__name').textContent;
+    this.title = this.base.querySelector('.member__title').textContent;
 
     this.base.addEventListener('click', this.handleClick.bind(this));
     this.base.addEventListener('keypress', this.handleClick.bind(this));
