@@ -1,12 +1,12 @@
 .contact {
   display: flex;
+  flex-direction: column;
   opacity: 0;
   position: relative;
   width: 100%;
   max-width: 83rem;
   margin: 0 auto;
   background-color: $cl-white;
-  border-radius: .2rem;
   transform: scale(.5) translate3d(0, 100%, 0);
 
   .section.is-active & {
@@ -32,6 +32,10 @@
   > * {
     z-index: 2;
     position: relative;
+  }
+
+  @include media($screen-lg) {
+    flex-direction: row;
   }
 }
 
@@ -251,6 +255,7 @@
     position: absolute;
     width: 3rem;
     height: 3rem;
+    text-align: center;
     color: lighten($cl-body, 30%);
     line-height: 2.8rem;
     background: $cl-white;
@@ -280,11 +285,15 @@
 
 .contact-form {
   width: 100%;
-  padding-bottom: 6.4rem;
+  padding-bottom: 4.4rem;
   transition: padding 200ms;
 
   [data-step='0'] & {
     padding: 0;
+  }
+
+  @include media($screen-lg) {
+    padding-bottom: 6.4rem;
   }
 }
 
@@ -332,13 +341,13 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 57rem;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 3rem 2rem 2rem;
   color: darken($cl-primary, 30%);
 
   @include media($screen-lg) {
     padding: 9rem 6rem 6rem;
+    max-width: 57rem;
   }
 }
 
@@ -357,8 +366,8 @@
   align-items: flex-start;
   justify-content: flex-end;
   width: 100%;
-  height: 6.4rem;
-  padding: 0 6rem 0 6rem;
+  height: 4.4rem;
+  padding: 0 2rem;
   overflow: hidden;
   transition: {
     property: height, opacity, transform;
@@ -367,7 +376,11 @@
   };
 
   &::after {
-    height: 4rem;
+    height: 2rem;
+
+    @include media($screen-lg) {
+      height: 4rem;
+    }
   }
 
   &.is-hidden {
@@ -401,6 +414,10 @@
 
   > * {
     flex-shrink: 0;
+  }
+
+  @include media($screen-lg) {
+    height: 6.4rem;
   }
 }
 
@@ -452,9 +469,11 @@
 
 
 .contact__steps-overview {
-  width: 26rem;
-  flex-shrink: 0;
-  padding: 4rem 2rem 2rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2.5rem;
+  padding-right: 3.25rem;
   background-color: $cl-primary;
   color: $cl-white;
   white-space: nowrap;
@@ -468,12 +487,25 @@
     width: 0;
     padding: 4rem 0 2rem 0;
   }
+
+  @include media($screen-lg) {
+    justify-content: flex-start ;
+    flex-direction: column;
+    width: 26rem;
+    flex-shrink: 0;
+    padding: 4rem 2rem 2rem 4rem;
+    background-color: $cl-primary;
+    color: $cl-white;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 }
 
 .overview-step {
   position: relative;
-  padding-left: 3rem;
-  padding-bottom: 3rem;
+  display: inline-block;
+  width: 100%;
+  height: 1rem;
 
   &::before {
     content: '';
@@ -481,26 +513,37 @@
     position: absolute;
     left: 0;
     display: inline-block;
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 1rem;
+    height: 1rem;
     border-radius: 50%;
-    margin: .6rem 1ch 0 0;
+    margin: 0;
     background: darken($cl-primary, 30%);
-    vertical-align: top;
+
+    @include media($screen-lg) {
+      margin: .6rem 1ch 0 0;
+      width: 1.2rem;
+      height: 1.2rem;
+    }
   }
 
   &:not(:last-child) {
     &::after {
       content: '';
+      display: block;
       position: absolute;
       top: .4rem;
       left: .5rem;
-      display: inline-block;
-      width: .25rem;
-      height: 100%;
-      margin: .5rem 1ch 0 0;
+      width: 100%;
+      height: .25rem;
       background: darken($cl-primary, 30%);
-      vertical-align: top;
+
+      @include media($screen-lg) {
+        top: .4rem;
+        left: .5rem;
+        width: .25rem;
+        height: 100%;
+        margin: .5rem 1ch 0 0;
+      }
     }
   }
 
@@ -515,6 +558,17 @@
       }
     }
   }
+
+  &:last-child {
+    width: 1rem;
+  }
+
+  @include media($screen-lg) {
+    display: block;
+    height: auto;
+    padding-left: 3rem;
+    padding-bottom: 3rem;
+  }
 }
 
 .overview-step__title {
@@ -522,10 +576,15 @@
   margin: 0 0 .5em;
   font-size: 2rem;
   cursor: pointer;
+  display: none;
 
   [disabled] & {
     color: darken($cl-primary, 30%);
     cursor: default;
+  }
+
+  @include media($screen-lg) {
+    display: block;
   }
 }
 
@@ -537,6 +596,11 @@
   white-space: pre;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: none;
+
+  @include media($screen-lg) {
+    display: block;
+  }
 }
 
 .team-overview {
