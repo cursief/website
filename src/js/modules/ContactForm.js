@@ -89,6 +89,8 @@ export default class ContactForm
     setTimeout(() => {
       this.updateStepHeights();
     }, 1);
+
+    window.addEventListener('resize', this.updateStepHeights.bind(this));
   }
 
   updateStepHeights(onlyActiveStep)

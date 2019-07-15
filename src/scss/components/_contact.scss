@@ -506,6 +506,12 @@
   display: inline-block;
   width: 100%;
   height: 1rem;
+  cursor: pointer;
+
+  &[disabled] {
+    pointer-events: none;
+    cursor: default;
+  }
 
   &::before {
     content: '';
@@ -575,12 +581,10 @@
   display: inline-block;
   margin: 0 0 .5em;
   font-size: 2rem;
-  cursor: pointer;
   display: none;
 
   [disabled] & {
     color: darken($cl-primary, 30%);
-    cursor: default;
   }
 
   @include media($screen-lg) {
@@ -625,6 +629,13 @@
       color: lighten($cl-body, 30%);
       animation: pulse 200ms;
     }
+  }
+}
+
+.team-overview__title {
+  a {
+    color: $cl-primary;
+    text-decoration: underline;
   }
 }
 
