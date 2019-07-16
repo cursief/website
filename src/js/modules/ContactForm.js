@@ -25,6 +25,9 @@ export default class ContactForm
     // Steps
     const overviewStepTemplate = document.querySelector('#overview-step');
 
+    // Submit button
+    this.elements.submitButton.addEventListener('click',  this.submitForm.bind(this));
+
     this.elements.steps.forEach((stepElement, index) => {
       if (index === 0) {
         return;
@@ -83,6 +86,7 @@ export default class ContactForm
     nextButtons.forEach(button => button.addEventListener('click', this.nextStep.bind(this)));
 
     this.nextStep();
+    // this.goToStep(7);
 
     void this.base.offsetWidth;
 
@@ -195,7 +199,7 @@ export default class ContactForm
       if (this.currentStep > 0) {
         this.elements.stepNav.classList.remove('is-hidden');
 
-        if (this.currentStep == this.elements.steps.length - 1) {
+        if (this.currentStep > this.elements.steps.length - 3) {
           this.elements.stepNav.classList.add('is-hidden');
           this.elements.submitButton.classList.remove('is-hidden');
         } else {
@@ -303,5 +307,13 @@ export default class ContactForm
     }
 
     currentStepEl.overviewStepElement.elements.content.textContent = answerTexts.join('\n');
+  }
+
+  /**
+   * Submit the form with user input.
+   */
+  submitForm()
+  {
+    this.nextStep();
   }
 }

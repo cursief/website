@@ -186,6 +186,7 @@ export default class Cart
 
       const placeholderItem = placeholderItemFrag.children[0];
       this.elements.content.appendChild(placeholderItem);
+      this.contactForm.elements.contact.classList.remove('has-members');
     } else {
       this.elements.teamOverviewTitle.textContent = `That's a great looking team you've assembled!`;
 
@@ -194,6 +195,8 @@ export default class Cart
       if (placeholderItem) {
         placeholderItem.remove();
       }
+
+      this.contactForm.elements.contact.classList.add('has-members');
     }
 
     if (this.contents.length !== this.previousContentLength) {
