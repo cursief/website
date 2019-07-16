@@ -3,20 +3,33 @@
   align-items: center;
   flex-grow: 0;
   flex-shrink: 1;
-  overflow: auto;
+  max-width: 100%;
+  padding: 2rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   margin-left: auto;
 
   @include media($screen-sm) {
+    margin-left: auto;
+    padding: 1rem 0;
+    background: transparent;
+  }
+
+  @include media($screen-md) {
     margin-left: 0;
   }
 }
 
 .navigation__list {
   display: flex;
-  padding: 0;
+  padding: 0 2rem;
   margin: 0;
   list-style: none;
+
+  @include media($screen-sm) {
+    padding: 0;
+  }
 }
 
 .navigation__item {
@@ -25,7 +38,7 @@
     name: fadeIn;
     duration: 800ms;
     fill-mode: both;
-    timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    timing-function: cubic-bezier(.215, .61, .355, 1);
   }
 
   @for $i from 1 through 4 {
@@ -45,6 +58,7 @@
   font-weight: 700;
   letter-spacing: .1rem;
   text-shadow: 0 .1rem .4rem darken($cl-primary, 10%);
+  white-space: nowrap;
   outline: none;
   transition: color 200ms;
 
