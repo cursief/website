@@ -204,6 +204,15 @@
     }
   }
 
+  .contact-form__step-title:first-child {
+    max-width: 34rem;
+    margin: 0 auto;
+  }
+
+  .contact-form__step-title {
+    text-align: center;
+  }
+
   p {
     max-width: 45rem;
     margin: 1rem 2rem;

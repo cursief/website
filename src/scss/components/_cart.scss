@@ -230,6 +230,11 @@ $cart-margin: .5em;
   line-height: 1;
   font-weight: bold;
   color: $cl-primary;
+
+  .cart-item--placeholder & {
+    color: $cl-body;
+    font-weight: normal;
+  }
 }
 
 .cart-item__subtitle {
