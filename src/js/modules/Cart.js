@@ -179,7 +179,7 @@ export default class Cart
     this.elements.amount.textContent = this.contents.length;
 
     if (this.contents.length === 0) {
-      this.elements.teamOverviewTitle.textContent = `Scroll up to pick out members for your team!`;
+      this.elements.teamOverviewTitle.innerHTML = `Assemble your own team by picking out members at the <a href="#members">members section</a>!`;
 
       const placeholderItemTemplate = document.querySelector('#cart-item-placeholder');
       const placeholderItemFrag = document.importNode(placeholderItemTemplate.content, true);

@@ -47,7 +47,7 @@ export default class ContactForm
         content: overviewStepElement.querySelector('.overview-step__content')
       };
 
-      overviewStepElement.elements.title.addEventListener('click', (event) => {
+      overviewStepElement.addEventListener('click', (event) => {
         if (!event.target.parentNode.getAttribute('disabled')) {
           this.goToStep(index);
         }
@@ -89,6 +89,8 @@ export default class ContactForm
     setTimeout(() => {
       this.updateStepHeights();
     }, 1);
+
+    window.addEventListener('resize', this.updateStepHeights.bind(this));
   }
 
   updateStepHeights(onlyActiveStep)
