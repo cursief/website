@@ -22,16 +22,3 @@
     padding: 0 3rem;
   }
 }
-
-.footer__logo {
-  display: none;
-
-  @include media($screen-sm) {
-    display: block;
-    margin-right: auto;
-  }
-
-  img {
-    vertical-align: middle;
-  }
-}
