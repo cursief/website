@@ -21,10 +21,12 @@
 
 .navigation__item {
   margin-right: 3rem;
-  animation-name: fadeIn;
-  animation-duration: 800ms;
-  animation-fill-mode: both;
-  animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  animation: {
+    name: fadeIn;
+    duration: 800ms;
+    fill-mode: both;
+    timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
 
   @for $i from 1 through 4 {
 
