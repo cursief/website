@@ -19,3 +19,14 @@ html {
 main {
   margin-top: -12rem;
 }
+
+.mobile-logo {
+  z-index: 1;
+  position: absolute;
+  top: 3rem;
+  left: 2rem;
+
+  @include media($screen-sm) {
+    display: none;
+  }
+}
