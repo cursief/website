@@ -9,8 +9,12 @@
   background-image: linear-gradient(168deg, #4735E2 40%, #3D3398 100%);
 
   @include media($screen-sm) {
-    height: 95vh;
+    height: 80vh;
     min-height: 80rem;
+  }
+
+  @include media($screen-md) {
+    height: 95vh;
   }
 
   &:before,
