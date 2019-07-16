@@ -8,7 +8,7 @@
   list-style: none;
   white-space: nowrap;
 
-  @include media($screen-sm) {
+  @include media($screen-lg) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,7 +56,7 @@
     &:nth-child(1),
     &:nth-child(5) {
 
-      @include media($screen-sm) {
+      @include media($screen-lg) {
         width: 19rem;
         font-size: .57143rem; // 16px
         transition-duration: 500ms;
@@ -80,7 +80,7 @@
     &:nth-child(2),
     &:nth-child(4) {
 
-      @include media($screen-sm) {
+      @include media($screen-lg) {
         width: 25.5rem;
         font-size: .75rem;
         transition-duration: 500ms;
