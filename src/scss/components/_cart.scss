@@ -176,14 +176,19 @@ $cart-margin: .5em;
 .cart-item__content {
   display: flex;
   align-items: center;
-  width: calc(100% - $cart-margin * 2);
-  margin: 0 $cart-margin $cart-margin;
+  width: calc(100% - #{$cart-margin} * 4);
+  margin: 0 ($cart-margin * 2) ($cart-margin * 2);
   padding: $cart-margin;
   border-radius: 1.33em * .33;
   overflow: hidden;
   box-shadow:
     0 3px 2px -2px transparentize($cl-body, .7),
     0 3px 8px -2px transparentize($cl-body, .7);
+
+  @include media($screen-md) {
+    width: calc(100% - #{$cart-margin} * 2);
+    margin: 0 $cart-margin $cart-margin;
+  }
 
   &--placeholder {
     flex-direction: column;
