@@ -176,19 +176,14 @@ $cart-margin: .5em;
 .cart-item__content {
   display: flex;
   align-items: center;
-  width: calc(100% - #{$cart-margin} * 4);
-  margin: 0 ($cart-margin * 2) ($cart-margin * 2);
+  width: calc(100% - #{$cart-margin * 2});
+  margin: 0 $cart-margin $cart-margin;
   padding: $cart-margin;
   border-radius: 1.33em * .33;
   overflow: hidden;
   box-shadow:
     0 3px 2px -2px transparentize($cl-body, .7),
     0 3px 8px -2px transparentize($cl-body, .7);
-
-  @include media($screen-md) {
-    width: calc(100% - #{$cart-margin} * 2);
-    margin: 0 $cart-margin $cart-margin;
-  }
 
   &--placeholder {
     flex-direction: column;
@@ -222,7 +217,10 @@ $cart-margin: .5em;
 }
 
 .cart-item__details {
-
+  flex-shrink: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .cart-item__title {
@@ -230,6 +228,8 @@ $cart-margin: .5em;
   line-height: 1;
   font-weight: bold;
   color: $cl-primary;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   .cart-item--placeholder & {
     color: $cl-body;
@@ -240,6 +240,8 @@ $cart-margin: .5em;
 .cart-item__subtitle {
   font-size: .85em;
   line-height: 1;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .cart-item__remove {
