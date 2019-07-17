@@ -5,6 +5,7 @@
   align-items: center;
   height: 70vh;
   min-height: 70rem;
+  max-height: 90rem;
   color: $cl-white;
   background-image: linear-gradient(168deg, #4735E2 40%, #3D3398 100%);
 
@@ -55,6 +56,16 @@
     &:after {
       opacity: 1;
     }
+  }
+}
+
+.banner--secondary {
+  height: 30rem;
+  min-height: 0;
+  padding-top: 12rem;
+
+  &:before {
+    display: none;
   }
 }
 
@@ -141,6 +152,11 @@
   img {
     display: block;
     width: 100%;
+  }
+
+  .banner--secondary & {
+    opacity: 1;
+    color: $cl-white;
   }
 }
 
