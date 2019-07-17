@@ -81,8 +81,13 @@ export default class ScrollHandler
 
       const sectionY = section.offsetTop;
 
-      if (scrollY + window.innerHeight > sectionY + section.clientHeight * (1 - this.activeThreshold)
-          && scrollY < sectionY + section.clientHeight * this.activeThreshold) {
+      if (sectionIndex < this.elements.sections.length - 1) {
+        if (scrollY > sectionY + section.clientHeight * this.activeThreshold) {
+          continue;
+        }
+      }
+
+      if (scrollY + window.innerHeight > sectionY + section.clientHeight * (1 - this.activeThreshold)) {
         section.classList.add('is-active');
         section.isActive = true;
         this.elements.sections.splice(sectionIndex, 1);
