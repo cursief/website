@@ -204,17 +204,11 @@
     }
   }
 
-  .contact-form__step-title:first-child {
-    max-width: 34rem;
-    margin: 0 auto;
-  }
-
   .contact-form__step-title {
     text-align: center;
   }
 
   p {
-    max-width: 45rem;
     margin: 1rem 2rem;
 
     @include media($screen-sm) {
@@ -313,16 +307,11 @@
   }
 }
 
-.contact-form__step-title {
-  margin-top: 0;
+.contact-form__step-wrapper {
+  width: 100%;
 
-  &:first-child {
-    max-width: calc(100% - 4rem);
-    margin-bottom: 0;
-
-    @include media($screen-sm) {
-      max-width: calc(100% - 17rem);
-    }
+  @include media($screen-sm) {
+    width: calc(100% - 12rem);
   }
 }
 
@@ -331,10 +320,9 @@
   bottom: 0;
   display: flex;
   align-items: flex-start;
-  justify-content: flex-end;
   width: 100%;
   height: 4.4rem;
-  padding: 0 2rem;
+  padding: 0 6rem;
   overflow: hidden;
   transition: {
     property: height, opacity, transform;
@@ -354,11 +342,16 @@
     height: 0;
   }
 
+  .prev-step-button {
+    color: $cl-primary;
+  }
+
   .next-step-button {
     display: inline-block;
     color: $cl-secondary;
     cursor: pointer;
     user-select: none;
+    margin-left: auto;
 
     &::after {
       content: '';
@@ -453,7 +446,8 @@
   [data-step='0'] &,
   [data-step='8'] & {
     width: 0;
-    padding: 2rem 0 0 0;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   @include media($screen-lg) {
@@ -461,7 +455,7 @@
     flex-direction: column;
     width: 26rem;
     flex-shrink: 0;
-    padding: 4rem 2rem 2rem 4rem;
+    padding: 6rem 4rem;
     background-color: $cl-primary;
     color: $cl-white;
     white-space: nowrap;
@@ -485,6 +479,7 @@
     content: '';
     z-index: 2;
     position: absolute;
+    top: 0;
     left: 0;
     display: inline-block;
     width: 1rem;
@@ -494,7 +489,7 @@
     background: darken($cl-primary, 30%);
 
     @include media($screen-lg) {
-      margin: .6rem 1ch 0 0;
+      top: .35rem;
       width: 1.2rem;
       height: 1.2rem;
     }
@@ -546,13 +541,13 @@
 }
 
 .overview-step__title {
-  display: inline-block;
-  margin: 0 0 .5em;
-  font-size: 2rem;
   display: none;
+  margin: 0 0 .5em;
+  color: $cl-white;
+  font-size: 2rem;
 
   [disabled] & {
-    color: darken($cl-primary, 30%);
+    color: $cl-quinary;
   }
 
   @include media($screen-lg) {
@@ -561,14 +556,14 @@
 }
 
 .overview-step__content {
+  display: none;
+  overflow: hidden;
   margin: 0;
-  line-height: 1.5;
   color: transparentize($cl-white, .4);
   font-size: 1.8rem;
+  line-height: 1.5;
   white-space: pre;
-  overflow: hidden;
   text-overflow: ellipsis;
-  display: none;
 
   @include media($screen-lg) {
     display: block;
@@ -576,7 +571,6 @@
 }
 
 .team-overview {
-  max-width: 45rem;
   width: 100%;
   margin: 0 auto;
 }

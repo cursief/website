@@ -5,6 +5,7 @@
   max-width: 100%;
   margin: 0;
   padding: 2rem 0 6rem;
+  font-size: 10px;
   list-style: none;
   white-space: nowrap;
 
@@ -21,7 +22,8 @@
   scroll-snap-align: center;
   opacity: 0;
   position: relative;
-  overflow: hidden;
+  // overflow: hidden;
+  flex-basis: auto;
   width: 33.6rem;
   min-height: 45em;
   margin: 0 2rem 0 0;
@@ -58,7 +60,7 @@
 
       @include media($screen-lg) {
         width: 19rem;
-        font-size: .57143rem; // 16px
+        font-size: 5.5px;
         transition-duration: 500ms;
         transition-delay: 600ms, 600ms, 600ms;
         transform: scale(0);
@@ -74,6 +76,11 @@
             transform: scale(1.765);
           }
         }
+
+        .member__anchor {
+          padding: 16px;
+          font-size: 9px;
+        }
       }
     }
 
@@ -82,7 +89,7 @@
 
       @include media($screen-lg) {
         width: 25.5rem;
-        font-size: .75rem;
+        font-size: 7.75px;
         transition-duration: 500ms;
         transition-delay: 300ms, 0ms, 0ms;
         transform: scale(0);
@@ -96,6 +103,11 @@
             z-index: 2;
             transform: scale(1.34299);
           }
+        }
+
+        .member__anchor {
+          padding: 22px;
+          font-size: 12px;
         }
       }
     }
@@ -240,13 +252,12 @@
   bottom: 0;
   left: 0;
   display: flex;
-  padding: 1.9em;
-  font-size: 1.6em;
+  align-items: center;
+  font-size: 16px;
+  padding: 30px;
   color: $cl-secondary;
   box-shadow: 0 0 0 0 $cl-secondary inset;
   outline: none;
-  mix-blend-mode: multiply;
-  background-clip: text;
   transition: {
     property: color, box-shadow;
     duration: 400ms;
