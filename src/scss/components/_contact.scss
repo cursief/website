@@ -188,7 +188,7 @@
 
 .contact__selection {
   transform: translateY(6rem);
-  margin-top: -6rem;
+  margin-top: -12rem;
 
   &.is-hidden {
     margin: 0;
@@ -215,6 +215,19 @@
       margin: 2rem;
       text-align: center;
     }
+  }
+
+  @include media($screen-lg) {
+    margin-top: -6rem;
+  }
+}
+
+.contact-form__step-title {
+  margin: 0 0 1rem;
+  max-width: calc(100% - 4rem);
+
+  @include media($screen-sm) {
+    max-width: 100%;
   }
 }
 
@@ -293,17 +306,8 @@
   color: darken($cl-primary, 30%);
 
   @include media($screen-lg) {
-    padding: 5rem 6rem 6rem;
+    padding: 9rem 6rem 6rem;
     max-width: 57rem;
-  }
-
-  h3 {
-    max-width: calc(100% - 4rem);
-    margin-bottom: 0;
-
-    @include media($screen-sm) {
-      max-width: 100%;
-    }
   }
 }
 
@@ -322,7 +326,7 @@
   align-items: flex-start;
   width: 100%;
   height: 4.4rem;
-  padding: 0 6rem;
+  padding: 0 2rem;
   overflow: hidden;
   transition: {
     property: height, opacity, transform;
@@ -343,15 +347,15 @@
   }
 
   .prev-step-button {
+    margin-top: 0;
     color: $cl-primary;
+    order: 1;
   }
 
   .next-step-button {
-    display: inline-block;
-    color: $cl-secondary;
-    cursor: pointer;
-    user-select: none;
+    margin-top: 0;
     margin-left: auto;
+    order: 2;
 
     &::after {
       content: '';
@@ -378,6 +382,7 @@
 
   @include media($screen-lg) {
     height: 6.4rem;
+    padding: 0 6rem;
   }
 }
 
@@ -573,6 +578,7 @@
 .team-overview {
   width: 100%;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .team-overview__members {
@@ -596,6 +602,13 @@
       @include media($screen-sm) {
         margin: 0 1rem;
       }
+    }
+  }
+
+  .cart-item {
+    @include media($screen-lg) {
+      width: 50%;
+      float: left;
     }
   }
 }

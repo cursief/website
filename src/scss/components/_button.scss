@@ -116,3 +116,20 @@
     display: none;
   }
 }
+
+.link-button {
+  display: inline-block;
+  appearance: none;
+  padding: 0;
+  border: 0;
+  font-size: inherit;
+  font-family: inherit;
+  color: $cl-secondary;
+  cursor: pointer;
+
+  &:focus,
+  &:hover {
+    outline: none;
+    text-decoration: underline;
+  }
+}
