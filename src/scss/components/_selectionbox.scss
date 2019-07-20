@@ -18,11 +18,15 @@
 
   a {
     color: $cl-white;
+    margin-top: 0em;
     font-size: 1.6rem;
 
     span {
+      display: inline-block;
       font-size: 2rem;
       font-weight: 700;
+      vertical-align: top;
+      margin-top: -.15em;
     }
   }
 }

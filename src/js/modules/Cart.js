@@ -10,6 +10,10 @@ export default class Cart
   {
     this.base = document.querySelector('.cart');
 
+    if (!this.base) {
+      return;
+    }
+
     this.contactForm = contactForm;
 
     this.elements = {
