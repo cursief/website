@@ -580,7 +580,7 @@
 
 .team-overview {
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 5rem;
   overflow: hidden;
 }
 
@@ -604,6 +604,10 @@
 
       @include media($screen-sm) {
         margin: 0 1rem;
+      }
+
+      @include media($screen-md) {
+        margin: 0;
       }
     }
   }
