@@ -192,7 +192,7 @@ export default class Cart
       this.elements.content.appendChild(placeholderItem);
       this.contactForm.elements.contact.classList.remove('has-members');
     } else {
-      this.elements.teamOverviewTitle.textContent = `That's a great looking team you've assembled!`;
+      this.elements.teamOverviewTitle.textContent = `You picked these members:`;
 
       const placeholderItem = this.base.querySelector('.cart-item--placeholder');
 

@@ -16,6 +16,11 @@
     padding: 2.5rem 3rem;
   }
 
+  @include media($screen-md) {
+    width: 100%;
+    margin: 4rem 0 6rem;
+  }
+
   a {
     color: $cl-white;
     margin-top: 0em;
