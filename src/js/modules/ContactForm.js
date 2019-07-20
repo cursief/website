@@ -11,6 +11,10 @@ export default class ContactForm
     this.base = document.querySelector(selector);
     this.currentStep = -1;
 
+    if (!this.base) {
+      return;
+    }
+
     this.elements = {
       contact: this.base.querySelector('.contact'),
       steps: this.base.querySelectorAll('.contact-form__step'),
@@ -84,6 +88,12 @@ export default class ContactForm
 
     prevButtons.forEach(button => button.addEventListener('click', this.prevStep.bind(this)));
     nextButtons.forEach(button => button.addEventListener('click', this.nextStep.bind(this)));
+
+    // Disable all step inputs
+    this.base.querySelectorAll('input, textarea, button, select, a').forEach(input => {
+      input.setAttribute('tabindex', -1);
+      input.setAttribute('disabled', true);
+    });
 
     this.nextStep();
     // this.goToStep(7);
@@ -170,11 +180,29 @@ export default class ContactForm
 
       currentStepEl.style.height = 0;
       currentStepEl.classList.add('is-hidden');
+
+      // Disable all step inputs
+      currentStepEl.querySelectorAll('input, textarea, button, select, a').forEach(input => {
+        input.setAttribute('tabindex', -1);
+
+        input.setAttribute('disabled', true);
+      });
     }
 
     if (nextStepEl) {
       nextStepEl.style.height = nextStepEl.dataset.height;
       nextStepEl.classList.remove('is-hidden');
+
+      // Enable all step inputs
+      nextStepEl.querySelectorAll('input, textarea, button, select, a').forEach(input => {
+        // Except if it has a condition
+        if (input.dataset.activeIf) {
+          return;
+        }
+
+        input.removeAttribute('tabindex');
+        input.removeAttribute('disabled');
+      });
 
       // Focus the first interactive element in this step
       const inputElement = nextStepEl.querySelectorAll('input, select')[0];
@@ -198,16 +226,27 @@ export default class ContactForm
 
       if (this.currentStep > 0) {
         this.elements.stepNav.classList.remove('is-hidden');
+        this.elements.stepNav.querySelectorAll('button').forEach(input => {
+          input.removeAttribute('tabindex');
+          input.removeAttribute('disabled');
+        });
 
         if (this.currentStep > this.elements.steps.length - 3) {
           this.elements.stepNav.classList.add('is-hidden');
           this.elements.submitButton.classList.remove('is-hidden');
+          this.elements.submitButton.removeAttribute('disabled');
         } else {
           this.elements.stepNav.classList.remove('is-hidden');
           this.elements.submitButton.classList.add('is-hidden');
+          this.elements.submitButton.setAttribute('disabled', true);
         }
       } else {
         this.elements.stepNav.classList.add('is-hidden');
+
+        this.elements.stepNav.querySelectorAll('button').forEach(input => {
+          input.setAttribute('tabindex', -1);
+          input.setAttribute('disabled', true);
+        });
       }
     }
   }
