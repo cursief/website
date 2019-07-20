@@ -7,10 +7,10 @@
   textarea {
     appearance: none;
     width: 100%;
-    padding: .4em;
-    border: .1em solid lighten($cl-body, 50%);
+    padding: 1rem 1.5rem;
+    border: .1em solid #D5D2EA;
     border-radius: .2em;
-    font-size: inherit;
+    font-size: 1.6rem;
     font-family: $font-body;
     color: $cl-body;
     outline: none;
@@ -72,5 +72,17 @@
     &::after {
       border-radius: 50%;
     }
+  }
+
+  select {
+    appearance: none;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    outline: none;
+    color: $cl-white;
+    font-size: 1.8rem;
+    font-weight: 700;
+    border: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z' fill='%23fff' /%3E%3C/svg%3E") $cl-primary no-repeat right 1rem center;
   }
 }
