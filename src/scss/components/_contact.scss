@@ -205,7 +205,12 @@
   }
 
   .contact-form__step-title {
-    text-align: center;
+    margin: 3rem 2rem 0;
+
+    @include media($screen-sm) {
+      margin-top: 0;
+      text-align: center;
+    }
   }
 
   p {
@@ -227,6 +232,7 @@
   max-width: calc(100% - 4rem);
 
   @include media($screen-sm) {
+    margin: 0 0 1rem;
     max-width: 100%;
   }
 }
@@ -356,20 +362,6 @@
     margin-top: 0;
     margin-left: auto;
     order: 2;
-
-    &::after {
-      content: '';
-      display: inline-block;
-      width: 2.4rem;
-      height: 2.4rem;
-      margin-left: .5ch;
-      background: {
-        image: svg-uri('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#{$cl-secondary}" d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>');
-        size: 2.4rem;
-        repeat: no-repeat;
-      };
-      vertical-align: top;
-    }
   }
 
   .is-hidden {

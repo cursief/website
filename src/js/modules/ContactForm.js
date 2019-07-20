@@ -76,6 +76,7 @@ export default class ContactForm
 
         if (boundElement.dataset.activeIf === input.value) {
           boundElement.removeAttribute('disabled');
+          boundElement.removeAttribute('tabindex');
         } else {
           boundElement.setAttribute('disabled', true);
         }
