@@ -95,6 +95,10 @@ export default class ScrollHandler
     }
 
     // Cart
+    if (!this.elements.memberSection) {
+      return;
+    }
+
     const memberSectionY = this.elements.membersSection.offsetTop;
 
     // Open cart when passing by the members section
