@@ -1,73 +1,76 @@
-input[type='text'],
-input[type='email'],
-input[type='tel'],
-input[type='date'],
-textarea {
-  appearance: none;
-  width: 100%;
-  padding: .4em;
-  border: .1em solid lighten($cl-body, 50%);
-  border-radius: .2em;
-  font-size: inherit;
-  font-family: $font-body;
-  color: $cl-body;
-  outline: none;
-  cursor: text;
+.contact-form {
 
-  &:focus {
-    border-color: $cl-tertiary;
-  }
-}
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'],
+  input[type='date'],
+  textarea {
+    appearance: none;
+    width: 100%;
+    padding: .4em;
+    border: .1em solid lighten($cl-body, 50%);
+    border-radius: .2em;
+    font-size: inherit;
+    font-family: $font-body;
+    color: $cl-body;
+    outline: none;
+    cursor: text;
 
-input[type='checkbox'],
-input[type='radio'] {
-  appearance: none;
-  position: relative;
-  box-sizing: unset;
-  display: inline-block;
-  width: 1.2em;
-  height: 1.2em;
-  margin: 0;
-  border: 2px solid $cl-primary;
-  border-radius: 2px;
-  vertical-align: top;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: .2em;
-    left: .2em;
-    width: .8em;
-    height: .8em;
-    border-radius: 1px;
-    background-color: $cl-primary;
-    opacity: 0;
+    &:focus {
+      border-color: $cl-tertiary;
+    }
   }
 
-  &:checked {
+  input[type='checkbox'],
+  input[type='radio'] {
+    appearance: none;
+    position: relative;
+    box-sizing: unset;
+    display: inline-block;
+    width: 1.2em;
+    height: 1.2em;
+    margin: 0;
+    border: 2px solid $cl-primary;
+    border-radius: 2px;
+    vertical-align: top;
+
     &::after {
-      opacity: 1;
+      content: '';
+      position: absolute;
+      top: .2em;
+      left: .2em;
+      width: .8em;
+      height: .8em;
+      border-radius: 1px;
+      background-color: $cl-primary;
+      opacity: 0;
+    }
+
+    &:checked {
+      &::after {
+        opacity: 1;
+      }
+
+      + label {
+        color: $cl-primary;
+      }
     }
 
     + label {
-      color: $cl-primary;
+      display: inline-block;
+      padding-left: 1ch;
+
+      &:hover {
+        color: $cl-primary;
+      }
     }
   }
 
-  + label {
-    display: inline-block;
-    padding-left: 1ch;
-
-    &:hover {
-      color: $cl-primary;
-    }
-  }
-}
-
-input[type='radio'] {
-  border-radius: 50%;
-
-  &::after {
+  input[type='radio'] {
     border-radius: 50%;
+
+    &::after {
+      border-radius: 50%;
+    }
   }
 }

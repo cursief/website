@@ -16,6 +16,7 @@
 
   @include media($screen-md) {
     height: 95vh;
+    max-height: 100rem;
   }
 
   &:before,
