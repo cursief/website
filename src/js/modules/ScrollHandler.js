@@ -4,8 +4,8 @@ export default class ScrollHandler
   * Constructor.
   * Setup the main scroll event handler.
   */
- constructor(selectors)
- {
+  constructor(selectors)
+  {
     this.activeThreshold = .75; // Percentage of a contactSection that should be scrolled past to activate
     this.debounceTimeOut = 100;
     this.throttleTimeOut = 100;
@@ -30,7 +30,7 @@ export default class ScrollHandler
 
     // Run the callback once at page load.
     this.handleScroll();
- }
+  }
 
   /**
    * Helper function to throttle the amount of times the scroll handler is
