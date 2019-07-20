@@ -210,8 +210,10 @@ export default class ContactForm
       inputElement && inputElement.focus();
 
       // Fix browser automatically scrolling the content to input element
-      nextStepEl.scrollTop = 0;
-      nextStepEl.parentNode.parentNode.parentNode.parentNode.scrollTop = 0;
+      if (document.activeElement !== document.body) {
+        nextStepEl.scrollTop = 0;
+        nextStepEl.parentNode.parentNode.parentNode.parentNode.scrollTop = 0;
+      }
 
       nextStepEl.overviewStepElement && nextStepEl.overviewStepElement.removeAttribute('disabled');
 
