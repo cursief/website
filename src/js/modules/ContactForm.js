@@ -23,7 +23,10 @@ export default class ContactForm
       submitButton: this.base.querySelector('.submit-button'),
       questions: this.base.querySelectorAll('.contact-form__question'),
       overview: this.base.querySelector('.contact__steps-overview'),
-      overviewStepTemplate: this.base.querySelector('.steps-overview')
+      overviewStepTemplate: this.base.querySelector('.steps-overview'),
+      teamOverview: this.base.querySelector('.team-overview'),
+      mobileOverview: this.base.querySelector('.mobile-overview'),
+      mobileOverviewContent: this.base.querySelector('.mobile-overview__content'),
     };
 
     // Steps
@@ -33,7 +36,7 @@ export default class ContactForm
     this.elements.submitButton.addEventListener('click',  this.submitForm.bind(this));
 
     this.elements.steps.forEach((stepElement, index) => {
-      if (index === 0) {
+      if (!stepElement.querySelector('input, textarea, select')) {
         return;
       }
 
@@ -75,9 +78,11 @@ export default class ContactForm
         const boundElement = this.base.querySelector(`[name='${event.target.dataset.bind}']`);
 
         if (boundElement.dataset.activeIf === input.value) {
+          delete boundElement.parentNode.dataset.disabled;
           boundElement.removeAttribute('disabled');
           boundElement.removeAttribute('tabindex');
         } else {
+          boundElement.parentNode.dataset.disabled = true;
           boundElement.setAttribute('disabled', true);
         }
       });
@@ -97,7 +102,7 @@ export default class ContactForm
     });
 
     this.nextStep();
-    // this.goToStep(7);
+    // this.goToStep(6);
 
     void this.base.offsetWidth;
 
@@ -194,11 +199,41 @@ export default class ContactForm
       nextStepEl.style.height = nextStepEl.dataset.height;
       nextStepEl.classList.remove('is-hidden');
 
+      // Move team overview to first page or last page
+      if (stepNumber === 0) {
+        if (this.elements.teamOverview.parentNode.parentNode.parentNode.parentNode !== nextStepEl) {
+          nextStepEl.querySelector('.team-overview-start').appendChild(this.elements.teamOverview);
+        }
+      }
+
+      if (stepNumber === 7) {
+        if (this.elements.teamOverview.parentNode.parentNode.parentNode.parentNode !== nextStepEl) {
+          nextStepEl.querySelector('.team-overview-end').appendChild(this.elements.teamOverview);
+        }
+
+        setTimeout(() => {
+          this.updateStepHeights(true);
+        }, 10);
+      }
+
       // Enable all step inputs
       nextStepEl.querySelectorAll('input, textarea, button, select, a').forEach(input => {
         // Except if it has a condition
         if (input.dataset.activeIf) {
           return;
+        }
+
+        // Bound elements
+        if (input.dataset.bind) {
+          const boundElement = this.base.querySelector(`[name="${ input.dataset.bind }"]`);
+
+          if (input.checked && boundElement.dataset.activeIf === input.value) {
+            boundElement.removeAttribute('disabled');
+            boundElement.removeAttribute('tabindex');
+            delete boundElement.parentNode.dataset.disabled;
+          } else {
+            boundElement.parentNode.dataset.disabled = true;
+          }
         }
 
         input.removeAttribute('tabindex');
@@ -349,6 +384,14 @@ export default class ContactForm
     }
 
     currentStepEl.overviewStepElement.elements.content.textContent = answerTexts.join('\n');
+
+    this.elements.mobileOverviewContent.innerHTML = this.elements.overview.innerHTML;
+
+    this.elements.mobileOverviewContent.querySelectorAll('.overview-step').forEach((step, index) => {
+      step.addEventListener('click', () => {
+        this.goToStep(index + 1);
+      });
+    })
   }
 
   /**

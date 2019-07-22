@@ -262,10 +262,12 @@
                     <div class="contact-form__step-wrapper">
                       <h3 class="contact-form__step-title">Get in touch with your selected team</h3>
 
-                      <div class="team-overview">
-                        <div class="team-overview__content">
-                          <p class="team-overview__title"></p>
-                          <div class="team-overview__members"></div>
+                      <div class="team-overview-start">
+                        <div class="team-overview">
+                          <div class="team-overview__content">
+                            <p class="team-overview__title"></p>
+                            <div class="team-overview__members"></div>
+                          </div>
                         </div>
                       </div>
 
@@ -310,7 +312,7 @@
                       </div>
                       <div class="contact-form__option">
                         <input type="radio" id="contact-form_company-no" name="contact-form_company" value="No" data-bind="contact-form_company-name">
-                        <label for="contact-form_company-no">No</label>
+                        <label for="contact-form_company-no" value="Just me">No</label>
                       </div>
                       <div class="contact-form__option">
                         <input class="contact-form__dependent" type="text" name="contact-form_company-name" placeholder="Company name goes here" data-active-if="Yes" disabled required>
@@ -376,7 +378,7 @@
                       </div>
                       <div class="contact-form__option">
                         <input type="radio" id="contact-form_deadline-no" name="contact-form_deadline" data-bind="contact-form_deadline-date" value="No">
-                        <label for="contact-form_deadline-no">No</label>
+                        <label for="contact-form_deadline-no" value="Not set">No</label>
                       </div>
                       <div class="contact-form__option">
                         <input class="contact-form__dependent" type="date" name="contact-form_deadline-date" data-active-if="Yes" disabled required>
@@ -388,9 +390,16 @@
                 <!-- Overview -->
                 <div class="contact-form__step">
                   <div class="contact-form__step-content">
-                    <p>Great! You're all set!</p>
-                    <p>Here's the info we've gathered so far:</p>
-                    <p>{{ form_overview }}</p>
+                    <h3 class="contact-form__step-title">Great! You're all set!</h3>
+                    <div class="mobile-overview">
+                      <p>Here's the info we've gathered so far:</p>
+                      <div class="mobile-overview__content"></div>
+                    </div>
+                    <p>You can change any details by clicking on them in the overview.</p>
+                    <h3 class="contact-form__step-title">Your selected team:</h3>
+
+                    <div class="team-overview-end"></div>
+
                     <div class="button button--primary submit-button is-hidden">Submit</div>
                   </div>
                 </div>
