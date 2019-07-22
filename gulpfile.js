@@ -1,6 +1,7 @@
 const gulp         = require('gulp'),
       del          = require('del'),
       scss         = require('gulp-sass'),
+      sourcemaps   = require('gulp-sourcemaps'),
       autoprefixer = require('gulp-autoprefixer'),
       rollup       = require('rollup').rollup,
       terser       = require('rollup-plugin-terser').terser,
@@ -31,11 +32,20 @@ function htmlTask() {
 }
 
 // SCSS
-function scssTask() {
+function scssBuildTask() {
   return gulp.src(`${config.source}/scss/**/*.scss`, { base: `${config.source}/scss` })
-  .pipe(scss())
+  .pipe(scss({ outputStyle: 'compressed' }))
   .on('error', notify.onError('SCSS compile error: <%= error.message %>'))
   .pipe(autoprefixer({ browsers: 'last 1 version, chrome > 70, not dead' }))
+  .pipe(gulp.dest(config.destination));
+}
+
+function scssWatchTask() {
+  return gulp.src(`${config.source}/scss/**/*.scss`, { base: `${config.source}/scss` })
+  .pipe(sourcemaps.init())
+  .pipe(scss()).on('error', notify.onError('SCSS compile error: <%= error.message %>'))
+  .pipe(autoprefixer({ browsers: 'last 1 version, chrome > 70, not dead' }))
+  .pipe(sourcemaps.write())
   .pipe(gulp.dest(config.destination))
   .pipe(browserSync.stream());
 }
@@ -72,6 +82,10 @@ function serve(done) {
   browserSync.init({
     server: {
       baseDir: config.destination
+    },
+    serveStatic: ['.', './dist'],
+    serveStaticOptions: {
+      extensions: ['html'] // pretty urls
     }
   });
 
@@ -89,10 +103,10 @@ function reloadTask(done) {
 function watchTask() {
   gulp.watch(`${config.source}/images/**/*`, gulp.series(imagesTask, reloadTask));
   gulp.watch(`${config.source}/*.html`, gulp.series(htmlTask, reloadTask));
-  gulp.watch(`${config.source}/scss/**/*.scss`, scssTask);
+  gulp.watch(`${config.source}/scss/**/*.scss`, scssWatchTask);
   gulp.watch(`${config.source}/js/**/*.js`, gulp.series(jsWatchTask, reloadTask));
 }
 
 // Default task
-gulp.task('default', gulp.series(clean, gulp.parallel(htmlTask, scssTask, imagesTask, jsWatchTask), gulp.parallel(serve, watchTask)));
-gulp.task('build', gulp.series(clean, gulp.parallel(htmlTask, scssTask, imagesTask, jsBuildTask)));
+gulp.task('default', gulp.series(clean, gulp.parallel(htmlTask, scssWatchTask, imagesTask, jsWatchTask), gulp.parallel(serve, watchTask)));
+gulp.task('build', gulp.series(clean, gulp.parallel(htmlTask, scssBuildTask, imagesTask, jsBuildTask)));
