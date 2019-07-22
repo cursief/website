@@ -134,9 +134,19 @@
   }
 
   &.is-selected {
+
     &::after {
       opacity: 1;
     }
+  }
+}
+
+.member--empty {
+  pointer-events: none;
+
+  .member__avatar::before,
+  .member__avatar::after {
+    display: none;
   }
 }
 
