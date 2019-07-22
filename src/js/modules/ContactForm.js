@@ -15,6 +15,8 @@ export default class ContactForm
       return;
     }
 
+    this.resizeTimer;
+
     this.elements = {
       contact: this.base.querySelector('.contact'),
       steps: this.base.querySelectorAll('.contact-form__step'),
@@ -110,10 +112,32 @@ export default class ContactForm
       this.updateStepHeights();
     }, 1);
 
-    window.addEventListener('resize', this.updateStepHeights.bind(this));
+    window.addEventListener('resize', () => {
+      clearTimeout(this.resizeTimer);
+
+      this.resizeTimer = setTimeout(() => {
+        this.updateStepHeights(false, true);
+      }, 500);
+    });
   }
 
-  updateStepHeights(onlyActiveStep)
+  updateSingleStepHeight(step)
+  {
+    const prevHeight = step.dataset.height;
+
+    step.style.height = 'auto';
+
+    if (prevHeight === `${step.clientHeight}px`) {
+      step.style.height = prevHeight;
+      return;
+    }
+
+    step.dataset.height = `${step.clientHeight}px`;
+    step.style.height = prevHeight;
+    void step.offsetWidth;
+  }
+
+  updateStepHeights(onlyActiveStep = false, resize = false)
   {
     if (onlyActiveStep) {
       const step = this.elements.steps[this.currentStep];
@@ -122,18 +146,7 @@ export default class ContactForm
         return;
       }
 
-      const prevHeight = step.dataset.height;
-
-      step.style.height = 'auto';
-
-      if (prevHeight === `${step.clientHeight}px`) {
-        step.style.height = prevHeight;
-        return;
-      }
-
-      step.dataset.height = `${step.clientHeight}px`;
-      step.style.height = prevHeight;
-      void step.offsetWidth;
+      this.updateSingleStepHeight(step);
 
       step.style.height = step.dataset.height;
 
@@ -142,6 +155,10 @@ export default class ContactForm
 
     this.elements.steps.forEach((step, index) => {
       step.dataset.height = `${step.clientHeight}px`;
+
+      if (resize) {
+        this.updateSingleStepHeight(step);
+      }
 
       if (index == this.currentStep) {
         step.style.height = step.dataset.height;
@@ -212,7 +229,7 @@ export default class ContactForm
         }
 
         setTimeout(() => {
-          this.updateStepHeights(true);
+          this.updateStepHeights();
         }, 10);
       }
 
