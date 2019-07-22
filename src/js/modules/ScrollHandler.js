@@ -20,6 +20,7 @@ export default class ScrollHandler
       sections: Array.from(document.querySelectorAll(selectors.sections))
     };
 
+    this.elements.bannerSection = this.elements.sections[0];
     this.elements.membersSection = this.elements.sections[2];
     this.elements.contactSection = this.elements.sections[4];
 
@@ -110,8 +111,9 @@ export default class ScrollHandler
       this.cart.handleClick();
     }
 
-    // Hide cart when at the contact section
-    if (scrollY + window.innerHeight * .75 > this.elements.contactSection.offsetTop) {
+    // Hide cart when at home the contact section
+    if (scrollY < this.elements.bannerSection.clientHeight * this.activeThreshold
+        || scrollY + window.innerHeight * this.activeThreshold > this.elements.contactSection.offsetTop) {
       if (!this.cart.hidden) {
         this.cart.showInContactForm();
       }
