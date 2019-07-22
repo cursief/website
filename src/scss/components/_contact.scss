@@ -233,7 +233,7 @@
   max-width: calc(100% - 4rem);
 
   @include media($screen-sm) {
-    margin: 0 0 1rem;
+    margin: 0 0 2rem;
     max-width: 100%;
   }
 }
@@ -381,8 +381,9 @@
 
 .contact-form__question {
   max-width: 60rem;
-  margin: 0 0 1em 0;
+  margin: 0 0 1rem 0;
   text-align: left;
+  font-weight: 700;
 }
 
 .contact-form__question--optional {
