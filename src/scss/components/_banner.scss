@@ -34,7 +34,7 @@
     background: {
       repeat: no-repeat;
       size: auto 100%;
-      position: center;
+      position: center calc(100% + 1rem);
       image: url('images/banner-mask.svg');
     };
   }
