@@ -95,7 +95,7 @@ export default class ScrollHandler
     }
 
     // Cart
-    if (!this.elements.memberSection) {
+    if (!this.elements.membersSection) {
       return;
     }
 
