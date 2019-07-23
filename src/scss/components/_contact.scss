@@ -189,7 +189,6 @@
 }
 
 .contact__selection {
-
   &.is-hidden {
     margin: 0;
   }
@@ -221,7 +220,8 @@
     margin: 1rem 2rem;
 
     @include media($screen-sm) {
-      margin: 2rem;
+      margin: 2rem auto;
+      max-width: 39rem;
       text-align: center;
     }
   }

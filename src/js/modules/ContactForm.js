@@ -110,9 +110,9 @@ export default class ContactForm
     });
 
     setTimeout(() => {
+      this.updateStepHeights();
       this.nextStep();
       // this.goToStep(2);
-      this.updateStepHeights();
     }, 1);
 
     window.addEventListener('resize', () => {
@@ -129,8 +129,6 @@ export default class ContactForm
     const prevHeight = step.style.height;
 
     step.style.height = 'auto';
-
-    void step.offsetWidth;
 
     step.dataset.height = `${step.clientHeight}px`;
 
