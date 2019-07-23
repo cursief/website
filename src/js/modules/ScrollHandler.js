@@ -30,7 +30,9 @@ export default class ScrollHandler
     this.cart = selectors.cart;
 
     // Run the callback once at page load.
-    this.handleScroll();
+    setTimeout(() => {
+      this.handleScroll();
+    }, 50);
   }
 
   /**
