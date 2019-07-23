@@ -112,7 +112,8 @@ export default class ContactForm
     setTimeout(() => {
       this.updateStepHeights();
       this.nextStep();
-      // this.goToStep(2);
+      // Debug the form easier with the following line
+      // this.goToStep(7);
     }, 1);
 
     window.addEventListener('resize', () => {
@@ -124,6 +125,11 @@ export default class ContactForm
     });
   }
 
+  /**
+   * Update single step height in background.
+   *
+   * @param {HTMLElement} step
+   */
   updateSingleStepHeight(step)
   {
     const prevHeight = step.style.height;
@@ -137,6 +143,12 @@ export default class ContactForm
     void step.offsetWidth;
   }
 
+  /**
+   * Update the height of the steps in background.
+   *
+   * @param {boolean} onlyActiveStep Update only the current step element.
+   * @param {boolean} resize Update the size of the steps.
+   */
   updateStepHeights(onlyActiveStep = false, resize = false)
   {
     if (onlyActiveStep) {
@@ -170,25 +182,24 @@ export default class ContactForm
     });
   }
 
-  updateField(input, newValue)
-  {
-    let inputValue = (input.value.trim().length > 0)
-      ? input.value
-      : input.shadowElement.textContent;
-
-    input.shadowElement.textContent = newValue || inputValue;
-
-    input.boundElements.forEach(boundElement => {
-      boundElement.textContent = (newValue || inputValue).trim();
-    });
-
-    input.style.width = `${input.shadowElement.offsetWidth + 1}px`;
-  }
-
+  /**
+   * Navigate to another step in the contact form and update overview.
+   *
+   * @param {int} stepNumber The number of the step the method should attempt to navigate to.
+   * @param {boolean} skipUpdate Should the overview be updated on navigation.
+   */
   goToStep(stepNumber, skipUpdate)
   {
     const currentStepEl = this.elements.steps[this.currentStep];
     const nextStepEl = this.elements.steps[stepNumber];
+
+    if (stepNumber === this.currentStep) {
+      // Focus the first interactive element in this step
+      const inputElement = nextStepEl.querySelectorAll('input, select')[0];
+      inputElement && inputElement.focus();
+
+      return;
+    }
 
     if (currentStepEl) {
 
@@ -247,8 +258,6 @@ export default class ContactForm
         // Bound elements
         if (input.dataset.bind) {
           const boundElement = this.base.querySelector(`[name="${ input.dataset.bind }"]`);
-
-          console.log(boundElement);
 
           if (input.checked) {
             if (boundElement.dataset.activeIf === input.value) {
@@ -315,16 +324,25 @@ export default class ContactForm
     }
   }
 
+  /**
+   * Go to next step: increment currentStep and call goToStep().
+   */
   nextStep()
   {
     this.goToStep(this.currentStep + 1);
   }
 
+  /**
+   * Go to previous step: subtract currentStep and call goToStep().
+   */
   prevStep()
   {
     this.goToStep(this.currentStep - 1, true);
   }
 
+  /**
+   * Update the contact form input overview for the user.
+   */
   updateOverview()
   {
     const currentStepEl = this.elements.steps[this.currentStep];
@@ -358,6 +376,8 @@ export default class ContactForm
 
               if (boundAnswer.value.length > 0) {
                 answerTexts.push(boundAnswer.value);
+              } else if (answer.dataset.defaultValue) {
+                answerTexts.push(answer.dataset.defaultValue);
               } else if (boundAnswer.getAttribute('required') !== null) {
                 answerTexts.push('Not specified');
               }
@@ -421,10 +441,160 @@ export default class ContactForm
   }
 
   /**
+   * Generate e-mail body from contact form input and team overview.
+   */
+  generateEmail()
+  {
+    const emailBody = [];
+    let extraNewLine;
+
+    // Step data
+    this.elements.steps.forEach((step, stepIndex) => {
+      if (stepIndex < 1 || stepIndex > 6) {
+        return;
+      }
+
+      // Step title
+      const title = step.querySelector('.contact-form__step-title');
+
+      if (extraNewLine) {
+        emailBody.push('\n');
+        extraNewLine = false;
+      }
+
+      emailBody.push(`${title.textContent}\n`);
+
+      // Questions and answers
+      const stepContent = step.querySelectorAll('.contact-form__question, .required-group, input, select');
+
+      stepContent.forEach(item => {
+        // Question
+        if (item.classList.contains('contact-form__question')) {
+          emailBody.push(`   • ${item.textContent}\n`);
+        }
+
+        // Option group
+        if (item.classList.contains('required-group')) {
+
+          if (item.querySelector('input[type="checkbox"]:checked')) {
+            extraNewLine = true;
+          }
+
+          if (item.querySelectorAll('input:checked').length === 0) {
+            emailBody.push(`     - Not specified -\n\n`);
+          }
+        }
+
+        // Single option
+        if (item.nodeName === 'SELECT') {
+          emailBody.push(`     ${item.value}\n\n`);
+
+        } else if (item.nodeName === 'INPUT') {
+          if (item.type === 'checkbox') {
+            if (item.checked) {
+              emailBody.push(`     - ${item.value}\n`);
+            }
+          } else if (item.type === 'radio') {
+            if (item.checked) {
+              if (item.dataset.bind) {
+                const boundItem = step.querySelector(`[name="${item.dataset.bind}"]`);
+
+                if (boundItem.dataset.activeIf === item.value) {
+                  const boundValue = boundItem.value;
+                  emailBody.push(`     ${item.value}: ${boundValue}\n\n`);
+                } else {
+                  emailBody.push(`     ${item.value}: ${item.dataset.defaultValue}\n\n`);
+                }
+              } else {
+                emailBody.push(`     ${item.value}\n\n`);
+              }
+            }
+          } else {
+            if (!item.dataset.activeIf) {
+              if (item.value.length > 0) {
+                emailBody.push(`     ${item.value}\n\n`);
+              } else {
+                emailBody.push(`     - Not specified -\n\n`);
+              }
+            }
+          }
+        }
+      });
+    });
+
+    // Team data
+    emailBody.push('---\n\n');
+
+    emailBody.push('Selected team:\n');
+
+    const selectedMembers = this.elements.teamOverview.querySelectorAll('.cart-item');
+
+    selectedMembers.forEach(memberElement => {
+      const member = memberElement.member;
+      emailBody.push(` • ${member.fullName} (${member.title})\n`);
+    });
+
+    if (selectedMembers.length === 0) {
+      emailBody.push(` - No members selected - \n`);
+    }
+
+    return emailBody.join('');
+  }
+
+  /**
    * Submit the form with user input.
    */
   submitForm()
   {
+    this.sendMail(this.generateEmail());
+
     this.nextStep();
+
+    const overview = this.elements.overview;
+
+    setTimeout(() => {
+      overview.remove();
+    }, 1000);
+
+    if (window.innerWidth < 641) {
+      return false
+    }
+
+    setTimeout(() => {
+      overview.style.height = `${overview.clientHeight}px`;
+
+      void overview.offsetWidth;
+
+      overview.style.height = '353px';
+    }, 500);
+  }
+
+  /**
+   * Send the e-mail with XHR.
+   *
+   * @param {string} emailBody The main body of the e-mail.
+   */
+  sendMail(emailBody)
+  {
+    const request = new XMLHttpRequest();
+
+    request.open('POST', '/email.php', true);
+    request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+    // request.responseType = 'json';
+
+    request.send(JSON.stringify({
+      emailBody: emailBody,
+      clientName: this.elements.contact.querySelector('[name="clientName"]').value || 'Murtada al Mousawy',
+      clientEmail: this.elements.contact.querySelector('[name="clientEmail"]').value || 'murtada.al.mousawy@gmail.com'
+    }));
+
+    request.onload = function() {
+      if (request.status === 200) {
+        const response = request.response;
+        console.log(response);
+      } else {
+        console.log(request.response);
+      }
+    };
   }
 }

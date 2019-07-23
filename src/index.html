@@ -304,9 +304,9 @@
                   <div class="contact-form__step-content">
                     <h3 class="contact-form__step-title">1. Personal info</h3>
                     <p class="contact-form__question">What do you call yourself?</p>
-                    <div class="contact-form__option"><input type="text" placeholder="Your name goes here" required></div>
+                    <div class="contact-form__option"><input type="text" name="clientName" placeholder="Your name goes here" required></div>
                     <p class="contact-form__question">On what address can we email you?</p>
-                    <div class="contact-form__option"><input type="email" placeholder="Your email" required></div>
+                    <div class="contact-form__option"><input type="email" name="clientEmail" placeholder="Your email" required></div>
                     <p class="contact-form__question contact-form__question--optional">What number should we call you on?</p>
                     <div class="contact-form__option"><input type="tel" placeholder="Your phone number"></div>
                   </div>
@@ -323,8 +323,8 @@
                         <label for="contact-form_company-yes">Yes</label>
                       </div>
                       <div class="contact-form__option">
-                        <input type="radio" id="contact-form_company-no" name="contact-form_company" value="No" data-bind="contact-form_company-name">
-                        <label for="contact-form_company-no" value="Just me">No</label>
+                        <input type="radio" id="contact-form_company-no" name="contact-form_company" value="No" data-default-value="Just me" data-bind="contact-form_company-name">
+                        <label for="contact-form_company-no">No</label>
                       </div>
                       <div class="contact-form__option">
                         <input class="contact-form__dependent" type="text" name="contact-form_company-name" placeholder="Company name goes here" data-active-if="Yes" disabled required>
@@ -367,7 +367,7 @@
                     <p class="contact-form__question">What is your budget?</p>
                     <div class="contact-form__option">
                       <select name="" id="">
-                        <option value="Not yet selected">Not yet selected</option>
+                        <option value="Not yet specified">Not yet specified</option>
                         <option value="€ 500 - € 1.500">€ 500 - € 1.500</option>
                         <option value="€ 1.500 - € 4.000">€ 1.500 - € 4.000</option>
                         <option value="€ 4.000 - € 8.000">€ 4.000 - € 8.000</option>
@@ -389,8 +389,8 @@
                         <label for="contact-form_deadline-yes">Yes</label>
                       </div>
                       <div class="contact-form__option">
-                        <input type="radio" id="contact-form_deadline-no" name="contact-form_deadline" data-bind="contact-form_deadline-date" value="No">
-                        <label for="contact-form_deadline-no" value="Not set">No</label>
+                        <input type="radio" id="contact-form_deadline-no" name="contact-form_deadline" data-bind="contact-form_deadline-date" value="No" data-default-value="Not set">
+                        <label for="contact-form_deadline-no">No</label>
                       </div>
                       <div class="contact-form__option">
                         <input class="contact-form__dependent" type="date" name="contact-form_deadline-date" data-active-if="Yes" disabled required>
