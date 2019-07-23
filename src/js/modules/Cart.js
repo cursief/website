@@ -211,7 +211,9 @@ export default class Cart
       this.updateSize();
       this.previousContentLength = this.contents.length;
 
-      this.contactForm.updateStepHeights(true);
+      if (this.contactForm.currentStep > -1) {
+        this.contactForm.updateStepHeights(true);
+      }
     }
   }
 
