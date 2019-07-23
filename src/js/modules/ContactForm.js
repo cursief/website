@@ -27,6 +27,8 @@ export default class ContactForm
       overview: this.base.querySelector('.contact__steps-overview'),
       overviewStepTemplate: this.base.querySelector('.steps-overview'),
       teamOverview: this.base.querySelector('.team-overview'),
+      teamOverviewStart: this.base.querySelector('.team-overview-start'),
+      teamOverviewEnd: this.base.querySelector('.team-overview-end'),
       mobileOverview: this.base.querySelector('.mobile-overview'),
       mobileOverviewContent: this.base.querySelector('.mobile-overview__content'),
     };
@@ -101,14 +103,15 @@ export default class ContactForm
     this.base.querySelectorAll('input, textarea, button, select, a').forEach(input => {
       input.setAttribute('tabindex', -1);
       input.setAttribute('disabled', true);
+
+      if (input.dataset.activeIf) {
+        input.parentNode.dataset.disabled = true;
+      }
     });
 
-    this.nextStep();
-    // this.goToStep(6);
-
-    void this.base.offsetWidth;
-
     setTimeout(() => {
+      this.nextStep();
+      // this.goToStep(2);
       this.updateStepHeights();
     }, 1);
 
@@ -123,17 +126,16 @@ export default class ContactForm
 
   updateSingleStepHeight(step)
   {
-    const prevHeight = step.dataset.height;
+    const prevHeight = step.style.height;
 
     step.style.height = 'auto';
 
-    if (prevHeight === `${step.clientHeight}px`) {
-      step.style.height = prevHeight;
-      return;
-    }
+    void step.offsetWidth;
 
     step.dataset.height = `${step.clientHeight}px`;
+
     step.style.height = prevHeight;
+
     void step.offsetWidth;
   }
 
@@ -207,31 +209,32 @@ export default class ContactForm
       // Disable all step inputs
       currentStepEl.querySelectorAll('input, textarea, button, select, a').forEach(input => {
         input.setAttribute('tabindex', -1);
-
         input.setAttribute('disabled', true);
+
+        if (input.dataset.activeIf) {
+          input.parentNode.dataset.disabled = true;
+        }
       });
     }
 
     if (nextStepEl) {
-      nextStepEl.style.height = nextStepEl.dataset.height;
-      nextStepEl.classList.remove('is-hidden');
-
       // Move team overview to first page or last page
       if (stepNumber === 0) {
-        if (this.elements.teamOverview.parentNode.parentNode.parentNode.parentNode !== nextStepEl) {
-          nextStepEl.querySelector('.team-overview-start').appendChild(this.elements.teamOverview);
+        if (this.elements.teamOverview.parentNode !== this.elements.teamOverviewStart) {
+          this.elements.teamOverviewStart.appendChild(this.elements.teamOverview);
         }
       }
 
       if (stepNumber === 7) {
-        if (this.elements.teamOverview.parentNode.parentNode.parentNode.parentNode !== nextStepEl) {
-          nextStepEl.querySelector('.team-overview-end').appendChild(this.elements.teamOverview);
+        if (this.elements.teamOverview.parentNode !== this.elements.teamOverviewEnd) {
+          this.elements.teamOverviewEnd.appendChild(this.elements.teamOverview);
         }
-
-        setTimeout(() => {
-          this.updateStepHeights();
-        }, 10);
       }
+
+      nextStepEl.classList.remove('is-hidden');
+
+      this.updateSingleStepHeight(nextStepEl);
+      nextStepEl.style.height = nextStepEl.dataset.height;
 
       // Enable all step inputs
       nextStepEl.querySelectorAll('input, textarea, button, select, a').forEach(input => {
@@ -240,21 +243,32 @@ export default class ContactForm
           return;
         }
 
+        input.removeAttribute('tabindex');
+        input.removeAttribute('disabled');
+
         // Bound elements
         if (input.dataset.bind) {
           const boundElement = this.base.querySelector(`[name="${ input.dataset.bind }"]`);
 
-          if (input.checked && boundElement.dataset.activeIf === input.value) {
-            boundElement.removeAttribute('disabled');
-            boundElement.removeAttribute('tabindex');
-            delete boundElement.parentNode.dataset.disabled;
-          } else {
-            boundElement.parentNode.dataset.disabled = true;
+          console.log(boundElement);
+
+          if (input.checked) {
+            if (boundElement.dataset.activeIf === input.value) {
+              boundElement.removeAttribute('disabled');
+              boundElement.removeAttribute('tabindex');
+              boundElement.parentNode.removeAttribute('tabindex');
+
+              console.log('>>> yes')
+
+              delete boundElement.parentNode.dataset.disabled;
+
+            } else {
+              boundElement.parentNode.dataset.disabled = true;
+              boundElement.setAttribute('disabled', true);
+              boundElement.setAttribute('tabindex', -1);
+            }
           }
         }
-
-        input.removeAttribute('tabindex');
-        input.removeAttribute('disabled');
       });
 
       // Focus the first interactive element in this step

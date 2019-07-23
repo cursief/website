@@ -19,6 +19,10 @@
     &:focus {
       border-color: $cl-tertiary;
     }
+
+    &:disabled {
+      background: transparent;
+    }
   }
 
   input[type='checkbox'],

@@ -307,7 +307,7 @@
   flex-direction: column;
   width: 100%;
   margin: 0 auto;
-  padding: 3rem 2rem 2rem;
+  padding: 3rem 2rem 5rem;
   color: darken($cl-primary, 30%);
 
   @include media($screen-lg) {
@@ -723,6 +723,18 @@
 }
 
 .mobile-overview {
+
+  + p {
+    @include media($screen-lg) {
+      margin-top: 0;
+      margin-bottom: 4rem;
+    }
+  }
+
+  @include media($screen-lg) {
+    display: none;
+  }
+
   .overview-step {
     display: block;
     width: 100%;
@@ -771,12 +783,20 @@
 }
 
 .team-overview-end {
+
   .team-overview__title {
     display: none;
   }
 
   .team-overview {
     margin: 0;
+
+    .cart-item {
+      @include media($screen-lg) {
+        width: 100%;
+        float: left;
+      }
+    }
   }
 
   .team-overview__members {
