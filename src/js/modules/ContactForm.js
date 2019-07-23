@@ -258,8 +258,6 @@ export default class ContactForm
               boundElement.removeAttribute('tabindex');
               boundElement.parentNode.removeAttribute('tabindex');
 
-              console.log('>>> yes')
-
               delete boundElement.parentNode.dataset.disabled;
 
             } else {
@@ -278,7 +276,6 @@ export default class ContactForm
       // Fix browser automatically scrolling the content to input element
       if (document.activeElement !== document.body) {
         nextStepEl.scrollTop = 0;
-        nextStepEl.parentNode.parentNode.parentNode.parentNode.scrollTop = 0;
       }
 
       nextStepEl.overviewStepElement && nextStepEl.overviewStepElement.removeAttribute('disabled');
