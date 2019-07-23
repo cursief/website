@@ -15,9 +15,13 @@
   cursor: pointer;
   user-select: none;
   transition: {
-    property: background-color, box-shadow;
+    property: background-color, box-shadow, padding-right;
     duration: 200ms;
   };
+
+  &:disabled {
+    pointer-events: none;
+  }
 }
 
 .button--primary {

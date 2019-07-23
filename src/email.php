@@ -6,17 +6,18 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json');
 
-$_POST = json_decode(file_get_contents('php://input'), true) ?: [];
-
-$emailBody = $_POST['emailBody'];
-$emailBody = $_POST['emailBody'];
-
 $response = [
   'success' => false,
   'message' => ''
 ];
 
-$members = json_decode('%__MEMBERS__%');
+$_POST = json_decode(file_get_contents('php://input'), true) ?: [];
+
+$emailBody = $_POST['emailBody'];
+$clientEmail = $_POST['clientEmail'];
+$clientName = $_POST['clientName'];
+
+$members = json_decode('%__MEMBERS__%', true);
 
 $memberEmailsList = '';
 
@@ -54,6 +55,7 @@ Cursief Bot 🤖
 
 TXT;
 
+  // Send e-mail to member
   mail(
     $member['email'],
     $memberEmail['subject'],
@@ -65,7 +67,7 @@ TXT;
 // Setup the client e-mail
 
 $clientEmailBody = <<<TXT
-Hi {$_POST['clientName']}!
+Hi {$clientName}!
 
 We've received your message and will be in touch with you shortly.
 You can find a copy of your message below.
@@ -80,7 +82,7 @@ Cursief
 TXT;
 
 $clientEmail = [
-  'email'   => $_POST['clientEmail'],
+  'email'   => $clientEmail,
   'subject' => 'Contact confirmation',
   'body'    => $clientEmailBody,
   'headers' => $memberEmailHeaders
