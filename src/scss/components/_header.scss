@@ -16,7 +16,7 @@
   }
 
   @include media($screen-md) {
-    height: 6rem;
+    height: 7rem;
   }
 
   &::before {
@@ -67,6 +67,7 @@
 .header__container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   max-width: $container-max-width;
 
