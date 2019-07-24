@@ -99,6 +99,10 @@ function jsWatchTask() {
   });
 }
 
+function copyFiles() {
+  return gulp.src([`${config.source}/browserconfig.xml`, `${config.source}/site.webmanifest`]).pipe(gulp.dest(`${config.destination}`));
+}
+
 // Serve
 function serve(done) {
   connect.server({
@@ -139,5 +143,5 @@ function watchTask() {
 }
 
 // Default task
-gulp.task('default', gulp.series(clean, gulp.parallel(htmlTask, scssWatchTask, imagesTask, jsWatchTask), gulp.parallel(serve, watchTask)));
-gulp.task('build', gulp.series(clean, gulp.parallel(htmlTask, scssBuildTask, imagesTask, jsBuildTask)));
+gulp.task('default', gulp.series(clean, gulp.parallel(htmlTask, scssWatchTask, imagesTask, jsWatchTask, copyFiles), gulp.parallel(serve, watchTask)));
+gulp.task('build', gulp.series(clean, gulp.parallel(htmlTask, scssBuildTask, imagesTask, jsBuildTask, copyFiles)));
