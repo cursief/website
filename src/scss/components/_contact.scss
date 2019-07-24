@@ -3,30 +3,20 @@
   flex-direction: column;
   opacity: 0;
   position: relative;
+  overflow: hidden;
   width: 100%;
   max-width: 83rem;
   margin: 0 auto;
   background-color: $cl-white;
   transform: scale(.5) translate3d(0, 100%, 0);
+  box-shadow: 0 0 .3rem .1rem rgba($cl-black, .3);
+  border: {
+    top-left-radius: .5rem;
+    top-right-radius: .5rem;
+  };
 
   .section.is-active & {
-    animation: slideUp 1000ms both cubic-bezier(.215, .61, .355, 1);
-  }
-
-  &::after {
-    content: '';
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: $cl-white;
-    box-shadow: 0 0 .3rem .1rem rgba($cl-black, .3);
-
-    .section.is-active & {
-      animation: slideUpShadow 1000ms both cubic-bezier(.215, .61, .355, 1);
-    }
+    animation: slideUpShadow 1000ms both cubic-bezier(.215, .61, .355, 1);
   }
 
   > * {
