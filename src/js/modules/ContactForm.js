@@ -306,12 +306,8 @@ export default class ContactForm
 
         if (this.currentStep > this.elements.steps.length - 3) {
           this.elements.stepNav.classList.add('is-hidden');
-          this.elements.submitButton.classList.remove('is-hidden');
-          this.elements.submitButton.removeAttribute('disabled');
         } else {
           this.elements.stepNav.classList.remove('is-hidden');
-          this.elements.submitButton.classList.add('is-hidden');
-          this.elements.submitButton.setAttribute('disabled', true);
         }
       } else {
         this.elements.stepNav.classList.add('is-hidden');
@@ -547,26 +543,6 @@ export default class ContactForm
   submitForm()
   {
     this.sendMail(this.generateEmail());
-
-    this.nextStep();
-
-    const overview = this.elements.overview;
-
-    setTimeout(() => {
-      overview.remove();
-    }, 1000);
-
-    if (window.innerWidth < 641) {
-      return false
-    }
-
-    setTimeout(() => {
-      overview.style.height = `${overview.clientHeight}px`;
-
-      void overview.offsetWidth;
-
-      overview.style.height = '353px';
-    }, 500);
   }
 
   /**
@@ -580,21 +556,49 @@ export default class ContactForm
 
     request.open('POST', '/email.php', true);
     request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-    // request.responseType = 'json';
+    request.responseType = 'json';
+
+    this.elements.submitButton.setAttribute('disabled', true);
 
     request.send(JSON.stringify({
       emailBody: emailBody,
-      clientName: this.elements.contact.querySelector('[name="clientName"]').value || 'Murtada al Mousawy',
-      clientEmail: this.elements.contact.querySelector('[name="clientEmail"]').value || 'murtada.al.mousawy@gmail.com'
+      clientName: this.elements.contact.querySelector('[name="clientName"]').value || '- Not specified -',
+      clientEmail: this.elements.contact.querySelector('[name="clientEmail"]').value || 'hello@cursief.co'
     }));
 
-    request.onload = function() {
+    request.onload = () => {
+      this.elements.submitButton.removeAttribute('disabled');
+
       if (request.status === 200) {
         const response = request.response;
-        console.log(response);
-      } else {
-        console.log(request.response);
+
+        if (response.success === true) {
+          this.nextStep();
+
+          const overview = this.elements.overview;
+
+          setTimeout(() => {
+            overview.remove();
+          }, 1000);
+
+          if (window.innerWidth < 641) {
+            return false
+          }
+
+          setTimeout(() => {
+            overview.style.height = `${overview.clientHeight}px`;
+
+            void overview.offsetWidth;
+
+            overview.style.height = '353px';
+          }, 500);
+
+          return;
+        }
       }
+
+      // Should not reach this if successful
+      alert('Something went wrong! Please try again.')
     };
   }
 }
