@@ -15,22 +15,27 @@
   cursor: pointer;
   user-select: none;
   transition: {
-    property: background-color, box-shadow;
+    property: background-image, background-color, box-shadow, padding-right;
     duration: 200ms;
   };
+
+  &:disabled {
+    pointer-events: none;
+  }
 }
 
 .button--primary {
+  background-image: linear-gradient(-20deg, $cl-secondary 14%, lighten($cl-secondary, 5%) 78%);
   background-color: $cl-secondary;
   box-shadow: 0 .5rem 1rem 0 rgba($cl-black, .3);
 
   &:hover,
   &:focus {
-    background-color: darken($cl-secondary, 12%);
+    background-image: linear-gradient(-20deg, $cl-secondary 14%, lighten($cl-secondary, 10%) 78%);
   }
 
   &:active {
-    background-color: darken($cl-secondary, 12%);
+    background-image: linear-gradient(-20deg, $cl-secondary 14%, $cl-secondary 78%);
     box-shadow: 0 .1rem .3rem 0 rgba($cl-black, .9);
   }
 }

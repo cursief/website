@@ -1,6 +1,8 @@
 {
 	"source": "src",
   "destination": "dist",
+  "port": 3000,
+  "members": "./members.json",
   "js": {
     "bundleName": "app.js"
   }

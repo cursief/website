@@ -27,7 +27,7 @@ export default class Cart
       teamOverviewMessage: document.body.querySelector('.team-overview__message')
     };
 
-    this.hidden = false;
+    this.hidden = true;
     this.contents = [];
     this.previousContentLength = -1;
 
