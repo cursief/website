@@ -5,6 +5,14 @@
     padding: 14rem 0 4rem;
   }
 
+  &--smallhead {
+    padding: 2rem 0 2rem;
+
+    @include media($screen-sm) {
+      padding: 4rem 0 4rem;
+    }
+  }
+
   &.is-active {
 
     .section__column {
@@ -19,6 +27,18 @@
 }
 
 .section--intro {
+  margin-top: 0;
+
+  .section__media {
+    display: none;
+
+    @include media($screen-sm) {
+      display: block;
+    }
+  }
+}
+
+.section--faq-intro {
   margin-top: 0;
 
   .section__media {
@@ -84,6 +104,14 @@
 
 .section__container--wide {
   max-width: 135rem;
+}
+
+.section__container--text {
+  flex-direction: column;
+
+  > * {
+    max-width: 60rem;
+  }
 }
 
 .section__column {

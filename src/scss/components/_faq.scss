@@ -46,10 +46,11 @@
     transition: transform 400ms, background-color 400ms;
   }
 
-  p {
+  p,
+  ul {
     z-index: 2;
     position: relative;
-    margin: 0 2rem 3rem;
+    margin: 0 2rem 2rem;
     font-size: 1.6rem;
     font-weight: 300;
     line-height: 1.4;
@@ -58,6 +59,15 @@
     @include media($screen-md) {
       font-size: 1.8rem;
     }
+
+    &:last-child {
+      margin-bottom: 3rem;
+    }
+  }
+
+  ul {
+    list-style-type: square;
+    margin: -1rem 2rem 2rem;
   }
 }
 
