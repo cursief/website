@@ -4,7 +4,7 @@ export default class ScrollHandler
   * Constructor.
   * Setup the main scroll event handler.
   */
-  constructor(selectors)
+  constructor(options)
   {
     this.activeThreshold = .75; // Percentage of a contactSection that should be scrolled past to activate
     this.debounceTimeOut = 100;
@@ -16,8 +16,8 @@ export default class ScrollHandler
 
     // Elements
     this.elements = {
-      header: document.querySelector(selectors.header),
-      sections: Array.from(document.querySelectorAll(selectors.sections))
+      header: document.querySelector(options.header),
+      sections: Array.from(document.querySelectorAll(options.sections))
     };
 
     this.elements.bannerSection = this.elements.sections[0];
@@ -27,7 +27,7 @@ export default class ScrollHandler
     this.elements.header.dataset.isSticky = 'false';
     this.elements.header.stickyFrom = parseInt(window.getComputedStyle(this.elements.header)['marginTop'], 10);
 
-    this.cart = selectors.cart;
+    this.cart = options.cart;
 
     // Run the callback once at page load.
     setTimeout(() => {
@@ -98,7 +98,7 @@ export default class ScrollHandler
     }
 
     // Cart
-    if (!this.elements.membersSection) {
+    if (!this.elements.membersSection || !this.cart.base) {
       return;
     }
 
