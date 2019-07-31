@@ -10,7 +10,7 @@ export default class Members
    */
   constructor(cart)
   {
-    this.members = document.querySelectorAll('.members .member');
+    this.members = document.querySelectorAll('.members .member:not(.member--empty)');
     this.cart = cart;
     this.memberObjects = this.members.forEach(memberElement => {
       new Member(memberElement, this.cart);
