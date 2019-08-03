@@ -30,9 +30,7 @@ export default class ScrollHandler
     this.cart = options.cart;
 
     // Run the callback once at page load.
-    setTimeout(() => {
-      this.handleScroll();
-    }, 50);
+    this.handleScroll();
   }
 
   /**
@@ -59,8 +57,8 @@ export default class ScrollHandler
    */
   handleScroll()
   {
-    const scrollY = window.scrollY;
-    const windowHalfHeight = window.innerHeight * .5;
+    const scrollY = Math.round(window.scrollY);
+    const windowHalfHeight = Math.round(window.innerHeight * .5);
 
     // Header
     if (scrollY > this.elements.header.stickyFrom) {
@@ -94,6 +92,7 @@ export default class ScrollHandler
         section.classList.add('is-active');
         section.isActive = true;
         this.elements.sections.splice(sectionIndex, 1);
+        sectionIndex--;
       }
     }
 
