@@ -193,6 +193,10 @@ export default class ContactForm
     const currentStepEl = this.elements.steps[this.currentStep];
     const nextStepEl = this.elements.steps[stepNumber];
 
+    if (stepNumber > 0) {
+      window.location.hash = 'contact';
+    }
+
     if (stepNumber === this.currentStep) {
       // Focus the first interactive element in this step
       const inputElement = nextStepEl.querySelectorAll('input, select')[0];
@@ -278,7 +282,9 @@ export default class ContactForm
 
       // Focus the first interactive element in this step
       const inputElement = nextStepEl.querySelectorAll('input, select')[0];
-      inputElement && inputElement.focus();
+      setTimeout(() => {
+        inputElement && inputElement.focus();
+      }, 500);
 
       // Fix browser automatically scrolling the content to input element
       if (document.activeElement !== document.body) {
